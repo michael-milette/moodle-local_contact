@@ -18,7 +18,7 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,18 +26,17 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * @brief      local_contact class.
- *
- * @details    Handles processing of information submitted from a web form.
+ * local_contact class. Handles processing of information submitted from a web form.
+ * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_contact {
 
     /**
-     * @brief Constructor.
+     * Class constructor. Receives and validates information received through a
+     * web form submission.
      *
-     * @return True if the information receives passes our spambot detection. False if it fails.
-     *
-     * @details Receives and validates information received through a web form submission.
+     * @return     True  if the information received passes our spambot detection. False if it fails.
      */
     public function __construct() {
         global $CFG;
@@ -79,6 +78,23 @@ class local_contact {
         }
 
         // START: Spambot detection.
+
+        // File attachments not supported.
+        if (!empty($_FILES)) {
+            $this->errmsg = 'File attachments not supported.';
+        }
+
+        // Maximum size of allowed form $_POST submission is 256 KB.
+        $postsize = (int) $_SERVER['CONTENT_LENGTH'];
+        if ($postsize > 262144) {
+            $this->errmsg = 'Form cannot contain more than 256 KB of data.';
+        }
+
+        // Maximum number of form $_POST fields allowed is 1024.
+        $postsize = (int) $_SERVER['CONTENT_LENGTH'];
+        if ($postsize > 1024) {
+            $this->errmsg = 'Form cannot contain more than 1024 fields.';
+        }
 
         // Validate submit button.
         if (!$this->isspambot && $this->isspambot = !isset($_POST['submit'])) {
@@ -154,12 +170,13 @@ class local_contact {
     }
 
     /**
-     * @brief Creates a user info object based on provided parameters.
+     * Creates a user info object based on provided parameters.
      *
-     * @param  [string] $email Parameter_Description.
-     * @param  [string] $name (optional) Plain text real name.
-     * @param  [int]    $id   (optional) Moodle user ID.
-     * @return [object] Moodle userinfo.
+     * @param      string  $email  email address.
+     * @param      string  $name   (optional) Plain text real name.
+     * @param      int     $id     (optional) Moodle user ID.
+     *
+     * @return     object  Moodle userinfo.
      */
     private function makeemailuser($email, $name = '', $id = -99) {
         $emailuser = new stdClass();
@@ -179,10 +196,12 @@ class local_contact {
         return $emailuser;
     }
 
-    /*  @brief Send email message and optionally autorespond.
+    /**
+     * Send email message and optionally autorespond.
      *
-     *  @param  [boolean] $confirm - set to true if you also want a confirmation email to be sent back to user (TODO).
-     *  @return [boolean] $status - True if message was successfully sent, false if not.
+     * @param      boolean  $sendconfirmationemail  Set to true to also send an autorespond confirmation email back to user (TODO).
+     *
+     * @return     boolean  $status - True if message was successfully sent, false if not.
      */
     public function sendmessage($sendconfirmationemail = false) {
         global $USER, $CFG, $SITE;
@@ -199,20 +218,36 @@ class local_contact {
                 get_string('defaultsubject', 'local_contact'), PARAM_TEXT);
 
         // Build the body of the email using user-entered information.
-        $htmlmessage = '';
+
+        // Note: Name of message field is defined in the language pack.
         $fieldmessage = get_string('field-message', 'local_contact');
+
+        $htmlmessage = '';
         foreach ($_POST as $key => $value) {
-            if (!in_array($key, array('sesskey', 'submit')) && trim($value) != '') {
+
+            // Only process key conforming to valid form field ID/Name token specifications.
+            if (preg_match('/^[A-Za-z][A-Za-z0-9_:\.-]*/', $key)) {
+
                 // Exclude fields we don't want in the message and empty fields.
-                switch ($key) { // Make custom alterations.
-                    case $fieldmessage:
-                        $value = preg_replace('/\n(\s*\n){2,}/', "\n\n", $value); // Strip out excessive empty lines.
-                        $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
-                        $htmlmessage .= '<p><strong>' . ucfirst($key) . ' :</strong></p><p>' . $value . '</p>';
-                        break;
-                    default:
-                        $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
-                        $htmlmessage .= '<strong>'.ucfirst($key) . ' :</strong> ' . $value . '<br>' . PHP_EOL;
+                if (!in_array($key, array('sesskey', 'submit')) && trim($value) != '') {
+
+                    // Apply minor formatting of key by replacing underscores with spaces.
+                    $key = str_replace('_', ' ', $key);
+                    switch ($key) { // Make custom alterations.
+                        case $fieldmessage: // Message field.
+                            // Strip out excessive empty lines.
+                            $value = preg_replace('/\n(\s*\n){2,}/', "\n\n", $value);
+                            // Sanitize the text.
+                            $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
+                            // Add to email message.
+                            $htmlmessage .= '<p><strong>' . ucfirst($key) . ' :</strong></p><p>' . $value . '</p>';
+                            break;
+                        default:            // All other fields.
+                            // Sanitize the text.
+                            $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
+                            // Add to email message.
+                            $htmlmessage .= '<strong>'.ucfirst($key) . ' :</strong> ' . $value . '<br>' . PHP_EOL;
+                    }
                 }
             }
         }
@@ -252,9 +287,9 @@ class local_contact {
     }
 
     /**
-     * @brief Get the user's public or private IP address.
+     * Get the user's public or private IP address.
      *
-     * @return [string] IP Address - Public or private if the public address cannot be identified.
+     * @return     string  Public IP address or the private IP address if the public address cannot be identified.
      */
     private function getuserip() {
         $fieldlist = array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED',
@@ -298,13 +333,13 @@ class local_contact {
     }
 
     /**
-     * @brief Get a one line status report on a Moodle user.
+     * Builds a one line status report on the user. Uses their Moodle info, if
+     * logged in, or their email address to look up the information if they are
+     * not.
      *
-     * @param  [string] $emailaddress Plain text email address.
-     * @return [string] Contains what we know about the user.
+     * @param      string  $emailaddress  Plain text email address.
      *
-     * @details Get information about the Moodle user, whether logged in or out,
-     *          using their email address of their Moodle info if logged in.
+     * @return     string  Contains what we know about the Moodle user including whether they are logged in or out.
      */
     private function moodleuserstatus($emailaddress) {
         if (isloggedin()) {

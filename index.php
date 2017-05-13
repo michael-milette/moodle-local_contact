@@ -18,13 +18,13 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once('../../config.php');
-require_once($CFG->dirroot . '/local/contact/locallib.php');
+require_once($CFG->dirroot . '/local/contact/class/local_contact.php');
 
 $context = context_system::instance();
 $PAGE->set_context($context);
@@ -49,7 +49,7 @@ echo $OUTPUT->header();
 
 if ($contact->sendmessage()) {
     // Share a gratitude and Say Thank You! Your user will love to know their message was sent.
-    echo '<h3>' . get_string('messagesent', 'message') . '</h3>';
+    echo '<h3>' . get_string('eventmessagesent', 'message') . '</h3>';
     echo get_string('confirmationmessage', 'local_contact');
 } else {
     // Oh no! What are the chances. Looks like we failed to meet user expectations (message not sent).

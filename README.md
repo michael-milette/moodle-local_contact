@@ -3,7 +3,7 @@ Local Contact Form plugin for Moodle
 
 Copyright
 ---------
-Copyright © 2016 TNG Consulting Inc. - http://www.tngconsulting.ca/
+Copyright © 2016-2017 TNG Consulting Inc. - http://www.tngconsulting.ca/
 
 This file is part of the Contact Form plugin for Moodle - http://moodle.org/
 
@@ -39,15 +39,24 @@ Examples uses for this plugin include:
 
 Requirements
 ------------
-This plugin requires Moodle 3.0+ from http://moodle.org . 
+This plugin requires Moodle 3.0+ from http://moodle.org .
 
 It may work with previous versions of Moodle all the way back to Moodle 2.7 but it has not been tested yet. If it works for you, let us know. Tip: You might need to modify the version.php in order for Moodle to let you install it on earlier versions.
 
 Changes
 -------
-The first public BETA version of Contact Form was released on 2016-12-05.
+The first public BETA version was released on 2016-12-05.
 
 For more information on releases since then, see CHANGELOG.md.
+
+Download Contact for Moodle
+------------------------------
+
+The most recent STABLE release of eMail Test for Moodle is available from:
+https://moodle.org/plugins/local_contact
+
+The most development release can be found at:
+https://github.com/michael-milette/moodle-local_contact
 
 Installation and Update
 -----------------------
@@ -55,7 +64,7 @@ Install the plugin, like any other plugin, to the following folder:
 
     /local/contact
 
-See http://docs.moodle.org/30/en/Installing_plugins for details on installing Moodle plugins.
+See http://docs.moodle.org/33/en/Installing_plugins for details on installing Moodle plugins.
 
 There are no special considerations required for updating the plugin.
 
@@ -71,7 +80,7 @@ Home > Administration > Site Administration > Plugins > Manage plugins > Contact
 
 Usage & Settings
 ----------------
-There are no configuration settings at this time. However:
+There are no configurable settings for this plugin at this time. However:
 
 * You should configure the email settings in Moodle.
 * You should configure the support name and email address in Moodle.
@@ -79,8 +88,8 @@ There are no configuration settings at this time. However:
 
 These can include the following tags which will be substituted at the time the message is sent:
 
-* **[fromemail]**      : Users email address as entered in the web form.
-* **[fromname]**       : Users name as entered in the web form.
+* **[fromemail]**      : User's email address as entered in the web form.
+* **[fromname]**       : User's name as entered in the web form.
 * **[http_referer]**   : URL of the web form page that the email was generated from.
 * **[http_user_agent]**: Web browser.
 * **[lang]**           : Language that the user was viewing the website in at the time they submitted the form.
@@ -89,8 +98,8 @@ These can include the following tags which will be substituted at the time the m
 * **[siteurl]**        : URL of the website.
 * **[supportemail]**   : Site's support email address.
 * **[supportname]**    : Site's support name.
-* **[userip]**         : Best attempt to determine the users IP address. Will be the firewall address if they are behind one.
-* **[userstatus]**     : Displays the users current status if they are known to the Moodle site, either because they are logged in or by their email address.
+* **[userip]**         : Best attempt to determine the user's IP address. Will be the firewall address if they are behind one.
+* **[userstatus]**     : Displays the user's current status if they are known to the Moodle site, either because they are logged in or by their email address.
 
 To make a web form, start by creating a Moodle page or block containing a web form similar to the following:
 
@@ -115,6 +124,10 @@ To make a web form, start by creating a Moodle page or block containing a web fo
         </div>
     </form>
 
+More examples of web forms for Contact Form for Moodle are available in the Wiki:
+
+https://github.com/michael-milette/moodle-local_contact/wiki/HTML-Form-Templates
+
 Almost any type of HTML field included with the form should automatically appear in the email.
 Example: text, password, textarea, radio, checkbox, select dropdown, hidden and more.
 See the section on Limitations below.
@@ -135,31 +148,47 @@ Although not required, the following fields have special meaning to Contact Form
 * **subject** : If you want the subject of the email to contain content from the submitted web form, your form must include a field called **subject**. You can change the name of this field by editing the **field-subject** string in the Moodle language editor.
 * **message** : If you want a textarea field, like a Message field, to be formatted properly when inserted in the email, the field must be called **message**. You can change the name of this field by editing the **field-message** string in the Moodle language editor.
 
-You can add the referring URL, the page that they were on before going to the form, by adding the following to your form:
+Optional: You can add the referring URL, the page that the user was on before going to the form, by adding the following to your form:
 
     <input type="hidden" id="referrer" name="referrer" value="">
     <script>document.getElementById('referrer').value = document.referrer;</script>
 
 If you are not familiar with how to create basic HTML web forms, take a look at this tutorial:
 
-    http://www.w3schools.com/html/html_forms.asp
+http://www.w3schools.com/html/html_forms.asp
+
+If you want to insert spaces in your field names, use underscores "_" in your form field id and name. Contact Form for Moodle will replace these with a space before inserting the field name into the email message.
+
+Field id/name tokens must begin with a letter. They may optionally also contain any combination of letters (a-z), numbers (0-9), underscores, dashes, periods and colons (_-.:). They are not case sensitive.
+
+Security considerations
+-----------------------
+There are no known security considerations at this time.
+
+Motivation for this plugin
+--------------------------
+The initial development for this project was sponsored by the kind folk at l'Action ontarienne contre la violence aux femmes together with TNG Consulting Inc.
 
 Limitations
 -----------
-The plugin doesn't currently properly support more than one textarea type fields. It will still work however it won't be pretty.
+This is not a form builder.
 
-Any HTML entered will be escaped. You cannot use any kind of HTML formatting
-or markup/markdown other than pressing ENTER at the end of a paragraph.
+This plugin has yet to been tested with PHP 7.0 or later.
 
-You cannot configure the Contact Form email processor on a per form basis.
-All contact forms on your site will share:
+The plugin doesn't currently properly support more than one textarea type fields. Additional textareas will still work however they won't be as pretty.
+
+Any HTML entered will be escaped. You cannot use any kind of HTML formatting or markup/markdown other than pressing ENTER at the end of a paragraph.
+
+You cannot configure the Contact Form email processor on a per form basis. All contact forms on your site will share:
 
 * The message that is displayed to the user after the message has been sent.
 * The footer of the email containing additional user information.
 * Enabling/disabling of the autoresponder.
 * The autoresponder message (if enabled).
 
-This is not a form builder.
+Web forms are limited to 1024 fields including hidden fields and the submit button. Total size of the submission may not exceed 256 KB.
+
+There is no support file attachments type fields or form-data encoded as "multipart/form-data".
 
 Future Releases
 ---------------
@@ -167,13 +196,13 @@ Here are some of the features we are considering for future releases:
 
 * Option to enable the auto-responder / confirmation message.
 * Auto-responder will be editable in the plugin's settings.
-* Add additional examples to the documentation or create a basic form builder.
-* Make all submitted web form fields will be available as tags that you can insert into your message template.
+* Add additional examples of web forms to the documentation (see Wiki)
+* Create a basic form builder.
+* Make all submitted web form fields available as markup tags that you can insert into your message template.
 * Add a "Continue" button on the confirmation screen.
-* Moodle logging of sent messages.
+* Add some Moodle logging of sent messages.
 * Add a Whitelist and Blacklist for email addresses.
 * Add a Whitelist and Blacklist for email domains.
-* Include more examples of web forms.
 * Add support for form-specific custom autoresponders.
 * Add support for form-specific custom confirmation message.
 * Add support to optionally only use autoresponder feature without also sending the main email message.
@@ -185,23 +214,20 @@ Further information
 For further information regarding the local_contact plugin, support or to
 report a bug, please visit the project page at:
 
-  http://github.com/michael-milette/moodle-local_contact
+http://github.com/michael-milette/moodle-local_contact
 
 Language Support
 ----------------
-This plugin includes support for the English language. Additional languages including
-French are supported if you've installed one or more additional Moodle language packs.
+This plugin includes support for the English language. Additional languages including French are supported if you've installed one or more additional Moodle language packs.
 
-If you need a language that is not yet supported, please feel free
-to contribute using the Moodle AMOS Translation Toolkit for Moodle at
-
-  https://lang.moodle.org/
+If you need a language that is not yet supported, please contribute translations using the Moodle AMOS Translation Toolkit for Moodle at
+https://lang.moodle.org/
 
 This plugin has not been tested for right-to-left (RTL) language support.
 If you want to use this plugin with a RTL language and it doesn't work as-is,
 feel free to prepare a pull request and submit it to the project page at:
 
-  http://github.com/michael-milette/moodle-local_contact
+http://github.com/michael-milette/moodle-local_contact
 
 Frequently Asked Questions (FAQ)
 --------------------------------
@@ -209,21 +235,20 @@ Here are a few answers to questions folks often come up with at this point.
 
 **Question: How do I make this form available to everyone, even if they are not logged in?**
 
-Answer: Add a page or block to your Moodle Frontpage. Edit the content and paste in your HTML form source code. Make sure that the WYSIWYG editor is in HTML more. 
+Answer: Add a page or block to your Moodle Frontpage. Edit the content and paste in your HTML form source code. Make sure that the WYSIWYG editor is in HTML more.
 
 Since you don't need to be logged into your Moodle Frontpage to see it, your form will also be accessible to visitors to your site who are logged-out, logged-in as a guest as well as to regular logged-in users. If this option is not available to you, the process is a little more complicated as it involves making a course available to guests and having Moodle automatically logged them in as guests.
 
 **Question: All I see is the word "Forbidden" after submitting a form. What should I do?**
 
-Answer: Although this plugin is still in BETA, has been tested pretty extensively.
-If you are getting this error, it is likely that your will need to fix your form and/or
-enable Moodle debugging. Alternatively you can try the form logged in as a Moodle
-administrator. This will enable the display of additional diagnostic information.
+Answer: Although this plugin is still in BETA, has been tested pretty extensively. If you are getting this error, it is likely that your will need to fix your form and/or enable Moodle debugging. Alternatively you can try the form logged in as a Moodle administrator. This will enable the display of additional diagnostic information.
 
 **Question: Where do emails go when they are submitted on my Moodle website?**
 
-Answer: Logged in as a Moodle administrator, go to:
+Answer: Logged in as a Moodle administrator, you can find out by going to:
+
 Administration > Site Administration > Server > Support Contact
+
 Emails are sent to the Support Email address. If the field is empty, take note
 of the indicated default email address.
 
@@ -233,22 +258,21 @@ Answer: Make sure Moodle email is working. We recommend test your Moodle email s
 
   https://moodle.org/plugins/local_mailtest
 
-**Question: My site successfully completed eMailTest. Why am is it still not working?**
+**Question: My site successfully completed the eMailTest process. Why is it still not working?**
 
-Answer: If you still can't get your web form to work, the problem might be your form.
-Try using HTML sample form included above. Then customize it to meet your needs.
+Answer: If you still can't get your web form to work, the problem might be your form. Try using HTML sample form included above. Then customize it to meet your needs.
 
 **Question: I am still getting a lot of spam emails through my web form. Can I block certain IP addresses?**
 
-Answer: There are a couple of ways you can blacklist an IP address. The best way
-is to add them to your web server settings. Consult your web server documentation
-for more information. If you don't have access to those settings, Moodle
-Administrators can add the IP addresses to the Moodle IP Blocker settings.
-For more information, see:
+Answer: There are a couple of ways you can blacklist an IP address. The best way is to add them to your web server settings. Consult your web server documentation for more information. If you don't have access to those settings, Moodle Administrators can add the IP addresses to the Moodle IP Blocker settings. For more information, see:
 
-  https://docs.moodle.org/32/en/IP_blocker
+https://docs.moodle.org/33/en/IP_blocker
 
-**Question: Can I include my favourite captcha in my form?**
+**Question: Why does the User's IP address ([userip]) says "::1" instead showing a real IP address when I receive an email submitted from the form?**
+
+Answer: ::1 is the equivalent of 127.0.0.1 (localhost). This should only happen if your web browser is on the same computer as the web server.
+
+**Question: Can I include my favourite captcha in a form?**
 
 Answer: White we haven't tried every captcha out there, we don't see any reason why it would not work. This plugin has nothing to do with the actual form. If your form works, it should work with this plugin.
 
@@ -266,12 +290,12 @@ Answer: In your form, change the value of "label for=" to the word you want. On 
 
 **Question: What types of web forms are not recommended for Contact Form?**
 
-Answer: This plugin is not suitable for any form whose data should not end up in an email inbox. For example, Moodle natively supports several excellent types of forms processors such as Feedback, Survey and Database. Unless your e-commerce solution involves low volume semi-manual process, this could be better handled by by applications that are designed with this in mind. Signing up for mailing list subscriptions should be done through a service such as Aweber, Constant Contact, MailChimp and other similar services.
+Answer: This plugin is not suitable for any form whose data should not end up in an email inbox. For example, Moodle natively supports several excellent types of forms processors such as Feedback, Survey and Database. Unless your e-commerce solution involves low volume semi-manual process, this could be better handled by applications designed with this in mind. Signing up for mailing list subscriptions should be done through a service such as Aweber, Constant Contact, MailChimp and other similar services.
 
-Note: The mention of any 3rd party product is not meant as an endorsement or recommendation them. They are simply provided as example.
+Note: The mention of any 3rd party product is not meant as an endorsement or recommendation. They are simply provided as examples.
 
 **Other questions**
 
 Got a burning question that is not covered here? Submit your question in the Moodle forums (coming soon) or open a new issue on Github at:
 
-  http://github.com/michael-milette/moodle-local_contact
+http://github.com/michael-milette/moodle-local_contact

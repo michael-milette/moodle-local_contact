@@ -18,7 +18,7 @@
  * Version information for Contact Form (also called Contact).
  *
  * @package    local_contact
- * @copyright  2016 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,8 +26,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_contact';   // To check on upgrade, that module sits in correct place.
-$plugin->version   = 2016120500;        // The current module version (Date: YYYYMMDDXX).
+$plugin->version   = 2017051300;        // The current module version (Date: YYYYMMDDXX).
 $plugin->requires  = 2015111600;        // Requires Moodle version 3.0.
-$plugin->release   = '0.6';
+$plugin->release   = '0.7';
 $plugin->maturity  = MATURITY_BETA;
 $plugin->cron      = 0;

@@ -82,14 +82,14 @@ Usage & Settings
 ----------------
 There are no configurable settings for this plugin at this time. However:
 
-* You should configure the email settings in Moodle.
+* Ensure email settings are properly configured in Moodle.
 * You should configure the support name and email address in Moodle.
 * You can edit the language files to modify the messages sent to the user.
 
-These can include the following tags which will be substituted at the time the message is sent:
+The message can include the following tags which will be substituted at the time the message is sent:
 
-* **[fromemail]**      : User's email address as entered in the web form.
-* **[fromname]**       : User's name as entered in the web form.
+* **[fromemail]**      : User's email address as entered in the web form or the users registered email address if logged in.
+* **[fromname]**       : User's name as entered in the web form or the users registered first and last name if logged in.
 * **[http_referer]**   : URL of the web form page that the email was generated from.
 * **[http_user_agent]**: Web browser.
 * **[lang]**           : Language that the user was viewing the website in at the time they submitted the form.
@@ -134,8 +134,10 @@ See the section on Limitations below.
 
 **REQUIRED FIELDS:** The following input fields are required in order to avoid the built-in anti-spam protection. If these input fields are not present in the form, it will not work:
 
-1. **name** - You can change the name of this field by editing the **field-name** string in the Moodle language editor.
+1. **name** - You can change the name of this field by editing the **field-name** string in the Moodle language editor. If user is logged in, this field will be ignored and the users full name as registered in Moodle will be used instead.
+   Exception: This form fields not required and will be ignored if it exist but only if the user is currently logged-in to Moodle. User profile info (firstname lastname) will be used instead.
 2. **email** - You can change the name of this field by editing the **field-email** string in the Moodle language editor.
+   Exception: This form fields not required and will be ignored if it exist but only if the user is currently logged-in to Moodle. User profile info (email address) will be used instead.
 3. **sesskey** - Must include both the hidden **sesskey** field as well as the SCRIPT line below it.
 4. **submit** - The name of the button.
 
@@ -194,9 +196,10 @@ Future Releases
 ---------------
 Here are some of the features we are considering for future releases:
 
+* Add ability to specify recipient email address (selectable from dropdown list in the form).
 * Option to enable the auto-responder / confirmation message.
 * Auto-responder will be editable in the plugin's settings.
-* Add additional examples of web forms to the documentation (see Wiki)
+* Add additional examples of web forms to the documentation (see Wiki).
 * Create a basic form builder.
 * Make all submitted web form fields available as markup tags that you can insert into your message template.
 * Add a "Continue" button on the confirmation screen.
@@ -293,6 +296,14 @@ Answer: In your form, change the value of "label for=" to the word you want. On 
 Answer: This plugin is not suitable for any form whose data should not end up in an email inbox. For example, Moodle natively supports several excellent types of forms processors such as Feedback, Survey and Database. Unless your e-commerce solution involves low volume semi-manual process, this could be better handled by applications designed with this in mind. Signing up for mailing list subscriptions should be done through a service such as Aweber, Constant Contact, MailChimp and other similar services.
 
 Note: The mention of any 3rd party product is not meant as an endorsement or recommendation. They are simply provided as examples.
+
+**Question: How can I make the form only available to logged-in users?**
+
+Answer: To only display your form for logged-in users, ensure that it is on a Moodle page that is only viewable by logged-in users. User access to pages and blocks is controlled by Moodle, not by this plugin. With that in mind, if you don't include a name and email address field in your form, only registered users who are logged-in to the Moodle site will be able to submit the form.
+
+**Question: Why is the name and/or email address I entered in a form getting changed when submitted?**
+
+Answer: This only happens if a user is logged in. In this case, their registered first and last name and email address will be used instead of the name and email address entered in a form.
 
 **Other questions**
 

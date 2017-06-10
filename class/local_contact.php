@@ -41,8 +41,16 @@ class local_contact {
     public function __construct() {
         global $CFG;
 
-        $this->fromname  = optional_param(get_string('field-name', 'local_contact'), null, PARAM_TEXT);
-        $this->fromemail = optional_param(get_string('field-email', 'local_contact'), null, PARAM_EMAIL);
+        if (isloggedin() && !isguestuser()) {
+            // If logged-in as non guest, use their registered fullname and email address.
+            global $USER;
+            $this->fromname = $USER->firstname.' '.$USER->lastname;
+            $this->fromemail = $USER->email;
+        } else {
+            // If not logged-in as a user or logged in a guest, the name and email fields are required.
+            $this->fromname  = required_param(get_string('field-name', 'local_contact'), PARAM_TEXT);
+            $this->fromemail = required_param(get_string('field-email', 'local_contact'), PARAM_EMAIL);
+        }
         $this->isspambot = false;
         $this->errmsg = '';
 

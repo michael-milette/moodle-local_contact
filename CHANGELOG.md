@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.7.1] - 2017-06-10
+### Updated
+- If present, the name and email address form fields will now be ignored for users currently logged-in to Moodle. Their user profile info will be used instead.
+
 ## [0.7.0] - 2017-05-13
 ### Updated
 - Made source code comments clearer and phpdoc valid.

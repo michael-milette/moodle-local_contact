@@ -88,25 +88,31 @@ class local_contact {
         // START: Spambot detection.
 
         // File attachments not supported.
-        if (!empty($_FILES)) {
+        if (!$this->isspambot && $this->isspambot = !empty($_FILES)) {
             $this->errmsg = 'File attachments not supported.';
-        }
-
-        // Maximum size of allowed form $_POST submission is 256 KB.
-        $postsize = (int) $_SERVER['CONTENT_LENGTH'];
-        if ($postsize > 262144) {
-            $this->errmsg = 'Form cannot contain more than 256 KB of data.';
-        }
-
-        // Maximum number of form $_POST fields allowed is 1024.
-        $postsize = (int) $_SERVER['CONTENT_LENGTH'];
-        if ($postsize > 1024) {
-            $this->errmsg = 'Form cannot contain more than 1024 fields.';
         }
 
         // Validate submit button.
         if (!$this->isspambot && $this->isspambot = !isset($_POST['submit'])) {
             $this->errmsg = 'Missing submit button.';
+        }
+
+        // Limit maximum number of form $_POST fields to 1024.
+        if (!$this->isspambot) {
+            $postsize = @count($_POST);
+            if ($this->isspambot = ($postsize > 1024)) {
+                $this->errmsg = 'Form cannot contain more than 1024 fields.';
+            } else if ($this->isspambot = ($postsize == 0)) {
+                $this->errmsg = 'Form must be submitted using POST method.';
+            }
+        }
+
+        // Limit maximum size of allowed form $_POST submission to 256 KB.
+        if (!$this->isspambot) {
+            $postsize = (int) @$_SERVER['CONTENT_LENGTH'];
+            if ($this->isspambot = ($postsize > 262144)) {
+                $this->errmsg = 'Form cannot contain more than 256 KB of data.';
+            }
         }
 
         // Validate if "sesskey" field contains the correct value.

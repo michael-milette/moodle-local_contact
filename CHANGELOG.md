@@ -1,16 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.7.1] - 2017-06-11
+## [0.7.1] - 2017-06-12
 ### Added
 - The French translation for Contact Form for Moodle is now available. Update your Moodle language pack to get it!
 - You can now specify the recipient's email address on a per form basis.
+- Added POST method detection.
 
 ### Updated
 - If present, the name and email address form fields will now be ignored for users currently logged-in to Moodle. Their user profile info will be used instead.
 - Clarified documentation's instructions for creating a form.
 - Added some new FAQ items to the documentation relating to changes to the name and email address field requirements.
 - Added some new ideas for features to the documentation.
+- Fixed detection of maximum number of submitted fields.
 
 ## [0.7.0] - 2017-05-13
 ### Updated

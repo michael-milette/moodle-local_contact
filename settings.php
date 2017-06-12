@@ -15,7 +15,7 @@
 // along with Contact Form.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for Contact Form (also called Contact).
+ * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
  * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
@@ -23,11 +23,19 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
-$plugin->component = 'local_contact';   // To check on upgrade, that module sits in correct place.
-$plugin->version   = 2017061100;        // The current module version (Date: YYYYMMDDXX).
-$plugin->requires  = 2015111600;        // Requires Moodle version 3.0.
-$plugin->release   = '0.7.2';
-$plugin->maturity  = MATURITY_BETA;
-$plugin->cron      = 0;
+if ($hassiteconfig) {
+    // Heading.
+    $settings = new admin_settingpage('local_contact', get_string('pluginname', 'local_contact'));
+    $ADMIN->add('localplugins', $settings);
+
+    // List of tags and recipient email addresses.
+    $default = '';
+    $name = 'local_contact/recipient_list';
+    $title = get_string('recipient_list', 'local_contact');
+    $description = get_string('recipient_list_description', 'local_contact');
+    $setting = new admin_setting_configtextarea($name, $title, $description, $default);
+    $settings->add($setting);
+}
+

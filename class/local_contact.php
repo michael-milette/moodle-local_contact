@@ -211,14 +211,14 @@ class local_contact {
      *
      * @return     boolean  $status - True if message was successfully sent, false if not.
      */
-    public function sendmessage($sendconfirmationemail = false) {
+    public function sendmessage($email, $name, $sendconfirmationemail = false) {
         global $USER, $CFG, $SITE;
 
         // Create the sender from the submitted name and email address.
         $from = $this->makeemailuser($this->fromemail, $this->fromname);
 
         // Create the recipient.
-        $to = $this->makeemailuser($CFG->supportemail, $CFG->supportname);
+        $to = $this->makeemailuser($email, $name);
 
         // Create the Subject for message.
         $subject = '[' . $SITE->shortname . '] ' .
@@ -243,12 +243,15 @@ class local_contact {
                     $key = str_replace('_', ' ', $key);
                     switch ($key) { // Make custom alterations.
                         case $fieldmessage: // Message field.
+                        case $fieldmessage: // Message field.
                             // Strip out excessive empty lines.
                             $value = preg_replace('/\n(\s*\n){2,}/', "\n\n", $value);
                             // Sanitize the text.
                             $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
                             // Add to email message.
                             $htmlmessage .= '<p><strong>' . ucfirst($key) . ' :</strong></p><p>' . $value . '</p>';
+                            break;
+                        case 'recipient': // Message field.
                             break;
                         default:            // All other fields.
                             // Sanitize the text.

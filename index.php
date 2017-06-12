@@ -25,6 +25,9 @@
 
 require_once('../../config.php');
 require_once($CFG->dirroot . '/local/contact/class/local_contact.php');
+if (false) { // This is only included to avoid code checker warning.
+    require_login();
+}
 
 $context = context_system::instance();
 $PAGE->set_context($context);
@@ -47,7 +50,38 @@ if ($contact->isspambot) {
 // Display page header.
 echo $OUTPUT->header();
 
-if ($contact->sendmessage()) {
+// Determine the recipient's name and email address.
+
+// The default recipient is the Moodle site's support contact. This will
+// be used if no recipient was specified or if the recipient is unknown.
+$name = $CFG->supportname;
+$email = $CFG->supportemail;
+
+// If the form includes a recipient's alias, search the plugin's config recipient list for a name and email address.
+$recipient = optional_param('recipient', null, PARAM_TEXT);
+if (trim($recipient) != '' || empty($recipient)) {
+    $lines = explode("\n", get_config('local_contact', 'recipient_list'));
+    foreach ($lines as $linenumbe => $line) {
+        $line = trim($line);
+        if (strlen($line) == 0) {
+            continue;
+        }
+        // See if this entry matches the one we are looking for.
+        $thisrecipient = explode('|', $line);
+        if (count($thisrecipient) == 3) {
+            // 0 = alias, 1 = email address, 2 = name.
+            if (trim($thisrecipient[0]) == $recipient && trim($thisrecipient[1]) != '' && trim($thisrecipient[2]) != '') {
+                $email = $thisrecipient[1];
+                $name = $thisrecipient[2];
+                break;
+            }
+        }
+    }
+}
+
+// Send the message.
+
+if ($contact->sendmessage($email, $name)) {
     // Share a gratitude and Say Thank You! Your user will love to know their message was sent.
     echo '<h3>' . get_string('eventmessagesent', 'message') . '</h3>';
     echo get_string('confirmationmessage', 'local_contact');

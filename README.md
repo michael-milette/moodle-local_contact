@@ -82,9 +82,12 @@ Usage & Settings
 ----------------
 There are no configurable settings for this plugin at this time. However:
 
-* Ensure email settings are properly configured in Moodle.
+* You should ensure email settings are properly configured in Moodle.
 * You should configure the support name and email address in Moodle.
-* You can edit the language files to modify the messages sent to the user.
+
+**Configuring the Email Message**
+
+At the moment, you will need to edit the language files in order to modify the messages which will be sent to the user.
 
 The message can include the following tags which will be substituted at the time the message is sent:
 
@@ -101,7 +104,11 @@ The message can include the following tags which will be substituted at the time
 * **[userip]**         : Best attempt to determine the user's IP address. Will be the firewall address if they are behind one.
 * **[userstatus]**     : Displays the user's current status if they are known to the Moodle site, either because they are logged in or by their email address.
 
-To make a web form, start by creating a Moodle page or block containing a web form similar to the following:
+Note that, in the future, the email message will be configurable from within the plugin's settings.
+
+**Creating a New Form**
+
+This plugin is for administrators with a little knowledge of HTML forms. To create a new web form on your site, add a Moodle page or HTML block. Be sure to switch to the Source Code view button in the Moodle WYSIWYG editor before entering or pasting HTML code similar to the following:
 
     <form action="../../local/contact/index.php" method="post" class="contact-us">
         <fieldset>
@@ -124,36 +131,39 @@ To make a web form, start by creating a Moodle page or block containing a web fo
         </div>
     </form>
 
-More examples of web forms for Contact Form for Moodle are available in the Wiki:
+That is it. Just save and you are done. Additional examples of forms are available on the plugin's GitHub Wiki:
 
 https://github.com/michael-milette/moodle-local_contact/wiki/HTML-Form-Templates
 
+You can of course customize it to suit your particular requirements.
+
 Almost any type of HTML field included with the form should automatically appear in the email.
-Example: text, password, textarea, radio, checkbox, select dropdown, hidden and more.
+Example: text, password, textarea, radio, checkbox, select drop-down, hidden and more.
 See the section on Limitations below.
 
 **REQUIRED FIELDS:** The following input fields are required in order to avoid the built-in anti-spam protection. If these input fields are not present in the form, it will not work:
 
 1. **name** - You can change the name of this field by editing the **field-name** string in the Moodle language editor. If user is logged in, this field will be ignored and the users full name as registered in Moodle will be used instead.
-   Exception: This form fields not required and will be ignored if it exist but only if the user is currently logged-in to Moodle. User profile info (firstname lastname) will be used instead.
+   If the user is currently logged in (not guest), this field will be ignored if it exists and user profile info (firstname lastname) will be used instead.
 2. **email** - You can change the name of this field by editing the **field-email** string in the Moodle language editor.
-   Exception: This form fields not required and will be ignored if it exist but only if the user is currently logged-in to Moodle. User profile info (email address) will be used instead.
+   If the user is currently logged in (not guest), this field will be ignored if it exists and user profile info (firstname lastname) will be used instead.
 3. **sesskey** - Must include both the hidden **sesskey** field as well as the SCRIPT line below it.
 4. **submit** - The name of the button.
 
 Your FORM tag must have an action set to **../../local/contact/index.php** and a method set to **post**.
 
-**A Few Tips**
+**OPTIONAL FIELDS:** Although not required, the following fields have special meaning to Contact Form:
 
-Although not required, the following fields have special meaning to Contact Form:
+* **subject**  : If you want the subject of the email to contain content from the submitted web form, your form must include a field called **subject**. You can change the name of this field by editing the **field-subject** string in the Moodle language editor.
+* **message**  : If you want a textarea field, like a Message field, to be formatted properly when inserted in the email, the field must be called **message**. You can change the name of this field by editing the **field-message** string in the Moodle language editor.
+* **recipient**: Add this field if you want to specify a recipient other than the Moodle support email address. This field must contain an alias, not an email address. See the section on Configuring the List of Recipients in this documentation.
 
-* **subject** : If you want the subject of the email to contain content from the submitted web form, your form must include a field called **subject**. You can change the name of this field by editing the **field-subject** string in the Moodle language editor.
-* **message** : If you want a textarea field, like a Message field, to be formatted properly when inserted in the email, the field must be called **message**. You can change the name of this field by editing the **field-message** string in the Moodle language editor.
-
-Optional: You can add the referring URL, the page that the user was on before going to the form, by adding the following to your form:
+You can also add the referring URL, the page that the user was on before going to the form, by adding the following to your form:
 
     <input type="hidden" id="referrer" name="referrer" value="">
     <script>document.getElementById('referrer').value = document.referrer;</script>
+
+**Additional Tips**
 
 If you are not familiar with how to create basic HTML web forms, take a look at this tutorial:
 
@@ -162,6 +172,57 @@ http://www.w3schools.com/html/html_forms.asp
 If you want to insert spaces in your field names, use underscores "_" in your form field id and name. Contact Form for Moodle will replace these with a space before inserting the field name into the email message.
 
 Field id/name tokens must begin with a letter. They may optionally also contain any combination of letters (a-z), numbers (0-9), underscores, dashes, periods and colons (_-.:). They are not case sensitive.
+
+**Configuring the List of Recipients**
+
+By default, messages sent from the Contact Form for Moodle will be delivered to your Moodle support contact email address. However, you can optionally specify a different recipient on a per form basis. Configuring this requires two additional easy steps:
+
+Step 1 - Create the List of Available Recipients
+
+Start by specifying a List of Available Recipients in the plugin's settings. (Site administration > Plugins > Local plugins > Contact Form)
+
+The format for each recipient is alias|emailaddress|name. You should only enter one recipient per line. Incorrectly entered lines and blank lines will be ignored.
+
+For example:
+
+    tech support|support@example.com|Joe Fixit
+    webmaster|admin@example.com|Mr. Moodle
+    electrical|nikola.tesla@example.com|Nikola
+    history|charles.darwin@example.com|Mr. Darwin
+    law|issac.newton@example.com|Isaac Newton
+    math|galileo.galilei@example.com|Galileo
+    english|mark.twain@example.com|Mark Twain
+    physics|albert.einstein@example.com|Albert
+    science|thomas.edison@example.com|Mr. Edison
+    philosophy|aristotle@example.com|Aristotle
+
+Note that this list is not automatically populated in forms. You will need to do that manually in the next step.
+
+Step 2 - Add a field to your form.
+
+Single Recipient - This can be done by specifying the recipient's alias in a "hidden" type input field in your form. For example:
+
+    <input type="hidden" name="recipient" id="recipient" value="webmaster">
+
+One of Many Recipients - You can also create a drop-down (select) list in your form and have the user specify the recipient. For example:
+
+    <select name="recipient" id="recipient" required>
+        <option value="">Please select...</option>
+        <option value="tech support">Technical support</option>
+        <option value="webmaster">Moodle administrator</option>
+    </select>
+
+A different form on the same site might have:
+
+    <select name="recipient" id="recipient" required>
+        <option value="">Please select...</option>
+        <option value="history">History teacher</option>
+        <option value="math">Math teacher</option>
+        <option value="english">English teacher</option>
+        <option value="philosophy">Philosophy teacher</option>
+    </select>
+
+Notice that you can include any number of recipients in your form's drop-down list. You need not include all of them. If a specified alias is not in the List of Available Recipients, the email message will default to being delivered to the Moodle site's support email address.
 
 Security considerations
 -----------------------
@@ -196,7 +257,8 @@ Future Releases
 ---------------
 Here are some of the features we are considering for future releases:
 
-* Add ability to specify recipient email address (selectable from dropdown list in the form).
+* Add ability to specify profile fields in the body of the email message.
+* Add ability to specify custom profile fields in the body of the email message.
 * Option to enable the auto-responder / confirmation message.
 * Auto-responder will be editable in the plugin's settings.
 * Add additional examples of web forms to the documentation (see Wiki).

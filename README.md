@@ -55,7 +55,7 @@ Download Contact for Moodle
 The most recent STABLE release of eMail Test for Moodle is available from:
 https://moodle.org/plugins/local_contact
 
-The most development release can be found at:
+The most recent DEVELOPMENT release can be found at:
 https://github.com/michael-milette/moodle-local_contact
 
 Installation and Update
@@ -264,7 +264,6 @@ Here are some of the features we are considering for future releases:
 * Add additional examples of web forms to the documentation (see Wiki).
 * Create a basic form builder.
 * Make all submitted web form fields available as markup tags that you can insert into your message template.
-* Add a "Continue" button on the confirmation screen.
 * Add some Moodle logging of sent messages.
 * Add a Whitelist and Blacklist for email addresses.
 * Add a Whitelist and Blacklist for email domains.
@@ -304,7 +303,7 @@ Answer: Add a page or block to your Moodle Frontpage. Edit the content and paste
 
 Since you don't need to be logged into your Moodle Frontpage to see it, your form will also be accessible to visitors to your site who are logged-out, logged-in as a guest as well as to regular logged-in users. If this option is not available to you, the process is a little more complicated as it involves making a course available to guests and having Moodle automatically logged them in as guests.
 
-**Question: All I see is the word "Forbidden" after submitting a form. What should I do?**
+**Question: All I see is the word "Forbidden" or a blank screen after submitting a form. What should I do?**
 
 Answer: Although this plugin is still in BETA, has been tested pretty extensively. If you are getting this error, it is likely that your will need to fix your form and/or enable Moodle debugging. Alternatively you can try the form logged in as a Moodle administrator. This will enable the display of additional diagnostic information.
 
@@ -333,13 +332,13 @@ Answer: There are a couple of ways you can blacklist an IP address. The best way
 
 https://docs.moodle.org/33/en/IP_blocker
 
-**Question: Why does the User's IP address ([userip]) says "::1" instead showing a real IP address when I receive an email submitted from the form?**
+**Question: Why does the User's IP address ([userip]) says "::1" or 0:0:0:0:0:1 instead showing a real IP address when I receive an email submitted from the form?**
 
-Answer: ::1 is the equivalent of 127.0.0.1 (localhost). This should only happen if your web browser is on the same computer as the web server.
+Answer: ::1 and 0:0:0:0:0:1 are the equivalent of 127.0.0.1 (localhost). This should only happen if your web browser is on the same computer as the web server. Otherwise you should be seeing a real IP address.
 
 **Question: Can I include my favourite captcha in a form?**
 
-Answer: White we haven't tried every captcha out there, we don't see any reason why it would not work. This plugin has nothing to do with the actual form. If your form works, it should work with this plugin.
+Answer: No. Support for Moodle captcha is currenty in the works and will be available in a future release of Contact Form for Moodle. It will also require the use of the [filter_filtercodes](https://moodle.org/plugins/filter_filtercodes) plugin.
 
 **Question: Can I add a check box that must be checked, like for accepting the privacy policy, before the user can submit the form?**
 
@@ -353,7 +352,7 @@ Answer: Each language file defines the names of the fields for your form. To mak
 
 Answer: In your form, change the value of "label for=" to the word you want. On the next line, change the id= and the name= to be the same as the one for the "label for=". Finally, if the field was "name", "email", "subject" or "message", you will also need to edit the related "field-*" string in the Moodle language editor.
 
-**Question: What types of web forms are not recommended for Contact Form?**
+**Question: What types of web forms should not be implemented using Contact Form?**
 
 Answer: This plugin is not suitable for any form whose data should not end up in an email inbox. For example, Moodle natively supports several excellent types of forms processors such as Feedback, Survey and Database. Unless your e-commerce solution involves low volume semi-manual process, this could be better handled by applications designed with this in mind. Signing up for mailing list subscriptions should be done through a service such as Aweber, Constant Contact, MailChimp and other similar services.
 
@@ -369,6 +368,6 @@ Answer: This only happens if a user is logged in. In this case, their registered
 
 **Other questions**
 
-Got a burning question that is not covered here? Submit your question in the Moodle forums (coming soon) or open a new issue on Github at:
+Got a burning question that is not covered here? Checkout the [troubleshooting section of our Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/Troubleshooting). If you still can't find your answer, submit your question in the Moodle forums or open a new issue on Github at:
 
 http://github.com/michael-milette/moodle-local_contact

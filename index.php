@@ -90,6 +90,7 @@ if ($contact->sendmessage($email, $name)) {
     echo '<h3>'.get_string('errorsendingtitle', 'local_contact').'</h3>';
     echo get_string('errorsending', 'local_contact');
 }
+echo $OUTPUT->continue_button($CFG->wwwroot);
 
 // Display page footer.
 echo $OUTPUT->footer();

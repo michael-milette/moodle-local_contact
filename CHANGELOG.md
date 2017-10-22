@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - You can now specify the recipient's email address on a per form basis.
 - Added POST method detection.
 - Added "Continue" button on the confirmation page.
+- Added ability to specify some profile fields using FilterCodes filter plugin for Moodle in the footer of the email message.
 ### Updated
 - If present, the name and email address form fields will now be ignored for users currently logged-in to Moodle. Their user profile info will be used instead.
 - Clarified documentation's instructions for creating a form.

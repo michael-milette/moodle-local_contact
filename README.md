@@ -257,7 +257,6 @@ Future Releases
 ---------------
 Here are some of the features we are considering for future releases:
 
-* Add ability to specify profile fields in the body of the email message.
 * Add ability to specify custom profile fields in the body of the email message.
 * Option to enable the auto-responder / confirmation message.
 * Auto-responder will be editable in the plugin's settings.
@@ -299,7 +298,7 @@ Here are a few answers to questions folks often come up with at this point.
 
 **Question: How do I make this form available to everyone, even if they are not logged in?**
 
-Answer: Add a page or block to your Moodle Frontpage. Edit the content and paste in your HTML form source code. Make sure that the WYSIWYG editor is in HTML more.
+Answer: Add a page or block to your Moodle Frontpage. Edit the content and paste in your HTML form source code. Make sure that the WYSIWYG editor is in HTML mode.
 
 Since you don't need to be logged into your Moodle Frontpage to see it, your form will also be accessible to visitors to your site who are logged-out, logged-in as a guest as well as to regular logged-in users. If this option is not available to you, the process is a little more complicated as it involves making a course available to guests and having Moodle automatically logged them in as guests.
 
@@ -309,12 +308,11 @@ Answer: Although this plugin is still in BETA, has been tested pretty extensivel
 
 **Question: Where do emails go when they are submitted on my Moodle website?**
 
-Answer: Logged in as a Moodle administrator, you can find out by going to:
+Answer: Emails are sent to the Support Email address. Logged in as a Moodle administrator, you can find out the email address by going to:
 
 Administration > Site Administration > Server > Support Contact
 
-Emails are sent to the Support Email address. If the field is empty, take note
-of the indicated default email address.
+If the field is empty, take note of the indicated default email address.
 
 **Question: Why are emails submitted on my Moodle website not being delivered?**
 
@@ -330,7 +328,7 @@ Answer: If you still can't get your web form to work, the problem might be your 
 
 Answer: There are a couple of ways you can blacklist an IP address. The best way is to add them to your web server settings. Consult your web server documentation for more information. If you don't have access to those settings, Moodle Administrators can add the IP addresses to the Moodle IP Blocker settings. For more information, see:
 
-https://docs.moodle.org/33/en/IP_blocker
+  https://docs.moodle.org/33/en/IP_blocker
 
 **Question: Why does the User's IP address ([userip]) says "::1" or 0:0:0:0:0:1 instead showing a real IP address when I receive an email submitted from the form?**
 
@@ -356,18 +354,22 @@ Answer: In your form, change the value of "label for=" to the word you want. On 
 
 Answer: This plugin is not suitable for any form whose data should not end up in an email inbox. For example, Moodle natively supports several excellent types of forms processors such as Feedback, Survey and Database. Unless your e-commerce solution involves low volume semi-manual process, this could be better handled by applications designed with this in mind. Signing up for mailing list subscriptions should be done through a service such as Aweber, Constant Contact, MailChimp and other similar services.
 
-Note: The mention of any 3rd party product is not meant as an endorsement or recommendation. They are simply provided as examples.
+Note: The mention of any 3rd party product other than Moodle and FilterCodes is not meant as an endorsement or recommendation. They are simply provided as examples.
 
 **Question: How can I make the form only available to logged-in users?**
 
-Answer: To only display your form for logged-in users, ensure that it is on a Moodle page that is only viewable by logged-in users. User access to pages and blocks is controlled by Moodle, not by this plugin. With that in mind, if you don't include a name and email address field in your form, only registered users who are logged-in to the Moodle site will be able to submit the form.
+Answer: To only display your form for logged-in users, ensure that it is on a Moodle page that is only viewable by logged-in users. User access to pages and blocks is controlled by Moodle, not by this plugin. With that in mind, if you don't include a name and email address field in your form, only registered users who are logged-in to the Moodle site will be able to submit the form. Another option is to use the {if...}{/if...} conditional tags in the FilterCodes plugin to control who can see the form.
 
 **Question: Why is the name and/or email address I entered in a form getting changed when submitted?**
 
 Answer: This only happens if a user is logged in. In this case, their registered first and last name and email address will be used instead of the name and email address entered in a form.
 
+**How can I include user profile fields in the email footer and confirmation email message?**
+
+Answer: Yes. Many but not all profile fields are available by inserting [FilterCodes](https://moodle.org/plugins/filter_filtercodes/) tags.
+
 **Other questions**
 
 Got a burning question that is not covered here? Checkout the [troubleshooting section of our Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/Troubleshooting). If you still can't find your answer, submit your question in the Moodle forums or open a new issue on Github at:
 
-http://github.com/michael-milette/moodle-local_contact
+http://github.com/michael-milette/moodle-local_contact/issues

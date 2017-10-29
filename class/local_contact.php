@@ -48,8 +48,12 @@ class local_contact {
             $this->fromemail = $USER->email;
         } else {
             // If not logged-in as a user or logged in a guest, the name and email fields are required.
-            $this->fromname  = required_param(get_string('field-name', 'local_contact'), PARAM_TEXT);
-            $this->fromemail = required_param(get_string('field-email', 'local_contact'), PARAM_EMAIL);
+            if (empty($this->fromname  = optional_param(get_string('field-name', 'local_contact'), '', PARAM_TEXT))) {
+                $this->fromname  = required_param('name', PARAM_TEXT);
+            }
+            if (empty($this->fromemail = optional_param(get_string('field-email', 'local_contact'), '', PARAM_EMAIL))) {
+                $this->fromemail  = required_param('email', PARAM_TEXT);
+            }
         }
         $this->isspambot = false;
         $this->errmsg = '';
@@ -247,8 +251,10 @@ class local_contact {
 
                     // Apply minor formatting of key by replacing underscores with spaces.
                     $key = str_replace('_', ' ', $key);
-                    switch ($key) { // Make custom alterations.
-                        case $fieldmessage: // Message field.
+                    switch ($key) {
+                        // Make custom alterations.
+                        case 'message': // Message field - use translated value from language file.
+                            $key = $fieldmessage;
                         case $fieldmessage: // Message field.
                             // Strip out excessive empty lines.
                             $value = preg_replace('/\n(\s*\n){2,}/', "\n\n", $value);
@@ -257,8 +263,12 @@ class local_contact {
                             // Add to email message.
                             $htmlmessage .= '<p><strong>' . ucfirst($key) . ' :</strong></p><p>' . $value . '</p>';
                             break;
-                        case 'recipient': // Message field.
+                        case 'recipient':   // Message field - don't include this one in the body.
                             break;
+                        case 'name':        // Name field  - use translated value from language file.
+                        case 'email':       // Email field - use translated value from language file.
+                        case 'subject':     // Subject field - use translated value from language file.
+                            $key = get_string('field-' . $key, 'local_contact');
                         default:            // All other fields.
                             // Sanitize the text.
                             $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
@@ -283,7 +293,7 @@ class local_contact {
 
         // Create the footer - Add some system information.
         $footmessage = get_string('extrainfo', 'local_contact');
-        $footmessage = format_text($footermessage, FORMAT_HTML, array('trusted' => true, 'noclean' => true, 'para' => false));
+        $footmessage = format_text($footmessage, FORMAT_HTML, array('trusted' => true, 'noclean' => true, 'para' => false));
         $htmlmessage .= str_replace($tags, $info, $footmessage);
 
         // Send email message to recipient.

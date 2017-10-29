@@ -9,12 +9,14 @@ All notable changes to this project will be documented in this file.
 - Added "Continue" button on the confirmation page.
 - Added ability to specify some profile fields using FilterCodes filter plugin for Moodle in the footer of the email message.
 - Added alias support for the 'name', 'email', 'subject' and 'message' fields.
+- Added CONTRIBUTE.md.
 ### Updated
 - If present, the name and email address form fields will now be ignored for users currently logged-in to Moodle. Their user profile info will be used instead.
 - Clarified documentation's instructions for creating a form.
 - Added some new FAQ items to the documentation relating to changes to the name and email address field requirements.
 - Added some new ideas for features to the documentation.
 - Fixed detection of maximum number of submitted fields.
+- Reorganized README.md (New: logo, status badges, table of contents, contributing, etc).
 
 ## [0.7.0] - 2017-05-13
 ### Updated

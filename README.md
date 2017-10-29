@@ -143,10 +143,8 @@ See the section on Limitations below.
 
 **REQUIRED FIELDS:** The following input fields are required in order to avoid the built-in anti-spam protection. If these input fields are not present in the form, it will not work:
 
-1. **name** - You can change the name of this field by editing the **field-name** string in the Moodle language editor. If user is logged in, this field will be ignored and the users full name as registered in Moodle will be used instead.
-   If the user is currently logged in (not guest), this field will be ignored if it exists and user profile info (firstname lastname) will be used instead.
-2. **email** - You can change the name of this field by editing the **field-email** string in the Moodle language editor.
-   If the user is currently logged in (not guest), this field will be ignored if it exists and user profile info (firstname lastname) will be used instead.
+1. **name** - You can create an alias for this field name by editing the **field-name** string in the Moodle language editor. If user is logged in, this field will be ignored and the users full name as registered in Moodle will be used instead. If the user is currently logged in (not guest), this field will be ignored if it exists and user profile info (firstname lastname) will be used instead.
+2. **email** - You can create an alias for this field name by editing the **field-email** string in the Moodle language editor. If the user is currently logged in (not guest), this field will be ignored if it exists and user profile info (firstname lastname) will be used instead.
 3. **sesskey** - Must include both the hidden **sesskey** field as well as the SCRIPT line below it.
 4. **submit** - The name of the button.
 
@@ -154,8 +152,8 @@ Your FORM tag must have an action set to **../../local/contact/index.php** and a
 
 **OPTIONAL FIELDS:** Although not required, the following fields have special meaning to Contact Form:
 
-* **subject**  : If you want the subject of the email to contain content from the submitted web form, your form must include a field called **subject**. You can change the name of this field by editing the **field-subject** string in the Moodle language editor.
-* **message**  : If you want a textarea field, like a Message field, to be formatted properly when inserted in the email, the field must be called **message**. You can change the name of this field by editing the **field-message** string in the Moodle language editor.
+* **subject**  : If you want the subject of the email to contain content from the submitted web form, your form must include a field called **subject**. You can create an alias for this field name by editing the **field-subject** string in the Moodle language editor.
+* **message**  : If you want a textarea field, like a Message field, to be formatted properly when inserted in the email, the field must be called **message**. You can create an alias for this field name by editing the **field-message** string in the Moodle language editor.
 * **recipient**: Add this field if you want to specify a recipient other than the Moodle support email address. This field must contain an alias, not an email address. See the section on Configuring the List of Recipients in this documentation.
 
 You can also add the referring URL, the page that the user was on before going to the form, by adding the following to your form:

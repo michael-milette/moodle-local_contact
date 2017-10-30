@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Added some new ideas for features to the documentation.
 - Fixed detection of maximum number of submitted fields.
 - Reorganized README.md (New: logo, status badges, table of contents, contributing, etc).
+- Has been tested with Moodle 3.4.
 
 ## [0.7.0] - 2017-05-13
 ### Updated

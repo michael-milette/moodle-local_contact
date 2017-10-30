@@ -217,6 +217,8 @@ class local_contact {
     /**
      * Send email message and optionally autorespond.
      *
+     * @param      string  $email Sender's Email address.
+     * @param      string  $name  Sender's real name in plain text.
      * @param      boolean  $sendconfirmationemail  Set to true to also send an autorespond confirmation email back to user (TODO).
      *
      * @return     boolean  $status - True if message was successfully sent, false if not.

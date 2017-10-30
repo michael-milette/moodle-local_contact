@@ -1,4 +1,4 @@
-<img src="pix/icon-lg.png" align="right" />
+<img src="pix/logo.png" align="right" />
 
 Local Contact Form plugin for Moodle
 ====================================
@@ -64,7 +64,7 @@ Install the plugin, like any other plugin, to the following folder:
 
     /local/contact
 
-See http://docs.moodle.org/33/en/Installing_plugins for details on installing Moodle plugins.
+See http://docs.moodle.org/34/en/Installing_plugins for details on installing Moodle plugins.
 
 [(Back to top)](#table-of-contents)
 
@@ -218,7 +218,7 @@ Notice that you can include any number of recipients in your form's drop-down li
 
 There are no special considerations required for updating the plugin.
 
-The first public BETA version was released on 2016-12-05. For more information on releases since then, see 
+The first public BETA version was released on 2016-12-05. For more information on releases since then, see
 [CHANGELOG.md](https://github.com/michael-milette/moodle-local_contact/blob/master/CHANGELOG.md).
 
 [(Back to top)](#table-of-contents)
@@ -307,7 +307,7 @@ If you still can't get your web form to work, the problem might be your form. Tr
 
 There are a couple of ways you can blacklist an IP address. The best way is to add them to your web server settings. Consult your web server documentation for more information. If you don't have access to those settings, Moodle Administrators can add the IP addresses to the Moodle IP Blocker settings. For more information, see:
 
-  https://docs.moodle.org/33/en/IP_blocker
+  https://docs.moodle.org/34/en/IP_blocker
 
 ### Why does the User's IP address ([userip]) says "::1" or 0:0:0:0:0:1 instead showing a real IP address when I receive an email submitted from the form?
 

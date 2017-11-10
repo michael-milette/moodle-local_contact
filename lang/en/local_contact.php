@@ -77,3 +77,13 @@ physics|albert.einstein@example.com|Albert
 science|thomas.edison@example.com|Mr. Edison
 philosophy|aristotle@example.com|Aristotle
 </pre>';
+
+$string['recapchainfo'] = 'Using ReCAPTCHA';
+$string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle. You <strong>must</strong>:<br>
+<ul>
+  <li>Ensure that the {recaptcha} tag is included in all forms processed by Contact Form for Moodle.</li>
+  <li>Ensure that the <a href="https://moodle.org/plugins/filter_filtercodes">FilterCodes plugin</a> is installed and enabled.</li>
+</ul>';
+
+$string['norecaptcha'] = 'No ReCAPTCHA';
+$string['norecaptcha_description'] = 'Don\'t use ReCAPTCHA with forms procesed by Contact form.';

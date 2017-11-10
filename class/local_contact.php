@@ -251,7 +251,7 @@ class local_contact {
                 // Exclude fields we don't want in the message and empty fields.
                 if (!in_array($key, array('sesskey', 'submit')) && trim($value) != '') {
 
-                    // Apply minor formatting of key by replacing underscores with spaces.
+                    // Apply minor formatting of the key by replacing underscores with spaces.
                     $key = str_replace('_', ' ', $key);
                     switch ($key) {
                         // Make custom alterations.
@@ -265,11 +265,15 @@ class local_contact {
                             // Add to email message.
                             $htmlmessage .= '<p><strong>' . ucfirst($key) . ' :</strong></p><p>' . $value . '</p>';
                             break;
-                        case 'recipient':   // Message field - don't include this one in the body.
+                        // Don't include the following fields in the body of the message.
+                        case 'recipient':                  // Recipient field.
+                        case 'recaptcha challenge field':  // ReCAPTCHA related field.
+                        case 'recaptcha response field':   // ReCAPTCHA related field.
                             break;
-                        case 'name':        // Name field  - use translated value from language file.
-                        case 'email':       // Email field - use translated value from language file.
-                        case 'subject':     // Subject field - use translated value from language file.
+                        // Use language translations for the labels of the following fields.
+                        case 'name':        // Name field.
+                        case 'email':       // Email field.
+                        case 'subject':     // Subject field.
                             $key = get_string('field-' . $key, 'local_contact');
                         default:            // All other fields.
                             // Sanitize the text.

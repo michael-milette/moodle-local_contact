@@ -79,6 +79,29 @@ if (trim($recipient) != '' || empty($recipient)) {
     }
 }
 
+// Test for ReCAPTCHA.
+// ReCAPTCHA is never required for logged-in non-guest users.
+if (!isloggedin() || isguestuser()) {
+    // Is ReCAPTCHA configured in Moodle?
+    if (!empty($CFG->recaptchaprivatekey) AND !empty($CFG->recaptchapublickey)) {
+        // If so, ensure that it was filled correctly and submitted with the form.
+        require_once($CFG->libdir . '/recaptchalib.php');
+        $resp = recaptcha_check_answer($CFG->recaptchaprivatekey, $_SERVER["REMOTE_ADDR"],
+                optional_param('recaptcha_challenge_field', '' , PARAM_TEXT),
+                optional_param('recaptcha_response_field', '' , PARAM_TEXT));
+
+        if (!$resp->is_valid) {
+            // Display error message if CAPTCHA was entered incorrectly.
+            echo '<h3>' . get_string('missingrecaptchachallengefield') . '</h3>';
+            echo '<p>' . get_string('recaptcha_help', 'auth') . ($CFG->debugdisplay == 1 ? ' (' .  $resp->error . ')' : '') .'</p>';
+            echo '<button type="button" onclick="history.back();">' . get_string('incorrectpleasetryagain', 'auth') . '</a>';
+            // Display page footer.
+            echo $OUTPUT->footer();
+            die;
+        }
+    }
+}
+
 // Send the message.
 
 if ($contact->sendmessage($email, $name)) {

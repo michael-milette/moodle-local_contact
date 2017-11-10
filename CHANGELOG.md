@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.8.0] - 2017-11-11
+### Added
+- Support for Moodle ReCAPTCHA. Can be disabled for Contact Forms in settings. Must be use with the {recaptcha} tag from the FilterCodes plugin.
+### Updated
+- Updated documenation and with new examples in README.md.
+
 ## [0.7.2] - 2017-10-29
 ### Added
 - The French translation for Contact Form for Moodle is now available. Update your Moodle language pack to get it!

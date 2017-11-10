@@ -37,5 +37,26 @@ if ($hassiteconfig) {
     $description = get_string('recipient_list_description', 'local_contact');
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $settings->add($setting);
+
+    // Override and disable ReCAPTCHA, if the private and public keys are setup in Moodle.
+    if (!empty($CFG->recaptchaprivatekey) AND !empty($CFG->recaptchapublickey)) {
+        // Information on using recaptcha with Contact Form.
+        $name = 'local_contact/recapchainfo';
+        $title = get_string('recapchainfo', 'local_contact');
+        if (empty(get_config('local_contact', 'norecaptcha'))) {
+            $description = get_string('recapchainfo_description', 'local_contact');
+        } else {
+            $description = '';
+        }
+        $setting = new admin_setting_heading($name, $title, $description);
+        $settings->add($setting);
+
+        // Disable Recapcha - if configured.
+        $name = 'local_contact/norecaptcha';
+        $title = get_string('norecaptcha', 'local_contact');
+        $description = get_string('norecaptcha_description', 'local_contact');
+        $setting = new admin_setting_configcheckbox($name, $title, $description, 0);
+        $settings->add($setting);
+    }
 }
 

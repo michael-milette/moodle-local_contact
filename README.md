@@ -3,7 +3,7 @@
 Local Contact Form plugin for Moodle
 ====================================
 ![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1-blue.svg)
-![Moodle](https://img.shields.io/badge/Moodle-v3.0%20%2F%20v3.1%20%2F%20v3.2%20%2F%20v3.3%20%2F%20v3.4-orange.svg)
+![Moodle](https://img.shields.io/badge/Moodle-v3.0%20%to%20v3.4-orange.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/michael-milette/moodle-local_contact.svg)](https://github.com/michael-milette/moodle-local_contact/issues)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-green.svg)](#contributing)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](#license)
@@ -31,11 +31,11 @@ The Contact Form plugin for Moodle processes information submitted through a web
 
 Examples uses for this plugin include:
 
-* Contact us form.
-* Support request form.
-* Request a course form.
-* Information request form.
-* Lead generation form.
+* Contact us form;
+* Support request form;
+* Request a course form;
+* Information request form;
+* Lead generation form;
 * Membership application form.
 
 [(Back to top)](#table-of-contents)
@@ -70,35 +70,16 @@ See http://docs.moodle.org/34/en/Installing_plugins for details on installing Mo
 
 # Usage
 
-There are no configurable settings for this plugin at this time. However:
+Before getting started:
 
-* You should ensure email settings are properly configured in Moodle.
-* You should configure the support name and email address in Moodle.
+* Ensure email settings are properly configured in Moodle.
+* Ensure that you have configured the support name and email address in Moodle.
 
-**Configuring the Email Message**
+## Creating a new form
 
-At the moment, you will need to edit the language files in order to modify the messages which will be sent to the user.
+This plugin is for administrators with a little knowledge of HTML forms. You can simply copy and paste any of the [examples from the Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/HTML-Form-Templates) to get started.
 
-The message can include the following tags which will be substituted at the time the message is sent:
-
-* **[fromemail]**      : User's email address as entered in the web form or the users registered email address if logged in.
-* **[fromname]**       : User's name as entered in the web form or the users registered first and last name if logged in.
-* **[http_referer]**   : URL of the web form page that the email was generated from.
-* **[http_user_agent]**: Web browser.
-* **[lang]**           : Language that the user was viewing the website in at the time they submitted the form.
-* **[sitefullname]**   : Site's fullname.
-* **[siteshortname]**  : Site's short name.
-* **[siteurl]**        : URL of the website.
-* **[supportemail]**   : Site's support email address.
-* **[supportname]**    : Site's support name.
-* **[userip]**         : Best attempt to determine the user's IP address. Will be the firewall address if they are behind one.
-* **[userstatus]**     : Displays the user's current status if they are known to the Moodle site, either because they are logged in or by their email address.
-
-Note that, in the future, the email message will be configurable from within the plugin's settings.
-
-**Creating a New Form**
-
-This plugin is for administrators with a little knowledge of HTML forms. To create a new web form on your site, add a Moodle page or HTML block. Be sure to switch to the Source Code view button in the Moodle WYSIWYG editor before entering or pasting HTML code similar to the following:
+To create a new web form on your site, start by adding a Moodle page or HTML block. Be sure to switch to the Source Code view button in the Moodle Atto WYSIWYG editor before entering or pasting HTML code similar to the following:
 
     <form action="../../local/contact/index.php" method="post" class="contact-us">
         <fieldset>
@@ -121,15 +102,24 @@ This plugin is for administrators with a little knowledge of HTML forms. To crea
         </div>
     </form>
 
-That is it. Just save and you are done. Additional examples of forms are available on the plugin's GitHub Wiki:
+That is it. Just save and you are done.
 
-https://github.com/michael-milette/moodle-local_contact/wiki/HTML-Form-Templates
+Note: If you are putting the form into a block, you will need to adjust the "../.." part in the action of the form so that it is relative to the webroot of your Moodle website. If you are using the FilterCodes plugin, you can simply use {wwwroot} and it will work anywhere you put the form whether it is in a page or a block.
 
-You can of course customize it to suit your particular requirements.
+Example:
 
-Almost any type of HTML field included with the form should automatically appear in the email.
-Example: text, password, textarea, radio, checkbox, select drop-down, hidden and more.
-See the section on Limitations below.
+    <form action="{wwwroot}/local/contact/index.php" method="post" class="contact-us">
+    :       :       :       :       :
+
+To see a full example of the above form, see [Contact Us with FilterCodes example](https://github.com/michael-milette/moodle-local_contact/wiki/HTML-Form-Templates#user-content-contact-us-form-with-filtercodes-for-contact-form-for-moodle).
+
+### Customizing the form
+
+You can customize your form to suit your particular requirements. You will need to be familiar with how to create basic HTML5 web forms. If you are not, take a look at the [HTML5 Forms tutorial](http://www.html5-tutorials.org/forms/introduction/).
+
+Almost any type of HTML field included with the form should automatically appear in the email. Example: text, password, textarea, radio, checkbox, select drop-down, hidden and more. See the section on [Limitations](#limitations).
+
+In the previous example, the form's class "contact-us" is not required but is simply included to help you to apply CSS styling to the form. Feel free to change it to anything you like.
 
 **REQUIRED FIELDS:** The following input fields are required in order to avoid the built-in anti-spam protection. If these input fields are not present in the form, it will not work:
 
@@ -151,23 +141,46 @@ You can also add the referring URL, the page that the user was on before going t
     <input type="hidden" id="referrer" name="referrer" value="">
     <script>document.getElementById('referrer').value = document.referrer;</script>
 
-**Additional Tips**
-
-If you are not familiar with how to create basic HTML web forms, take a look at this tutorial:
-
-http://www.w3schools.com/html/html_forms.asp
+#### Additional tips
 
 If you want to insert spaces in your field names, use underscores "_" in your form field id and name. Contact Form for Moodle will replace these with a space before inserting the field name into the email message.
 
 Field id/name tokens must begin with a letter. They may optionally also contain any combination of letters (a-z), numbers (0-9), underscores, dashes, periods and colons (_-.:). They are not case sensitive.
 
-**Configuring the List of Recipients**
+## Configuring the email message
+
+At the moment, you will need to edit the language files in order to modify the messages which will be sent to the user.
+
+The message can include the following tags which will be substituted at the time the message is sent:
+
+* **[fromemail]**      : User's email address as entered in the web form or the users registered email address if logged in.
+* **[fromname]**       : User's name as entered in the web form or the users registered first and last name if logged in.
+* **[http_referer]**   : URL of the web form page that the email was generated from.
+* **[http_user_agent]**: Web browser.
+* **[lang]**           : Language that the user was viewing the website in at the time they submitted the form.
+* **[sitefullname]**   : Site's fullname.
+* **[siteshortname]**  : Site's short name.
+* **[siteurl]**        : URL of the website.
+* **[supportemail]**   : Site's support email address.
+* **[supportname]**    : Site's support name.
+* **[userip]**         : Best attempt to determine the user's IP address. Will be the firewall address if they are behind one.
+* **[userstatus]**     : Displays the user's current status if they are known to the Moodle site, either because they are logged in or by their email address.
+
+Note that, in the future, the email message will be configurable from within the plugin's settings.
+
+## Optional Contact Form for Moodle settings
+
+Contact Form for Moodle includes the following settings. These are available on the plugin's `Settings` page by going to:
+
+Site administration > Plugins > Local plugins > Contact Form
+
+### Configuring the List of Recipients
 
 By default, messages sent from the Contact Form for Moodle will be delivered to your Moodle support contact email address. However, you can optionally specify a different recipient on a per form basis. Configuring this requires two additional easy steps:
 
-Step 1 - Create the List of Available Recipients
+#### Step 1 - Create the List of Available Recipients
 
-Start by specifying a List of Available Recipients in the plugin's settings. (Site administration > Plugins > Local plugins > Contact Form)
+Start by specifying a List of Available Recipients in the plugin's settings.
 
 The format for each recipient is alias|emailaddress|name. You should only enter one recipient per line. Incorrectly entered lines and blank lines will be ignored.
 
@@ -186,7 +199,7 @@ For example:
 
 Note that this list is not automatically populated in forms. You will need to do that manually in the next step.
 
-Step 2 - Add a field to your form.
+#### Step 2 - Add a field to your form.
 
 Single Recipient - This can be done by specifying the recipient's alias in a "hidden" type input field in your form. For example:
 
@@ -211,6 +224,33 @@ A different form on the same site might have:
     </select>
 
 Notice that you can include any number of recipients in your form's drop-down list. You need not include all of them. If a specified alias is not in the List of Available Recipients, the email message will default to being delivered to the Moodle site's support email address.
+
+### Configuring ReCAPTCHAs
+
+Note: If Moodle's ReCAPTCHA is not configured, you will not see this setting.
+
+To use ReCAPTCHA in your Contact form, you must:
+
+- Configure Moodle's ReCAPTCHA settings. See Site administration > Plugins > Authentication > Manage authentication. These settings are near the bottom of the page.
+- Install and enable the [filter_filtercodes](https://moodle.org/plugins/filter_filtercodes) plugin.
+- Add the {recaptcha} tag inside your form, usually right before the `Send` button. This will be converted into HTML code when your form is displayed. For more information on inserting a {recaptha} tag, see the [FilterCodes documentation](https://github.com/michael-milette/moodle-filter_filtercodes#usage).
+
+However, even if ReCAPTCHA is enabled, you can tell Contact Form for Moodle not to use it. Just go into the settings for Contact Form, check the box for `No ReCAPTCHA` and save. In this case, you will not need to include the {recaptcha} tag in the form. Example:
+
+    <form action="../../local/contact/index.php" method="post" class="template-form">
+        <fieldset>
+            <label for="name" id="namelabel">Your name <strong class="required">(required)</strong></label><br>
+            <input id="name" name="name" type="text" pattern="[A-zÀ-ž]([A-zÀ-ž\s]){2,}" title="Minimum 3 letters/spaces." required="required" value="" style="width:100%;"><br>
+            <label for="email" id="emaillabel">Email address <strong class="required">(required)</strong></label><br>
+            <input id="email" name="email" type="email" required="required" value="" style="width:100%;"><br>
+            <input type="hidden" id="sesskey" name="sesskey" value="">
+            <script>document.getElementById('sesskey').value = M.cfg.sesskey;</script>
+            **{recaptcha}**
+        </fieldset>
+        <div>
+            <input type="submit" name="submit" id="submit" value="Send">
+        </div>
+    </form>
 
 [(Back to top)](#table-of-contents)
 
@@ -301,7 +341,7 @@ Make sure Moodle email is working. We recommend test your Moodle email system us
 
 ### My site successfully completed the eMailTest process. Why is it still not working?
 
-If you still can't get your web form to work, the problem might be your form. Try using HTML sample form included above. Then customize it to meet your needs.
+If you still can't get your web form to work, the problem might be your form. Try using HTML sample form included in the [Usage](#usage) section. Then customize it to meet your needs.
 
 ### I am still getting a lot of spam emails through my web form. Can I block certain IP addresses?
 
@@ -315,7 +355,11 @@ There are a couple of ways you can blacklist an IP address. The best way is to a
 
 ### Can I include my favourite captcha in a form?
 
-No. Support for Moodle captcha is currenty in the works and will be available in a future release of Contact Form for Moodle. It will also require the use of the [filter_filtercodes](https://moodle.org/plugins/filter_filtercodes) plugin.
+No. Only Moodle's ReCAPTCHA will work. See the [Usage](#usage) section for more information.
+
+### Moodle's ReCAPTCHA is enabled. Do I need to use it in my Contact forms?
+
+It is not required. However, if you don't want to use it, you must check the `No ReCAPTCHA` checkbox in the plugin's settings.
 
 ### Can I add a check box that must be checked, like for accepting the privacy policy, before the user can submit the form?
 
@@ -372,7 +416,6 @@ Michael Milette - Author and Lead Developer
 Some of the features we are considering for future releases include:
 
 * Add ability to specify custom profile fields in the body of the email message.
-* Add ability to detect if Moodle captchas are enabled and, if so, make them required.
 * Option to enable the auto-responder / confirmation message.
 * Auto-responder will be editable in the plugin's settings.
 * Add additional examples of web forms to the documentation (see Wiki).

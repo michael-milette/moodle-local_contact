@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.8.1] - 2017-11-13
+### Updated
+- No ReCAPTCHA option now actually has an effect.
+
 ## [0.8.0] - 2017-11-11
 ### Added
 - Support for Moodle ReCAPTCHA. Can be disabled for Contact Forms in settings. Must be use with the {recaptcha} tag from the FilterCodes plugin.

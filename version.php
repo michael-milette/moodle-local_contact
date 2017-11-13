@@ -26,8 +26,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_contact';   // To check on upgrade, that module sits in correct place.
-$plugin->version   = 2017111100;        // The current module version (Date: YYYYMMDDXX).
+$plugin->version   = 2017111300;        // The current module version (Date: YYYYMMDDXX).
 $plugin->requires  = 2015111600;        // Requires Moodle version 3.0.
-$plugin->release   = '0.8';
+$plugin->release   = '0.8.1';
 $plugin->maturity  = MATURITY_BETA;
 $plugin->cron      = 0;

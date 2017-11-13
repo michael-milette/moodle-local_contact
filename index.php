@@ -83,7 +83,9 @@ if (trim($recipient) != '' || empty($recipient)) {
 // ReCAPTCHA is never required for logged-in non-guest users.
 if (!isloggedin() || isguestuser()) {
     // Is ReCAPTCHA configured in Moodle?
-    if (!empty($CFG->recaptchaprivatekey) AND !empty($CFG->recaptchapublickey)) {
+    if (!empty($CFG->recaptchaprivatekey) &&
+            !empty($CFG->recaptchapublickey) &&
+            empty(get_config('local_contact', 'norecaptcha'))) {
         // If so, ensure that it was filled correctly and submitted with the form.
         require_once($CFG->libdir . '/recaptchalib.php');
         $resp = recaptcha_check_answer($CFG->recaptchaprivatekey, $_SERVER["REMOTE_ADDR"],

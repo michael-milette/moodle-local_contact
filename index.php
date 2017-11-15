@@ -26,7 +26,7 @@
 require_once('../../config.php');
 require_once($CFG->dirroot . '/local/contact/class/local_contact.php');
 if (false) { // This is only included to avoid code checker warning.
-    require_login();
+    require_login(); // We don't ever actually want to require users to be logged-in.
 }
 
 $context = context_system::instance();
@@ -54,23 +54,26 @@ echo $OUTPUT->header();
 
 // The default recipient is the Moodle site's support contact. This will
 // be used if no recipient was specified or if the recipient is unknown.
-$name = $CFG->supportname;
-$email = $CFG->supportemail;
+$name = trim($CFG->supportname);
+$email = trim($CFG->supportemail);
 
-// If the form includes a recipient's alias, search the plugin's config recipient list for a name and email address.
-$recipient = optional_param('recipient', null, PARAM_TEXT);
-if (trim($recipient) != '' || empty($recipient)) {
+// Handle recipient alias.
+// If the form includes a recipient's alias, search the plugin's recipient list settings for a name and email address.
+$recipient = trim(optional_param('recipient', null, PARAM_TEXT));
+if (!empty($recipient)) {
     $lines = explode("\n", get_config('local_contact', 'recipient_list'));
     foreach ($lines as $linenumbe => $line) {
         $line = trim($line);
-        if (strlen($line) == 0) {
+        if (empty($line)) { // Blank line.
             continue;
         }
-        // See if this entry matches the one we are looking for.
         $thisrecipient = explode('|', $line);
+        // 0 = alias, 1 = email address, 2 = name.
         if (count($thisrecipient) == 3) {
-            // 0 = alias, 1 = email address, 2 = name.
-            if (trim($thisrecipient[0]) == $recipient && trim($thisrecipient[1]) != '' && trim($thisrecipient[2]) != '') {
+            // Trim leading and trailing spaces from each of the 3 parameters.
+            $thisrecipient = array_map('trim', $thisrecipient);
+            // See if this alias matches the one we are looking for.
+            if ($thisrecipient[0] == $recipient && !empty($thisrecipient[1]) && !empty($thisrecipient[2])) {
                 $email = $thisrecipient[1];
                 $name = $thisrecipient[2];
                 break;
@@ -80,6 +83,7 @@ if (trim($recipient) != '' || empty($recipient)) {
 }
 
 // Test for ReCAPTCHA.
+
 // ReCAPTCHA is never required for logged-in non-guest users.
 if (!isloggedin() || isguestuser()) {
     // Is ReCAPTCHA configured in Moodle?

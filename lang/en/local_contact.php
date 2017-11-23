@@ -78,6 +78,10 @@ science|thomas.edison@example.com|Mr. Edison
 philosophy|aristotle@example.com|Aristotle
 </pre>';
 
+$string['strictusers'] = 'Strict users';
+$string['strictusers_desc'] = 'Only allow logged in users, no guests to access the plugin to prevent spamming.';
+$string['strictusers_denied'] = 'Failed to send e-mail because you are not logged in.';
+
 $string['recapchainfo'] = 'Using ReCAPTCHA';
 $string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle. You <strong>must</strong>:<br>
 <ul>

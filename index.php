@@ -37,6 +37,10 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_title(get_string('pluginname', 'local_contact'));
 $PAGE->navbar->add('');
 
+if ( get_config('local_contact', 'strict_users') && ( !isloggedin() || isguestuser() ) ) {  // must be logged in and not a guest
+    die(get_string('strictusers_denied', 'local_contact') );
+}
+
 $contact = new local_contact();
 if ($contact->isspambot) {
     header('HTTP/1.0 403 Forbidden');

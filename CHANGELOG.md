@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.8.3] - 2017-11-23
+### Added
+- New strict_users setting to restrict HTTP_REFERER spoofing. Only logged in logged in and non-guest users can use the plugin.
+
 ## [0.8.2] - 2017-11-15
 ### Updated
 - Leading or trailing spaces in email addresses in recipient list settings will no longer cause a problem.

@@ -1,9 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.8.3] - 2017-11-23
+## [0.8.3] - 2017-11-24
 ### Added
-- New strict_users setting to restrict HTTP_REFERER spoofing. Only logged in logged in and non-guest users can use the plugin.
+- New Require Login setting - requires user to be logged-in in order to submit a form.
 
 ## [0.8.2] - 2017-11-15
 ### Updated

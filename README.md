@@ -255,7 +255,9 @@ However, even if ReCAPTCHA is enabled, you can tell Contact Form for Moodle not 
 [(Back to top)](#table-of-contents)
 
 ### Requiring login
-The 'Strict users' setting requires that the plugin must be called by a logged-in user who is NOT a guest. The aim is to prevent spamming by POSTing data directly to the URL local/contact/index.php with appropriate HTTP_REFERER spoofing. 
+
+The `Require login` setting requires that users be logged-in in order to be able to submit the form. If a form is submitted and the user is not logged-in they will be redirected and informed. If you require users to be logged-in, it is also highly recommended that you also place your form on a page which is only accessible to logged-in users. Guest users are not considered to be logged-in.
+ 
 
 
 # Updating

@@ -16,12 +16,12 @@
 
 /**
  * This plugin for Moodle is used to send emails through a web form.
-*
-* @package    local_contact
-* @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
-* @author     Michael Milette
-* @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ *
+ * @package    local_contact
+ * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @author     Michael Milette
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -37,9 +37,14 @@ if ($hassiteconfig) {
     $description = get_string('recipient_list_description', 'local_contact');
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $settings->add($setting);
-     
-    $settings->add(new admin_setting_configcheckbox('local_contact/strict_users', get_string('strictusers', 'local_contact'),
-        get_string('strictusers_desc', 'local_contact'), 1));
+
+    // Require the user to be logged in and not a guest, used to prevent calling the script from outside moodle.
+    $default = 0;
+    $name = 'local_contact/loginrequired';
+    $title = get_string('loginrequired', 'local_contact');
+    $description = get_string('loginrequired_description', 'local_contact');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+    $settings->add($setting);
 
     // Override and disable ReCAPTCHA, if the private and public keys are setup in Moodle.
     if (!empty($CFG->recaptchaprivatekey) AND !empty($CFG->recaptchapublickey)) {

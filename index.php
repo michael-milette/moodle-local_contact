@@ -25,9 +25,6 @@
 
 require_once('../../config.php');
 require_once($CFG->dirroot . '/local/contact/class/local_contact.php');
-if (false) { // This is only included to avoid code checker warning.
-    require_login(); // We don't ever actually want to require users to be logged-in.
-}
 
 $context = context_system::instance();
 $PAGE->set_context($context);
@@ -37,9 +34,6 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_title(get_string('pluginname', 'local_contact'));
 $PAGE->navbar->add('');
 
-if ( get_config('local_contact', 'strict_users') && ( !isloggedin() || isguestuser() ) ) {  // must be logged in and not a guest
-    die(get_string('strictusers_denied', 'local_contact') );
-}
 
 $contact = new local_contact();
 if ($contact->isspambot) {
@@ -53,6 +47,16 @@ if ($contact->isspambot) {
 
 // Display page header.
 echo $OUTPUT->header();
+
+// Are we being spoofed by external scripts? issue #38
+if ( !empty( get_config('local_contact', 'loginrequired') ) && ( !isloggedin() || isguestuser() ) ) {  // must be logged in and not a guest
+    echo '<h3>'.get_string('errorsendingtitle', 'local_contact').'</h3>';
+    echo get_string('mustbeloggedin', 'error');
+    echo $OUTPUT->continue_button($CFG->wwwroot);
+
+    echo $OUTPUT->footer();
+    die;
+}
 
 // Determine the recipient's name and email address.
 

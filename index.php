@@ -34,7 +34,6 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_title(get_string('pluginname', 'local_contact'));
 $PAGE->navbar->add('');
 
-
 $contact = new local_contact();
 if ($contact->isspambot) {
     header('HTTP/1.0 403 Forbidden');

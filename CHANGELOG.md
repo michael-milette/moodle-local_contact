@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.8.3] - 2017-11-24
+## [0.8.3] - 2017-11-29
 ### Added
 - New Require Login setting - requires user to be logged-in in order to submit a form.
 

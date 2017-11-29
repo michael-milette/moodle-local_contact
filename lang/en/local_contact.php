@@ -78,6 +78,9 @@ science|thomas.edison@example.com|Mr. Edison
 philosophy|aristotle@example.com|Aristotle
 </pre>';
 
+$string['loginrequired'] = 'Login required';
+$string['loginrequired_description'] = 'Only allow logged-in users to submit the Contact forms. Guests are not considered to be logged-in.';
+
 $string['recapchainfo'] = 'Using ReCAPTCHA';
 $string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle. You <strong>must</strong>:<br>
 <ul>
@@ -86,4 +89,4 @@ $string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle.
 </ul>';
 
 $string['norecaptcha'] = 'No ReCAPTCHA';
-$string['norecaptcha_description'] = 'Don\'t use ReCAPTCHA with forms procesed by Contact form.';
+$string['norecaptcha_description'] = 'Don\'t use ReCAPTCHA with forms processed by Contact form.';

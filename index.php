@@ -50,6 +50,16 @@ if ($contact->isspambot) {
 // Display page header.
 echo $OUTPUT->header();
 
+// Are we being spoofed by external scripts? issue #38
+// must be logged in and not a guest.
+if (!empty(get_config('local_contact', 'loginrequired')) && (!isloggedin() || isguestuser())) {
+    echo '<h3>' . get_string('errorsendingtitle', 'local_contact') . '</h3>';
+    echo get_string('mustbeloggedin', 'error');
+    echo $OUTPUT->continue_button($CFG->wwwroot);
+    echo $OUTPUT->footer();
+    die;
+}
+
 // Determine the recipient's name and email address.
 
 // The default recipient is the Moodle site's support contact. This will

@@ -25,13 +25,25 @@
 
 require_once('../../config.php');
 require_once($CFG->dirroot . '/local/contact/class/local_contact.php');
-if (false) { // This is only included to avoid code checker warning.
-    require_login(); // We don't ever actually want to require users to be logged-in.
+
+if (isset($_SERVER['HTTP_REFERER'])) {
+    $PAGE->set_url($_SERVER['HTTP_REFERER']);
+} else {
+    $PAGE->set_url('/local/contact/index.php');
+}
+
+// If we require user to be logged in.
+if (!empty(get_config('local_contact', 'loginrequired'))) {
+    // Log them in and then redirect them back to the form.
+    if (!isloggedin() or isguestuser()) {
+        // Set message that session has timed out.
+        $SESSION->has_timed_out = 1;
+        require_login();
+    }
 }
 
 $context = context_system::instance();
 $PAGE->set_context($context);
-$PAGE->set_url('/local/contact/index.php');
 $PAGE->set_heading($SITE->fullname);
 $PAGE->set_pagelayout('standard');
 $PAGE->set_title(get_string('pluginname', 'local_contact'));

@@ -123,7 +123,7 @@ class local_contact {
         }
 
         // Validate if "sesskey" field contains the correct value.
-        if (!$this->isspambot && $this->isspambot = !optional_param('sesskey', '3.1415', PARAM_RAW) == sesskey()) {
+        if (!$this->isspambot && $this->isspambot = (optional_param('sesskey', '3.1415', PARAM_RAW) != sesskey())) {
             $this->errmsg = '"sesskey" field is missing or contains an incorrect value.';
         }
 

@@ -27,7 +27,7 @@ require_once('../../config.php');
 require_once($CFG->dirroot . '/local/contact/class/local_contact.php');
 
 if (isset($_SERVER['HTTP_REFERER'])) {
-    $PAGE->set_url($_SERVER['HTTP_REFERER']);
+    $PAGE->set_url(get_local_referer(false));
 } else {
     $PAGE->set_url('/local/contact/index.php');
 }

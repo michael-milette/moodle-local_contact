@@ -41,7 +41,7 @@ class local_contact {
     public function __construct() {
         global $CFG;
 
-        if (isloggedin() && !isguestuser()) {
+        if (!isloggedin() && !isguestuser()) {
             // If logged-in as non guest, use their registered fullname and email address.
             global $USER;
             $this->fromname = $USER->firstname.' '.$USER->lastname;
@@ -220,8 +220,8 @@ class local_contact {
     /**
      * Send email message and optionally autorespond.
      *
-     * @param      string  $email Sender's Email address.
-     * @param      string  $name  Sender's real name in plain text.
+     * @param      string  $email Recipient's Email address.
+     * @param      string  $name  Recipient's real name in plain text.
      * @param      boolean  $sendconfirmationemail  Set to true to also send an autorespond confirmation email back to user (TODO).
      *
      * @return     boolean  $status - True if message was successfully sent, false if not.
@@ -305,8 +305,9 @@ class local_contact {
         $footmessage = format_text($footmessage, FORMAT_HTML, array('trusted' => true, 'noclean' => true, 'para' => false));
         $htmlmessage .= str_replace($tags, $info, $footmessage);
 
-        // Send email message to recipient.
-        $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true);
+        // Send email message to recipient and set replyto to the sender's email address and name.
+        $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true,
+                $from->email, $from->firstname);
 
         // If successful and a confirmation email is desired, send it the original sender.
         if ($status && $sendconfirmationemail) {

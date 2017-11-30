@@ -252,6 +252,10 @@ However, even if ReCAPTCHA is enabled, you can tell Contact Form for Moodle not 
         </div>
     </form>
 
+### Require login
+
+The `Require login` setting requires that users be logged-in in order to be able to submit the form. If a form is submitted and the user is not logged-in they will be redirected to the login page. If you require users to be logged-in, it is also highly recommended that you also place your form on a page which is only accessible to logged-in users. Guest users are not considered to be logged-in.
+
 [(Back to top)](#table-of-contents)
 
 # Updating

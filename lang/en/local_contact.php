@@ -78,6 +78,9 @@ science|thomas.edison@example.com|Mr. Edison
 philosophy|aristotle@example.com|Aristotle
 </pre>';
 
+$string['loginrequired'] = 'Login required';
+$string['loginrequired_description'] = 'Only allow logged-in users to submit the Contact forms. Guests are not considered to be logged-in.';
+
 $string['recapchainfo'] = 'Using ReCAPTCHA';
 $string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle. You <strong>must</strong>:<br>
 <ul>

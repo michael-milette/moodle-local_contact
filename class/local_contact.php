@@ -48,13 +48,16 @@ class local_contact {
             $this->fromemail = $USER->email;
         } else {
             // If not logged-in as a user or logged in a guest, the name and email fields are required.
-            if (empty($this->fromname  = optional_param(get_string('field-name', 'local_contact'), '', PARAM_TEXT))) {
+            if (empty($this->fromname  = trim(optional_param(get_string('field-name', 'local_contact'), '', PARAM_TEXT)))) {
                 $this->fromname  = required_param('name', PARAM_TEXT);
             }
-            if (empty($this->fromemail = optional_param(get_string('field-email', 'local_contact'), '', PARAM_EMAIL))) {
+            if (empty($this->fromemail = trim(optional_param(get_string('field-email', 'local_contact'), '', PARAM_EMAIL)))) {
                 $this->fromemail  = required_param('email', PARAM_TEXT);
             }
         }
+        $this->fromname = trim($this->fromname);
+        $this->fromemail = trim($this->fromemail);
+
         $this->isspambot = false;
         $this->errmsg = '';
 
@@ -120,7 +123,7 @@ class local_contact {
         }
 
         // Validate if "sesskey" field contains the correct value.
-        if (!$this->isspambot && $this->isspambot = !optional_param('sesskey', '3.1415', PARAM_RAW) == sesskey()) {
+        if (!$this->isspambot && $this->isspambot = (optional_param('sesskey', '3.1415', PARAM_RAW) != sesskey())) {
             $this->errmsg = '"sesskey" field is missing or contains an incorrect value.';
         }
 

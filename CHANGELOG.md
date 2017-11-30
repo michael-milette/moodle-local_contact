@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.8.2] - 2017-11-30
+### Added
+- Settings option to require users to be logged-in when submitting the form. Not enforced by default. (Thanks to contributions by @kmoouni and @jezhops)
+### Updated
+- Leading or trailing spaces in email addresses in recipient list settings will no longer cause a problem.
+- Fixed bug where forms could be submitted without sesskey JavaScript in the form.
+
 ## [0.8.1] - 2017-11-13
 ### Updated
 - No ReCAPTCHA option now actually has an effect.

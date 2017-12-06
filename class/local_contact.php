@@ -279,6 +279,10 @@ class local_contact {
                         case 'subject':     // Subject field.
                             $key = get_string('field-' . $key, 'local_contact');
                         default:            // All other fields.
+                            // Join array of values. Example: <select multiple>.
+                            if (is_array($value)) {
+                                $value = join($value, ", ");
+                            }
                             // Sanitize the text.
                             $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
                             // Add to email message.

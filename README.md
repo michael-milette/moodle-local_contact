@@ -225,6 +225,25 @@ A different form on the same site might have:
 
 Notice that you can include any number of recipients in your form's drop-down list. You need not include all of them. If a specified alias is not in the List of Available Recipients, the email message will default to being delivered to the Moodle site's support email address.
 
+### Select multiple items
+
+If you are using a select form where you allow multiple items to be selected, all of the selected items will be merged together in a commas/space delimited list. Example:
+
+    <select name="cars[]" id="cars">
+        <option value="">Please select...</option>
+        <option value="TOYOTA">Toyota</option>
+        <option value="GM">General Motors</option>
+        <option value="VOLKSWAGEN">Volkswagen</option>
+        <option value="NISSAN">Nissan</option>
+        <option value="HYUNDAI">Hyundai</option>
+        <option value="FORD">Ford</option>
+        <option value="CHRYSLER">Chrysler</option>
+        <option value="HONDA">Honda</option>
+        <option value="BMW">BMW</option>
+    </select>
+
+Important: Don't forget to end the name of your field with [] or all you will see is the last selected item.
+
 ### Configuring ReCAPTCHAs
 
 Note: If Moodle's ReCAPTCHA is not configured, you will not see this setting.
@@ -327,7 +346,7 @@ Since you don't need to be logged into your Moodle Frontpage to see it, your for
 
 ### All I see is the word "Forbidden" or a blank screen after submitting a form. What should I do?
 
-Although this plugin is still in BETA, has been tested pretty extensively. If you are getting this error, it is likely that your will need to fix your form and/or enable Moodle debugging. Alternatively you can try the form logged in as a Moodle administrator. This will enable the display of additional diagnostic information.
+Although this plugin is still in BETA, it has been extensively tested. If you are getting this error, it is likely that you will need to fix your form and/or enable Moodle debugging. Alternatively you can try the form logged in as a Moodle administrator. This will enable the display of additional diagnostic information.
 
 ### Where do emails go when they are submitted on my Moodle website?
 
@@ -401,7 +420,7 @@ There are no known security considerations at this time.
 
 ## Other questions
 
-Got a burning question that is not covered here? Checkout the [troubleshooting section of our Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/Troubleshooting). If you still can't find your answer, submit your question in the Moodle forums or open a new issue on Github at:
+Got a burning question that is not covered here? Checkout the [troubleshooting section of our Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/Troubleshooting). If you still can't find your answer, submit your question in the Moodle forums or open a new issue on GitHub at:
 
 http://github.com/michael-milette/moodle-local_contact/issues
 
@@ -455,7 +474,7 @@ http://github.com/michael-milette/moodle-local_contact
 
 Copyright © 2016-2017 TNG Consulting Inc. - http://www.tngconsulting.ca/
 
-This file is part of the Contact Form plugin for Moodle - http://moodle.org/
+This file is part of the Contact Form plugin for Moodle - https://moodle.org/plugins/local_contact/
 
 Contact Form is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

@@ -131,7 +131,14 @@ if ($contact->sendmessage($email, $name)) {
     echo '<h3>'.get_string('errorsendingtitle', 'local_contact').'</h3>';
     echo get_string('errorsending', 'local_contact');
 }
-echo $OUTPUT->continue_button($CFG->wwwroot);
+
+// Continue button takes the user back to the original page that he/she started from before going to the form.
+// If the referrer URL was not provided in the submitted form fields or is not from this site, go to the front page.
+$continueurl = optional_param('referrer', '', PARAM_URL);
+if (stripos($continueurl, $CFG->wwwroot) !== 0) {
+    $continueurl = $CFG->wwwroot;
+}
+echo $OUTPUT->continue_button($continueurl);
 
 // Display page footer.
 echo $OUTPUT->footer();

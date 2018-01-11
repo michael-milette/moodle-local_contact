@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.8.3] - 2018-01-11
 ### Updated
+- After submitting the form, the continue button will now take you to the front page or, if the "referrer" field was included in the form, the page the user was on just before going to the form.
 - Updated copyright notice to include 2018.
 
 ## [0.8.2] - 2017-12-04

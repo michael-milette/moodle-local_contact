@@ -141,6 +141,8 @@ You can also add the referring URL, the page that the user was on before going t
     <input type="hidden" id="referrer" name="referrer" value="">
     <script>document.getElementById('referrer').value = document.referrer;</script>
 
+An side benefit to including these two lines is that the "Continue" button, which appears after you submit the form, will take the user back to the form's referrer URL instead the site's front page.
+    
 #### Additional tips
 
 If you want to insert spaces in your field names, use underscores "_" in your form field id and name. Contact Form for Moodle will replace these with a space before inserting the field name into the email message.
@@ -410,9 +412,17 @@ To only display your form for logged-in users, ensure that it is on a Moodle pag
 
 This only happens if a user is logged in. In this case, their registered first and last name and email address will be used instead of the name and email address entered in a form.
 
-### How can I include user profile fields in the email footer and confirmation email message?
+### Can I include user profile fields in the email footer and confirmation email message?
 
 Yes. Many but not all profile fields are available by inserting [FilterCodes](https://moodle.org/plugins/filter_filtercodes/) tags.
+
+### Why does the "Continue" button always take me back to the front page instead of back to the referrer URL?
+
+This may happen in a few situations:
+
+1) If you manually specified a referrer URL in the form instead of using the recommended JavaScript snippet, this can work but the referrer URL must be fully qualified, be from the Moodle site and begin with the address of your front page ($CFG->wwwroot).
+2) If you try to trick it by manually specifying a URL from a different website, that URL will be ignored and your user will be redirected to the front page.
+3) If you access the from by manually typing in it's URL or using a bookmark, the continue button will still take you back to the front page since this would result in no referrer URL being available.
 
 ### Are there any security considerations?
 

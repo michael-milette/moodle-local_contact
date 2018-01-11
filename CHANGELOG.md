@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.8.3] - 2018-01-11
+### Updated
+- Updated copyright notice to include 2018.
+
 ## [0.8.2] - 2017-12-04
 ### Added
 - Settings option to require users to be logged-in when submitting the form. Not enforced by default. (Thanks to contributions by @kmoouni and @jezhops)

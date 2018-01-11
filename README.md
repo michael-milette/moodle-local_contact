@@ -472,7 +472,7 @@ http://github.com/michael-milette/moodle-local_contact
 
 # License
 
-Copyright © 2016-2017 TNG Consulting Inc. - http://www.tngconsulting.ca/
+Copyright © 2016-2018 TNG Consulting Inc. - http://www.tngconsulting.ca/
 
 This file is part of the Contact Form plugin for Moodle - https://moodle.org/plugins/local_contact/
 

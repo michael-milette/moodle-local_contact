@@ -18,7 +18,7 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * local_contact class. Handles processing of information submitted from a web form.
- * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_contact {

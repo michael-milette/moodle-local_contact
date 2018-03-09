@@ -236,8 +236,12 @@ class local_contact {
         $to = $this->makeemailuser($email, $name);
 
         // Create the Subject for message.
-        $subject = '[' . $SITE->shortname . '] ' .
-                optional_param(get_string('field-subject', 'local_contact'),
+        $subject = '';
+        if (empty(get_config('local_contact', 'nosubjectsitename'))) { // Not checked.
+            // Include site name in subject field.
+            $subject .= '[' . $SITE->shortname . '] ';
+        }
+        $subject .= optional_param(get_string('field-subject', 'local_contact'),
                 get_string('defaultsubject', 'local_contact'), PARAM_TEXT);
 
         // Build the body of the email using user-entered information.

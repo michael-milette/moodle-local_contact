@@ -1,7 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.8.3] - 2018-03-08
+## [0.8.3] - 2018-03-09
+### Added
+- New setting to remove site name from email subject field.
 ### Updated
 - After submitting the form, the continue button will now take you to the front page or, if the "referrer" field was included in the form, the page the user was on just before going to the form.
 - Documentation including how to edit email messages and FAQ for those using TinyMCE.

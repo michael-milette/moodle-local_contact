@@ -81,6 +81,9 @@ philosophy|aristotle@example.com|Aristotle
 $string['loginrequired'] = 'Login required';
 $string['loginrequired_description'] = 'Only allow logged-in users to submit the Contact forms. Guests are not considered to be logged-in.';
 
+$string['nosubjectsitename'] = 'Site name in email subject field';
+$string['nosubjectsitename_description'] = 'Do not include site name in email subject field.';
+
 $string['recapchainfo'] = 'Using ReCAPTCHA';
 $string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle. You <strong>must</strong>:<br>
 <ul>

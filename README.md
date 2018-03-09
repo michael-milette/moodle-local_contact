@@ -141,8 +141,23 @@ You can also add the referring URL, the page that the user was on before going t
     <input type="hidden" id="referrer" name="referrer" value="">
     <script>document.getElementById('referrer').value = document.referrer;</script>
 
-An side benefit to including these two lines is that the "Continue" button, which appears after you submit the form, will take the user back to the form's referrer URL instead the site's front page.
-    
+An side benefit to including these two lines is that the **Continue** button, which appears after you submit the form, will take the user back to the form's referrer URL instead the site's front page.
+
+If you would rather have the **Continue** button take the user back to the form itself, simply replace **document.referrer** with **document.location.href**. So the above two lines would become:
+
+    <input type="hidden" id="referrer" name="referrer" value="">
+    <script>document.getElementById('referrer').value = document.location.href;</script>
+
+This will result in the form's address being inserted into the email in the referrer field
+
+If you prefer to have the continue button always take the user to a different page, you can specify the URL in the input field. Just be sure that the page is on the Moodle site. The continue button will not allow you to take the user to a different website. Example:
+
+    <input type="hidden" id="referrer" name="referrer" value="https://moodle.example.com/mod/page/view.php?id=21">
+
+Note that, in these two last examples, the referrer field will no longer actually refer to the page from where the user actually came from before the form which can be a little misleading. For a support page, it is recommended to use **document.referrer** with the script tag in order to submit the URL of the page from where they came. This will be helpful when the student submits something like "Lesson 2 of the course didn't work" but offers no clue which course they were in at the time.
+
+Returning the student back to the page they were on before the form was submitted is also helpful if it would be rather complicated to navigate back to where they were before they submitted the form. This is especially important if you are dealing with students who may have accessibility issues.
+
 #### Additional tips
 
 If you want to insert spaces in your field names, use underscores "_" in your form field id and name. Contact Form for Moodle will replace these with a space before inserting the field name into the email message.
@@ -151,7 +166,14 @@ Field id/name tokens must begin with a letter. They may optionally also contain 
 
 ## Configuring the email message
 
-At the moment, you will need to edit the language files in order to modify the messages which will be sent to the user.
+To edit the language strings including the email message to be sent to the user, you will need to make the changes using the Moodle language editor. To do this:
+
+1. Login to Moodle as an Administrator
+2. Navigate to **Home** > **Site Administration** > **Language** > **Language Customization**.
+3. Select the language you wish to modify and then click **Open Language Pack for Editing** button.
+4. Select the local_contact.php from the list and click the **Show Strings** button.
+
+For more information on using the language editor, see the [Moodle documentation on Language Customization](https://docs.moodle.org/34/en/Language_customisation#Using_the_obtained_information_in_order_to_change_the_intended_strings).
 
 The message can include the following tags which will be substituted at the time the message is sent:
 
@@ -423,6 +445,19 @@ This may happen in a few situations:
 1) If you manually specified a referrer URL in the form instead of using the recommended JavaScript snippet, this can work but the referrer URL must be fully qualified, be from the Moodle site and begin with the address of your front page ($CFG->wwwroot).
 2) If you try to trick it by manually specifying a URL from a different website, that URL will be ignored and your user will be redirected to the front page.
 3) If you access the from by manually typing in it's URL or using a bookmark, the continue button will still take you back to the front page since this would result in no referrer URL being available.
+
+### Why do the form <input> fields disappear every time I save my form in Moodle?
+
+This will happen if you are using the old TinyMCE editor in Moodle instead of the newer Atto editor. With default settings, the TinyMCE editor would filter out HTML form tags when you went to save it.
+
+The easy solution is to simply switch your preferred editor to the Atto editor, edit and then save your form. The form fields should remain intact. Once you save your form using the Atto editor, you can switch your preferred editor back to TinyMCE and the form will continue to work for everyone. However, if one day you or someone else should you forget and edit the form with the TinyMCE editor, the fields will disappear again.
+
+If, for whatever reason, you really want to use the TinyMCE editor, you can still get it to work but you will need to modify its Moodle Configuration Settings to allow HTML form field tags.
+
+Additional information:
+
+* [Customizing TinyMCE](https://docs.moodle.org/34/en/TinyMCE_editor)
+* [TinyMCE settings](https://lmgtfy.com/?q=tinymce+input+field) - You will need to do the research.
 
 ### Are there any security considerations?
 

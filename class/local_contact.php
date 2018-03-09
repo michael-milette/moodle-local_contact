@@ -41,7 +41,7 @@ class local_contact {
     public function __construct() {
         global $CFG;
 
-        if (!isloggedin() && !isguestuser()) {
+        if (isloggedin() && !isguestuser()) {
             // If logged-in as non guest, use their registered fullname and email address.
             global $USER;
             $this->fromname = $USER->firstname.' '.$USER->lastname;

@@ -18,7 +18,7 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,10 +26,10 @@
 require_once('../../config.php');
 require_once($CFG->dirroot . '/local/contact/class/local_contact.php');
 
-if (isset($_SERVER['HTTP_REFERER'])) {
-    $PAGE->set_url(get_local_referer(false));
-} else {
+if (empty(get_local_referer(false))) {
     $PAGE->set_url('/local/contact/index.php');
+} else {
+    $PAGE->set_url(get_local_referer(false));
 }
 
 // If we require user to be logged in.
@@ -102,11 +102,24 @@ if (!isloggedin() || isguestuser()) {
     if (!empty($CFG->recaptchaprivatekey) &&
             !empty($CFG->recaptchapublickey) &&
             empty(get_config('local_contact', 'norecaptcha'))) {
+
         // If so, ensure that it was filled correctly and submitted with the form.
-        require_once($CFG->libdir . '/recaptchalib.php');
-        $resp = recaptcha_check_answer($CFG->recaptchaprivatekey, $_SERVER["REMOTE_ADDR"],
-                optional_param('recaptcha_challenge_field', '' , PARAM_TEXT),
-                optional_param('recaptcha_response_field', '' , PARAM_TEXT));
+        if (file_exists($CFG->libdir . '/recaptchalib_v2.php')) {
+            // For reCAPTCHA 2.0.
+            require_once($CFG->libdir . '/recaptchalib_v2.php');
+            $response = recaptcha_check_response(RECAPTCHA_VERIFY_URL, $CFG->recaptchaprivatekey,
+                   getremoteaddr(), optional_param('g-recaptcha-response', '' , PARAM_TEXT));
+            $resp = new stdClass();
+            $resp->is_valid = $response['isvalid'];
+            if (!$resp->is_valid) {
+                $resp->error = $response['error'];
+            }
+        } else {
+            // For reCAPTCHA 1.0.
+            $resp = recaptcha_check_answer($CFG->recaptchaprivatekey, $_SERVER["REMOTE_ADDR"],
+                    optional_param('recaptcha_challenge_field', '' , PARAM_TEXT),
+                    optional_param('recaptcha_response_field', '' , PARAM_TEXT));
+        }
 
         if (!$resp->is_valid) {
             // Display error message if CAPTCHA was entered incorrectly.
@@ -131,7 +144,14 @@ if ($contact->sendmessage($email, $name)) {
     echo '<h3>'.get_string('errorsendingtitle', 'local_contact').'</h3>';
     echo get_string('errorsending', 'local_contact');
 }
-echo $OUTPUT->continue_button($CFG->wwwroot);
+
+// Continue button takes the user back to the original page that he/she started from before going to the form.
+// If the referrer URL was not provided in the submitted form fields or is not from this site, go to the front page.
+$continueurl = optional_param('referrer', '', PARAM_URL);
+if (stripos($continueurl, $CFG->wwwroot) !== 0) {
+    $continueurl = $CFG->wwwroot;
+}
+echo $OUTPUT->continue_button($continueurl);
 
 // Display page footer.
 echo $OUTPUT->footer();

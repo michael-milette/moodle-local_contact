@@ -18,7 +18,7 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -43,6 +43,14 @@ if ($hassiteconfig) {
     $name = 'local_contact/loginrequired';
     $title = get_string('loginrequired', 'local_contact');
     $description = get_string('loginrequired_description', 'local_contact');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+    $settings->add($setting);
+
+    // Do not include site name in email subject line.
+    $default = 0;
+    $name = 'local_contact/nosubjectsitename';
+    $title = get_string('nosubjectsitename', 'local_contact');
+    $description = get_string('nosubjectsitename_description', 'local_contact');
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
     $settings->add($setting);
 

@@ -18,7 +18,7 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -80,6 +80,9 @@ philosophy|aristotle@example.com|Aristotle
 
 $string['loginrequired'] = 'Login required';
 $string['loginrequired_description'] = 'Only allow logged-in users to submit the Contact forms. Guests are not considered to be logged-in.';
+
+$string['nosubjectsitename'] = 'Site name in email subject field';
+$string['nosubjectsitename_description'] = 'Do not include site name in email subject field.';
 
 $string['recapchainfo'] = 'Using ReCAPTCHA';
 $string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle. You <strong>must</strong>:<br>

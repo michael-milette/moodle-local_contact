@@ -1,12 +1,26 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.8.2] - 2017-11-30
+## [0.8.3] - 2018-03-30
+### Added
+- Support for reCAPTCHA v2 in Moodle as of versions 3.1.11+, 3.2.8+, 3.3.5+, 3.4.5+ and 3.5+.
+- New setting to remove site name from email subject field.
+### Updated
+- After submitting the form, the continue button will now take you to the front page or, if the "referrer" field was included in the form, the page the user was on just before going to the form.
+- Documentation including how to edit email messages and FAQ for those using TinyMCE.
+- Corrected login detection bug introduced in v0.8.2.
+- Contact Form upgrade notifications now works properly when a updates are available on Moodle.org.
+- ReCAPTCHA tags are now filtered out from the email message.
+- Copyright notices now includes 2018.
+
+## [0.8.2] - 2017-12-04
 ### Added
 - Settings option to require users to be logged-in when submitting the form. Not enforced by default. (Thanks to contributions by @kmoouni and @jezhops)
 ### Updated
 - Leading or trailing spaces in email addresses in recipient list settings will no longer cause a problem.
 - Fixed bug where forms could be submitted without sesskey JavaScript in the form.
+- Fixed missing reply-to address.
+- Fixed support for multiple selections for select tag.
 
 ## [0.8.1] - 2017-11-13
 ### Updated
@@ -16,7 +30,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Support for Moodle ReCAPTCHA. Can be disabled for Contact Forms in settings. Must be use with the {recaptcha} tag from the FilterCodes plugin.
 ### Updated
-- Updated documenation and with new examples in README.md.
+- Updated documentation with new examples in README.md.
 
 ## [0.7.2] - 2017-10-29
 ### Added

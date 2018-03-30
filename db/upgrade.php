@@ -15,7 +15,7 @@
 // along with Contact Form.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for Contact Form (also called Contact).
+ * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
  * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
@@ -25,9 +25,16 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_contact';   // To check on upgrade, that module sits in correct place.
-$plugin->version   = 2018033000;        // The current module version (Date: YYYYMMDDXX).
-$plugin->requires  = 2015111600;        // Requires Moodle version 3.0.
-$plugin->release   = '0.8.3';
-$plugin->maturity  = MATURITY_BETA;
-$plugin->cron      = 0;
+/**
+ * Upgrade code for the Contact Form local plugin.
+ *
+ * @param int $oldversion
+ * @param object $block
+ */
+function xmldb_local_contact_upgrade($oldversion) {
+
+    // Moodle v3.0.0 release upgrade line.
+    // Upgrade steps below.
+
+    return true;
+}

@@ -18,7 +18,7 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * local_contact class. Handles processing of information submitted from a web form.
- * @copyright  2016-2017 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_contact {
@@ -220,8 +220,8 @@ class local_contact {
     /**
      * Send email message and optionally autorespond.
      *
-     * @param      string  $email Sender's Email address.
-     * @param      string  $name  Sender's real name in plain text.
+     * @param      string  $email Recipient's Email address.
+     * @param      string  $name  Recipient's real name in plain text.
      * @param      boolean  $sendconfirmationemail  Set to true to also send an autorespond confirmation email back to user (TODO).
      *
      * @return     boolean  $status - True if message was successfully sent, false if not.
@@ -236,8 +236,12 @@ class local_contact {
         $to = $this->makeemailuser($email, $name);
 
         // Create the Subject for message.
-        $subject = '[' . $SITE->shortname . '] ' .
-                optional_param(get_string('field-subject', 'local_contact'),
+        $subject = '';
+        if (empty(get_config('local_contact', 'nosubjectsitename'))) { // Not checked.
+            // Include site name in subject field.
+            $subject .= '[' . $SITE->shortname . '] ';
+        }
+        $subject .= optional_param(get_string('field-subject', 'local_contact'),
                 get_string('defaultsubject', 'local_contact'), PARAM_TEXT);
 
         // Build the body of the email using user-entered information.
@@ -272,6 +276,7 @@ class local_contact {
                         case 'recipient':                  // Recipient field.
                         case 'recaptcha challenge field':  // ReCAPTCHA related field.
                         case 'recaptcha response field':   // ReCAPTCHA related field.
+                        case 'g-recaptcha-response':       // ReCAPTCHA related field.
                             break;
                         // Use language translations for the labels of the following fields.
                         case 'name':        // Name field.
@@ -279,6 +284,10 @@ class local_contact {
                         case 'subject':     // Subject field.
                             $key = get_string('field-' . $key, 'local_contact');
                         default:            // All other fields.
+                            // Join array of values. Example: <select multiple>.
+                            if (is_array($value)) {
+                                $value = join($value, ", ");
+                            }
                             // Sanitize the text.
                             $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
                             // Add to email message.
@@ -305,8 +314,9 @@ class local_contact {
         $footmessage = format_text($footmessage, FORMAT_HTML, array('trusted' => true, 'noclean' => true, 'para' => false));
         $htmlmessage .= str_replace($tags, $info, $footmessage);
 
-        // Send email message to recipient.
-        $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true);
+        // Send email message to recipient and set replyto to the sender's email address and name.
+        $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true,
+                $from->email, $from->firstname);
 
         // If successful and a confirmation email is desired, send it the original sender.
         if ($status && $sendconfirmationemail) {

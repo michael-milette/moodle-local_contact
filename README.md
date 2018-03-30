@@ -141,6 +141,23 @@ You can also add the referring URL, the page that the user was on before going t
     <input type="hidden" id="referrer" name="referrer" value="">
     <script>document.getElementById('referrer').value = document.referrer;</script>
 
+An side benefit to including these two lines is that the **Continue** button, which appears after you submit the form, will take the user back to the form's referrer URL instead the site's front page.
+
+If you would rather have the **Continue** button take the user back to the form itself, simply replace **document.referrer** with **document.location.href**. So the above two lines would become:
+
+    <input type="hidden" id="referrer" name="referrer" value="">
+    <script>document.getElementById('referrer').value = document.location.href;</script>
+
+This will result in the form's address being inserted into the email in the referrer field
+
+If you prefer to have the continue button always take the user to a different page, you can specify the URL in the input field. Just be sure that the page is on the Moodle site. The continue button will not allow you to take the user to a different website. Example:
+
+    <input type="hidden" id="referrer" name="referrer" value="https://moodle.example.com/mod/page/view.php?id=21">
+
+Note that, in these two last examples, the referrer field will no longer actually refer to the page from where the user actually came from before the form which can be a little misleading. For a support page, it is recommended to use **document.referrer** with the script tag in order to submit the URL of the page from where they came. This will be helpful when the student submits something like "Lesson 2 of the course didn't work" but offers no clue which course they were in at the time.
+
+Returning the student back to the page they were on before the form was submitted is also helpful if it would be rather complicated to navigate back to where they were before they submitted the form. This is especially important if you are dealing with students who may have accessibility issues.
+
 #### Additional tips
 
 If you want to insert spaces in your field names, use underscores "_" in your form field id and name. Contact Form for Moodle will replace these with a space before inserting the field name into the email message.
@@ -149,7 +166,14 @@ Field id/name tokens must begin with a letter. They may optionally also contain 
 
 ## Configuring the email message
 
-At the moment, you will need to edit the language files in order to modify the messages which will be sent to the user.
+To edit the language strings including the email message to be sent to the user, you will need to make the changes using the Moodle language editor. To do this:
+
+1. Login to Moodle as an Administrator
+2. Navigate to **Home** > **Site Administration** > **Language** > **Language Customization**.
+3. Select the language you wish to modify and then click **Open Language Pack for Editing** button.
+4. Select the local_contact.php from the list and click the **Show Strings** button.
+
+For more information on using the language editor, see the [Moodle documentation on Language Customization](https://docs.moodle.org/34/en/Language_customisation#Using_the_obtained_information_in_order_to_change_the_intended_strings).
 
 The message can include the following tags which will be substituted at the time the message is sent:
 
@@ -225,17 +249,36 @@ A different form on the same site might have:
 
 Notice that you can include any number of recipients in your form's drop-down list. You need not include all of them. If a specified alias is not in the List of Available Recipients, the email message will default to being delivered to the Moodle site's support email address.
 
-### Configuring ReCAPTCHAs
+### Select multiple items
 
-Note: If Moodle's ReCAPTCHA is not configured, you will not see this setting.
+If you are using a select form where you allow multiple items to be selected, all of the selected items will be merged together in a commas/space delimited list. Example:
 
-To use ReCAPTCHA in your Contact form, you must:
+    <select name="cars[]" id="cars">
+        <option value="">Please select...</option>
+        <option value="TOYOTA">Toyota</option>
+        <option value="GM">General Motors</option>
+        <option value="VOLKSWAGEN">Volkswagen</option>
+        <option value="NISSAN">Nissan</option>
+        <option value="HYUNDAI">Hyundai</option>
+        <option value="FORD">Ford</option>
+        <option value="CHRYSLER">Chrysler</option>
+        <option value="HONDA">Honda</option>
+        <option value="BMW">BMW</option>
+    </select>
 
-- Configure Moodle's ReCAPTCHA settings. See Site administration > Plugins > Authentication > Manage authentication. These settings are near the bottom of the page.
+Important: Don't forget to end the name of your field with [] or all you will see is the last selected item.
+
+### Configuring reCAPTCHAs
+
+Note: If Moodle's reCAPTCHA is not configured, you will not see this setting.
+
+To use reCAPTCHA in your Contact form, you must:
+
+- Configure Moodle's reCAPTCHA settings. See Site administration > Plugins > Authentication > Manage authentication. These settings are near the bottom of the page.
 - Install and enable the [filter_filtercodes](https://moodle.org/plugins/filter_filtercodes) plugin.
 - Add the {recaptcha} tag inside your form, usually right before the `Send` button. This will be converted into HTML code when your form is displayed. For more information on inserting a {recaptha} tag, see the [FilterCodes documentation](https://github.com/michael-milette/moodle-filter_filtercodes#usage).
 
-However, even if ReCAPTCHA is enabled, you can tell Contact Form for Moodle not to use it. Just go into the settings for Contact Form, check the box for `No ReCAPTCHA` and save. In this case, you will not need to include the {recaptcha} tag in the form. Example:
+However, even if reCAPTCHA is enabled, you can tell Contact Form for Moodle not to use it. Just go into the settings for Contact Form, check the box for `No reCAPTCHA` and save. In this case, you will not need to include the {recaptcha} tag in the form. Example:
 
     <form action="../../local/contact/index.php" method="post" class="template-form">
         <fieldset>
@@ -251,6 +294,10 @@ However, even if ReCAPTCHA is enabled, you can tell Contact Form for Moodle not 
             <input type="submit" name="submit" id="submit" value="Send">
         </div>
     </form>
+
+### Require login
+
+The `Require login` setting requires that users be logged-in in order to be able to submit the form. If a form is submitted and the user is not logged-in they will be redirected to the login page. If you require users to be logged-in, it is also highly recommended that you also place your form on a page which is only accessible to logged-in users. Guest users are not considered to be logged-in.
 
 [(Back to top)](#table-of-contents)
 
@@ -323,7 +370,7 @@ Since you don't need to be logged into your Moodle Frontpage to see it, your for
 
 ### All I see is the word "Forbidden" or a blank screen after submitting a form. What should I do?
 
-Although this plugin is still in BETA, has been tested pretty extensively. If you are getting this error, it is likely that your will need to fix your form and/or enable Moodle debugging. Alternatively you can try the form logged in as a Moodle administrator. This will enable the display of additional diagnostic information.
+Although this plugin is still in BETA, it has been extensively tested. If you are getting this error, it is likely that you will need to fix your form and/or enable Moodle debugging. Alternatively you can try the form logged in as a Moodle administrator. This will enable the display of additional diagnostic information.
 
 ### Where do emails go when they are submitted on my Moodle website?
 
@@ -355,9 +402,9 @@ There are a couple of ways you can blacklist an IP address. The best way is to a
 
 ### Can I include my favourite captcha in a form?
 
-No. Only Moodle's ReCAPTCHA will work. See the [Usage](#usage) section for more information.
+No. Only Moodle's reCAPTCHA will work. See the [Usage](#usage) section for more information.
 
-### Moodle's ReCAPTCHA is enabled. Do I need to use it in my Contact forms?
+### Moodle's reCAPTCHA is enabled. Do I need to use it in my Contact forms?
 
 It is not required. However, if you don't want to use it, you must check the `No ReCAPTCHA` checkbox in the plugin's settings.
 
@@ -387,9 +434,32 @@ To only display your form for logged-in users, ensure that it is on a Moodle pag
 
 This only happens if a user is logged in. In this case, their registered first and last name and email address will be used instead of the name and email address entered in a form.
 
-### How can I include user profile fields in the email footer and confirmation email message?
+### Can I include user profile fields in the email footer and confirmation email message?
 
 Yes. Many but not all profile fields are available by inserting [FilterCodes](https://moodle.org/plugins/filter_filtercodes/) tags.
+
+### Why does the "Continue" button always take me back to the front page instead of back to the referrer URL?
+
+This may happen in a few situations:
+
+1) If you manually specified a referrer URL in the form instead of using the recommended JavaScript snippet, this can work but the referrer URL must be fully qualified, be from the Moodle site and begin with the address of your front page ($CFG->wwwroot).
+2) If you try to trick it by manually specifying a URL from a different website, that URL will be ignored and your user will be redirected to the front page.
+3) If you access the from by manually typing in it's URL or using a bookmark, the continue button will still take you back to the front page since this would result in no referrer URL being available.
+
+### Why do the form <input> fields disappear every time I save my form in Moodle?
+
+ANSWER 1: This will happen if you are using the old TinyMCE editor in Moodle instead of the newer Atto editor. With default settings, the TinyMCE editor would filter out HTML form tags when you went to save it.
+
+The easy solution is to simply switch your preferred editor to the Atto editor, edit and then save your form. The form fields should remain intact. Once you save your form using the Atto editor, you can switch your preferred editor back to TinyMCE and the form will continue to work for everyone. However, if one day you or someone else should you forget and edit the form with the TinyMCE editor, the fields will disappear again.
+
+If, for whatever reason, you really want to use the TinyMCE editor, you can still get it to work but you will need to modify its Moodle Configuration Settings to allow HTML form field tags.
+
+Additional information:
+
+* [Customizing TinyMCE](https://docs.moodle.org/34/en/TinyMCE_editor)
+* [TinyMCE settings](https://lmgtfy.com/?q=tinymce+input+field) - You will need to do the research.
+
+ANSWER 2: If you are having problems specifically with the StaticPages plugin, go into its configuration options and set the Clean HTML code to "No, don't clean HTML code". Otherwise the plugin will filter out HTML tags including all your form tags. (thanks to Alex Ferrer for this solution)
 
 ### Are there any security considerations?
 
@@ -397,7 +467,7 @@ There are no known security considerations at this time.
 
 ## Other questions
 
-Got a burning question that is not covered here? Checkout the [troubleshooting section of our Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/Troubleshooting). If you still can't find your answer, submit your question in the Moodle forums or open a new issue on Github at:
+Got a burning question that is not covered here? Checkout the [troubleshooting section of our Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/Troubleshooting). If you still can't find your answer, submit your question in the Moodle forums or open a new issue on GitHub at:
 
 http://github.com/michael-milette/moodle-local_contact/issues
 
@@ -449,9 +519,9 @@ http://github.com/michael-milette/moodle-local_contact
 
 # License
 
-Copyright © 2016-2017 TNG Consulting Inc. - http://www.tngconsulting.ca/
+Copyright © 2016-2018 TNG Consulting Inc. - http://www.tngconsulting.ca/
 
-This file is part of the Contact Form plugin for Moodle - http://moodle.org/
+This file is part of the Contact Form plugin for Moodle - https://moodle.org/plugins/local_contact/
 
 Contact Form is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

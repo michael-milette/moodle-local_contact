@@ -1,8 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.8.3] - 2018-03-09
+## [0.8.3] - 2018-03-30
 ### Added
+- Support for reCAPTCHA v2 in Moodle as of versions 3.1.11+, 3.2.8+, 3.3.5+, 3.4.5+ and 3.5+.
 - New setting to remove site name from email subject field.
 ### Updated
 - After submitting the form, the continue button will now take you to the front page or, if the "referrer" field was included in the form, the page the user was on just before going to the form.

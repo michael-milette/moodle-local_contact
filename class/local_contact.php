@@ -276,6 +276,7 @@ class local_contact {
                         case 'recipient':                  // Recipient field.
                         case 'recaptcha challenge field':  // ReCAPTCHA related field.
                         case 'recaptcha response field':   // ReCAPTCHA related field.
+                        case 'g-recaptcha-response':       // ReCAPTCHA related field.
                             break;
                         // Use language translations for the labels of the following fields.
                         case 'name':        // Name field.

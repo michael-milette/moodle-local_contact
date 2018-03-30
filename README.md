@@ -268,17 +268,17 @@ If you are using a select form where you allow multiple items to be selected, al
 
 Important: Don't forget to end the name of your field with [] or all you will see is the last selected item.
 
-### Configuring ReCAPTCHAs
+### Configuring reCAPTCHAs
 
-Note: If Moodle's ReCAPTCHA is not configured, you will not see this setting.
+Note: If Moodle's reCAPTCHA is not configured, you will not see this setting.
 
-To use ReCAPTCHA in your Contact form, you must:
+To use reCAPTCHA in your Contact form, you must:
 
-- Configure Moodle's ReCAPTCHA settings. See Site administration > Plugins > Authentication > Manage authentication. These settings are near the bottom of the page.
+- Configure Moodle's reCAPTCHA settings. See Site administration > Plugins > Authentication > Manage authentication. These settings are near the bottom of the page.
 - Install and enable the [filter_filtercodes](https://moodle.org/plugins/filter_filtercodes) plugin.
 - Add the {recaptcha} tag inside your form, usually right before the `Send` button. This will be converted into HTML code when your form is displayed. For more information on inserting a {recaptha} tag, see the [FilterCodes documentation](https://github.com/michael-milette/moodle-filter_filtercodes#usage).
 
-However, even if ReCAPTCHA is enabled, you can tell Contact Form for Moodle not to use it. Just go into the settings for Contact Form, check the box for `No ReCAPTCHA` and save. In this case, you will not need to include the {recaptcha} tag in the form. Example:
+However, even if reCAPTCHA is enabled, you can tell Contact Form for Moodle not to use it. Just go into the settings for Contact Form, check the box for `No reCAPTCHA` and save. In this case, you will not need to include the {recaptcha} tag in the form. Example:
 
     <form action="../../local/contact/index.php" method="post" class="template-form">
         <fieldset>
@@ -402,9 +402,9 @@ There are a couple of ways you can blacklist an IP address. The best way is to a
 
 ### Can I include my favourite captcha in a form?
 
-No. Only Moodle's ReCAPTCHA will work. See the [Usage](#usage) section for more information.
+No. Only Moodle's reCAPTCHA will work. See the [Usage](#usage) section for more information.
 
-### Moodle's ReCAPTCHA is enabled. Do I need to use it in my Contact forms?
+### Moodle's reCAPTCHA is enabled. Do I need to use it in my Contact forms?
 
 It is not required. However, if you don't want to use it, you must check the `No ReCAPTCHA` checkbox in the plugin's settings.
 
@@ -448,7 +448,7 @@ This may happen in a few situations:
 
 ### Why do the form <input> fields disappear every time I save my form in Moodle?
 
-This will happen if you are using the old TinyMCE editor in Moodle instead of the newer Atto editor. With default settings, the TinyMCE editor would filter out HTML form tags when you went to save it.
+ANSWER 1: This will happen if you are using the old TinyMCE editor in Moodle instead of the newer Atto editor. With default settings, the TinyMCE editor would filter out HTML form tags when you went to save it.
 
 The easy solution is to simply switch your preferred editor to the Atto editor, edit and then save your form. The form fields should remain intact. Once you save your form using the Atto editor, you can switch your preferred editor back to TinyMCE and the form will continue to work for everyone. However, if one day you or someone else should you forget and edit the form with the TinyMCE editor, the fields will disappear again.
 
@@ -458,6 +458,8 @@ Additional information:
 
 * [Customizing TinyMCE](https://docs.moodle.org/34/en/TinyMCE_editor)
 * [TinyMCE settings](https://lmgtfy.com/?q=tinymce+input+field) - You will need to do the research.
+
+ANSWER 2: If you are having problems specifically with the StaticPages plugin, go into its configuration options and set the Clean HTML code to "No, don't clean HTML code". Otherwise the plugin will filter out HTML tags including all your form tags. (thanks to Alex Ferrer for this solution)
 
 ### Are there any security considerations?
 

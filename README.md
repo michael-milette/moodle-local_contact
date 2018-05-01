@@ -3,7 +3,7 @@
 Local Contact Form plugin for Moodle
 ====================================
 ![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1-blue.svg)
-![Moodle](https://img.shields.io/badge/Moodle-v3.0%20to%20v3.4-orange.svg)
+![Moodle](https://img.shields.io/badge/Moodle-v3.0%20to%20v3.5-orange.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/michael-milette/moodle-local_contact.svg)](https://github.com/michael-milette/moodle-local_contact/issues)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-green.svg)](#contributing)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](#license)
@@ -64,7 +64,7 @@ Install the plugin, like any other plugin, to the following folder:
 
     /local/contact
 
-See http://docs.moodle.org/34/en/Installing_plugins for details on installing Moodle plugins.
+See http://docs.moodle.org/35/en/Installing_plugins for details on installing Moodle plugins.
 
 [(Back to top)](#table-of-contents)
 
@@ -173,7 +173,7 @@ To edit the language strings including the email message to be sent to the user,
 3. Select the language you wish to modify and then click **Open Language Pack for Editing** button.
 4. Select the local_contact.php from the list and click the **Show Strings** button.
 
-For more information on using the language editor, see the [Moodle documentation on Language Customization](https://docs.moodle.org/34/en/Language_customisation#Using_the_obtained_information_in_order_to_change_the_intended_strings).
+For more information on using the language editor, see the [Moodle documentation on Language Customization](https://docs.moodle.org/35/en/Language_customisation#Using_the_obtained_information_in_order_to_change_the_intended_strings).
 
 The message can include the following tags which will be substituted at the time the message is sent:
 
@@ -394,7 +394,7 @@ If you still can't get your web form to work, the problem might be your form. Tr
 
 There are a couple of ways you can blacklist an IP address. The best way is to add them to your web server settings. Consult your web server documentation for more information. If you don't have access to those settings, Moodle Administrators can add the IP addresses to the Moodle IP Blocker settings. For more information, see:
 
-  https://docs.moodle.org/34/en/IP_blocker
+  https://docs.moodle.org/35/en/IP_blocker
 
 ### Why does the User's IP address ([userip]) says "::1" or 0:0:0:0:0:1 instead showing a real IP address when I receive an email submitted from the form?
 
@@ -456,7 +456,7 @@ If, for whatever reason, you really want to use the TinyMCE editor, you can stil
 
 Additional information:
 
-* [Customizing TinyMCE](https://docs.moodle.org/34/en/TinyMCE_editor)
+* [Customizing TinyMCE](https://docs.moodle.org/35/en/TinyMCE_editor)
 * [TinyMCE settings](https://lmgtfy.com/?q=tinymce+input+field) - You will need to do the research.
 
 ANSWER 2: If you are having problems specifically with the StaticPages plugin, go into its configuration options and set the Clean HTML code to "No, don't clean HTML code". Otherwise the plugin will filter out HTML tags including all your form tags. (thanks to Alex Ferrer for this solution)

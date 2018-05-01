@@ -26,6 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Contact Form';
+$string['privacy:metadata'] = 'The Contact Form plugin does not store any personal data about any user.';
 $string['globalhelp'] = 'Contact Form is a plugin for Moodle that allows your site to process information submitted through HTML web forms to the site\'s support email address.';
 $string['configure'] = 'Configure this plugin';
 

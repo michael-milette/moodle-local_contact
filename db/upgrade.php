@@ -28,8 +28,8 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Upgrade code for the Contact Form local plugin.
  *
- * @param int $oldversion
- * @param object $block
+ * @param int $oldversion the version we are upgrading from
+ * @return bool result
  */
 function xmldb_local_contact_upgrade($oldversion) {
 

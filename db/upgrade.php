@@ -28,12 +28,12 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Upgrade code for the Contact Form local plugin.
  *
- * @param int $oldversion the version we are upgrading from
+ * @param int $oldversion - the version we are upgrading from.
  * @return bool result
  */
 function xmldb_local_contact_upgrade($oldversion) {
 
-    // Moodle v3.0.0 release upgrade line.
+    // Moodle v3.1.0 release upgrade line.
     // Upgrade steps below.
 
     return true;

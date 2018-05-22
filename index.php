@@ -24,7 +24,7 @@
  */
 
 require_once('../../config.php');
-require_once($CFG->dirroot . '/local/contact/class/local_contact.php');
+require_once($CFG->dirroot . '/local/contact/classes/local_contact.php');
 
 if (empty(get_local_referer(false))) {
     $PAGE->set_url('/local/contact/index.php');

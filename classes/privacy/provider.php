@@ -15,26 +15,33 @@
 // along with Contact Form.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This plugin for Moodle is used to send emails through a web form.
+ * Privacy Subsystem implementation for local_contact.
  *
  * @package    local_contact
- * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2015-2018 TNG Consulting Inc. - www.tngcosulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace local_contact\privacy;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Upgrade code for the Contact Form local plugin.
+ * Privacy Subsystem for local_contact implementing null_provider.
  *
- * @param int $oldversion - the version we are upgrading from.
- * @return bool result
+ * @copyright  2018 TNG Consulting Inc. <www.tngconsulting.ca>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function xmldb_local_contact_upgrade($oldversion) {
+class provider implements \core_privacy\local\metadata\null_provider {
 
-    // Moodle v3.1.0 release upgrade line.
-    // Upgrade steps below.
-
-    return true;
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
 }

@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.,0] - 2019-11-17
+### Added
+- Documentation references to new {form...} FilterCode tags. Enables you to easily create common web-forms with just one FilterCode tag.
+### Updated
+- Documentation for Moodle 3.8.
+- Code maturity is now considered STABLE, supporting Moodle 3.0 to 3.8.
+- Copyright notice.
+- Note: No code changes in this release.
+
 ## [0.8.4] - 2018-05-21
 ### Added
 - Support for Privacy API

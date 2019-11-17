@@ -2,8 +2,8 @@
 
 Local Contact Form plugin for Moodle
 ====================================
-![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1-blue.svg)
-![Moodle](https://img.shields.io/badge/Moodle-v3.0%20to%20v3.5-orange.svg)
+![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1%20%2F%207.2-blue.svg)
+![Moodle](https://img.shields.io/badge/Moodle-v3.0%20to%20v3.8.x-orange.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/michael-milette/moodle-local_contact.svg)](https://github.com/michael-milette/moodle-local_contact/issues)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-green.svg)](#contributing)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](#license)
@@ -42,7 +42,7 @@ Examples uses for this plugin include:
 
 # Requirements
 
-This plugin requires Moodle 3.0+ from http://moodle.org .
+This plugin requires Moodle 3.0+ from https://moodle.org .
 
 It may work with previous versions of Moodle all the way back to Moodle 2.7 but it has not been tested yet. If it works for you, let us know. Tip: You might need to modify the version.php in order for Moodle to let you install it on earlier versions.
 
@@ -64,7 +64,7 @@ Install the plugin, like any other plugin, to the following folder:
 
     /local/contact
 
-See http://docs.moodle.org/35/en/Installing_plugins for details on installing Moodle plugins.
+See https://docs.moodle.org/en/Installing_plugins for details on installing Moodle plugins.
 
 [(Back to top)](#table-of-contents)
 
@@ -76,6 +76,22 @@ Before getting started:
 * Ensure that you have configured the support name and email address in Moodle.
 
 ## Creating a new form
+
+### Quick method
+
+The quickest way to get started by far is to use the [FilterCodes](https://moodle.org/plugins/filter_filtercodes/ Moodle plugin. As of version 1.3.0, it includes several plain text tags that you can easily copy and paste into any Atto editor. The {tags} include:
+
+{formquickquestion} : Adds a "quick question" form to your course. Form only includes a Subject and Message field. Note: User must be logged in or the form will not be displayed.
+
+{formcontactus} : Adds a "Contact Us" form to your site (example: in a page). Form includes Name, Email address, Subject and Message fields.
+
+{formcourserequest} : Adds a "Course Request" form to your site (example: in a page). Unlike Moodle's request-a-course feature where you can request to create your own course, this tag allows users to request that a course they are interested in be created. Could also be used to request to take a course. Form includes Name, Email address, Course name, Course Description.
+
+{formsupport} : Adds a "Support Request" form to your site (example: in a page). Form includes Name, Email address, pre-determined Subject, specific Subject, URL and Message fields.
+
+{formcheckin} : Adds a "I'm here!" button to your to your course. Form does not include any other fields. Note: User must be logged in or the button will not be displayed.
+
+### Custom method
 
 This plugin is for administrators with a little knowledge of HTML forms. You can simply copy and paste any of the [examples from the Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/HTML-Form-Templates) to get started.
 
@@ -173,7 +189,7 @@ To edit the language strings including the email message to be sent to the user,
 3. Select the language you wish to modify and then click **Open Language Pack for Editing** button.
 4. Select the local_contact.php from the list and click the **Show Strings** button.
 
-For more information on using the language editor, see the [Moodle documentation on Language Customization](https://docs.moodle.org/35/en/Language_customisation#Using_the_obtained_information_in_order_to_change_the_intended_strings).
+For more information on using the language editor, see the [Moodle documentation on Language Customization](https://docs.moodle.org/en/Language_customisation#Using_the_obtained_information_in_order_to_change_the_intended_strings).
 
 The message can include the following tags which will be substituted at the time the message is sent:
 
@@ -354,7 +370,7 @@ This plugin has not been tested for right-to-left (RTL) language support.
 If you want to use this plugin with a RTL language and it doesn't work as-is,
 feel free to prepare a pull request and submit it to the project page at:
 
-http://github.com/michael-milette/moodle-local_contact
+https://github.com/michael-milette/moodle-local_contact
 
 [(Back to top)](#table-of-contents)
 
@@ -394,7 +410,7 @@ If you still can't get your web form to work, the problem might be your form. Tr
 
 There are a couple of ways you can blacklist an IP address. The best way is to add them to your web server settings. Consult your web server documentation for more information. If you don't have access to those settings, Moodle Administrators can add the IP addresses to the Moodle IP Blocker settings. For more information, see:
 
-  https://docs.moodle.org/35/en/IP_blocker
+  https://docs.moodle.org/en/IP_blocker
 
 ### Why does the User's IP address ([userip]) says "::1" or 0:0:0:0:0:1 instead showing a real IP address when I receive an email submitted from the form?
 
@@ -434,9 +450,9 @@ To only display your form for logged-in users, ensure that it is on a Moodle pag
 
 This only happens if a user is logged in. In this case, their registered first and last name and email address will be used instead of the name and email address entered in a form.
 
-### Can I include user profile fields in the email footer and confirmation email message?
+### Can I include user profile fields and custom profile fields in the email footer and confirmation email message?
 
-Yes. Many but not all profile fields are available by inserting [FilterCodes](https://moodle.org/plugins/filter_filtercodes/) tags.
+Yes. Not all profile fields are available, but you can do it by inserting [FilterCodes](https://moodle.org/plugins/filter_filtercodes/) tags.
 
 ### Why does the "Continue" button always take me back to the front page instead of back to the referrer URL?
 
@@ -456,7 +472,7 @@ If, for whatever reason, you really want to use the TinyMCE editor, you can stil
 
 Additional information:
 
-* [Customizing TinyMCE](https://docs.moodle.org/35/en/TinyMCE_editor)
+* [Customizing TinyMCE](https://docs.moodle.org/en/TinyMCE_editor)
 * [TinyMCE settings](https://lmgtfy.com/?q=tinymce+input+field) - You will need to do the research.
 
 ANSWER 2: If you are having problems specifically with the StaticPages plugin, go into its configuration options and set the Clean HTML code to "No, don't clean HTML code". Otherwise the plugin will filter out HTML tags including all your form tags. (thanks to Alex Ferrer for this solution)
@@ -469,7 +485,7 @@ There are no known security considerations at this time.
 
 Got a burning question that is not covered here? Checkout the [troubleshooting section of our Wiki](https://github.com/michael-milette/moodle-local_contact/wiki/Troubleshooting). If you still can't find your answer, submit your question in the Moodle forums or open a new issue on GitHub at:
 
-http://github.com/michael-milette/moodle-local_contact/issues
+https://github.com/michael-milette/moodle-local_contact/issues
 
 [(Back to top)](#table-of-contents)
 
@@ -513,13 +529,13 @@ The initial development for this project was sponsored by the kind folk at l'Act
 For further information regarding the local_contact plugin, support or to
 report a bug, please visit the project page at:
 
-http://github.com/michael-milette/moodle-local_contact
+https://github.com/michael-milette/moodle-local_contact
 
 [(Back to top)](#table-of-contents)
 
 # License
 
-Copyright © 2016-2018 TNG Consulting Inc. - http://www.tngconsulting.ca/
+Copyright © 2016-2019 TNG Consulting Inc. - https://www.tngconsulting.ca/
 
 This file is part of the Contact Form plugin for Moodle - https://moodle.org/plugins/local_contact/
 
@@ -534,6 +550,6 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Contact Form.  If not, see <http://www.gnu.org/licenses/>.
+along with Contact Form.  If not, see <https://www.gnu.org/licenses/>.
 
 [(Back to top)](#table-of-contents)

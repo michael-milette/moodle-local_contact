@@ -18,7 +18,7 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2018 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2019 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

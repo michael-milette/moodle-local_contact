@@ -477,6 +477,19 @@ Additional information:
 
 ANSWER 2: If you are having problems specifically with the StaticPages plugin, go into its configuration options and set the Clean HTML code to "No, don't clean HTML code". Otherwise the plugin will filter out HTML tags including all your form tags. (thanks to Alex Ferrer for this solution)
 
+### Can I add a form to the Moodle login page?
+
+It is definitely possible. Here is what you need to do:
+
+1. Go to Site administration > Plugins > Authentication > Manage authentication.
+2. Scroll down to the Instructions field.
+3. Insert your form in this field.
+4. Click Save Changes at the bottom of the page.
+
+That's it! Your form will now appear in the section of the page called "Is this your first time here?" on the Moodle login page.
+
+With that said, if what you really want is to have the ability to approve any registration requests on your site, you might be interested in taking a look at the "Email-based self-registration with admin confirmation" plugin. New users complete would then complete the self-registration process. However, before they can gain access to the site, a Moodle Administrator will receive an email and need to approve. You can find the plugin by going to https://moodle.org/plugins/auth_emailadmin
+
 ### Are there any security considerations?
 
 There are no known security considerations at this time.
@@ -535,7 +548,7 @@ https://github.com/michael-milette/moodle-local_contact
 
 # License
 
-Copyright © 2016-2019 TNG Consulting Inc. - https://www.tngconsulting.ca/
+Copyright © 2016-2020 TNG Consulting Inc. - https://www.tngconsulting.ca/
 
 This file is part of the Contact Form plugin for Moodle - https://moodle.org/plugins/local_contact/
 

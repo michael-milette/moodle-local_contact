@@ -363,12 +363,22 @@ There is no support file attachments type fields or form-data encoded as "multip
 
 This plugin includes support for the English language. Additional languages including French are supported if you've installed one or more additional Moodle language packs.
 
-If you need a language that is not yet supported, please contribute translations using the Moodle AMOS Translation Toolkit for Moodle at
+Some core fields will be different if a language pack is available for your language. On a French Moodle site, for example (fielname on English site => fieldname on French site):
+
+* email => courriel
+* message => message
+* name => nom
+* subject => objet
+
+So on a French site, you would need to use the French versions of the field names or Contact Form will not recognize them. For more information, see the section called [Customizing the form](#customizing-the-form).
+
+Pro tip: Creating a multi-language Moodle site? Use the [FilterCodes](https://moodle.org/plugins/filter_filtercodes) {getstring} tag to populate the correct field name. Example: 
+
+Note: If no language pack is available for your language, the plugin will default to the English language pack. However, if you need a language that is not yet supported, please contribute translations using the Moodle AMOS Translation Toolkit for Moodle at:
+
 https://lang.moodle.org/
 
-This plugin has not been tested for right-to-left (RTL) language support.
-If you want to use this plugin with a RTL language and it doesn't work as-is,
-feel free to prepare a pull request and submit it to the project page at:
+This plugin has not been tested for right-to-left (RTL) language support. If you want to use this plugin with a RTL language and it doesn't work as-is, feel free to prepare a pull request and submit it to the project page at:
 
 https://github.com/michael-milette/moodle-local_contact
 

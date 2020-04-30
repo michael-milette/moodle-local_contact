@@ -46,7 +46,7 @@ $context = context_system::instance();
 $PAGE->set_context($context);
 $PAGE->set_heading($SITE->fullname);
 $PAGE->set_pagelayout('standard');
-$PAGE->set_title(get_string('pluginname', 'local_contact'));
+$PAGE->set_title(get_string('confirmationpage', 'local_contact'));
 $PAGE->navbar->add('');
 
 $contact = new local_contact();

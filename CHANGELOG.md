@@ -1,7 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.0.,0] - 2019-11-17
+## [1.0.1] - 2020-04-30
+### Updated
+- Title of the confirmation page is now "Thank you" and is configurable in Moodle's language editor.
+
+## [1.0.0] - 2019-11-17
 ### Added
 - Documentation references to new {form...} FilterCode tags. Enables you to easily create common web-forms with just one FilterCode tag.
 ### Updated

@@ -37,6 +37,16 @@ Examples uses for this plugin include:
 * Information request form;
 * Lead generation form;
 * Membership application form.
+* Quiz question issue report form.
+
+Several pre-configured templates are available when used with the FilterCodes plugin. They include:
+* {formquickquestion}
+* {formcontactus}
+* {formcourserequest}
+* {formsupport}
+* {formcheckin}
+
+See [The Quick and Easy method](#the-quick-and-easy-method) for details.
 
 [(Back to top)](#table-of-contents)
 
@@ -77,19 +87,15 @@ Before getting started:
 
 ## Creating a new form
 
-### Quick method
+### The Quick and Easy method
 
-The quickest way to get started by far is to use the [FilterCodes](https://moodle.org/plugins/filter_filtercodes/ Moodle plugin. As of version 1.3.0, it includes several plain text tags that you can easily copy and paste into any Atto editor. The {tags} include:
+By far, The quickest way to get started is to use the [FilterCodes](https://moodle.org/plugins/filter_filtercodes/ Moodle plugin. As of version 1.3.0, it includes several plain text tags that you can easily copy and paste into any Atto editor. The {tags} include:
 
-{formquickquestion} : Adds a "quick question" form to your course. Form only includes a Subject and Message field. Note: User must be logged in or the form will not be displayed.
-
-{formcontactus} : Adds a "Contact Us" form to your site (example: in a page). Form includes Name, Email address, Subject and Message fields.
-
-{formcourserequest} : Adds a "Course Request" form to your site (example: in a page). Unlike Moodle's request-a-course feature where you can request to create your own course, this tag allows users to request that a course they are interested in be created. Could also be used to request to take a course. Form includes Name, Email address, Course name, Course Description.
-
-{formsupport} : Adds a "Support Request" form to your site (example: in a page). Form includes Name, Email address, pre-determined Subject, specific Subject, URL and Message fields.
-
-{formcheckin} : Adds a "I'm here!" button to your to your course. Form does not include any other fields. Note: User must be logged in or the button will not be displayed.
+* {formquickquestion} : Adds a "quick question" form to your course. Form only includes a Subject and Message field. Note: User must be logged in or the form will not be displayed.
+* {formcontactus} : Adds a "Contact Us" form to your site (example: in a page). Form includes Name, Email address, Subject and Message fields.
+* {formcourserequest} : Adds a "Course Request" form to your site (example: in a page). Unlike Moodle's request-a-course feature where you can request to create your own course, this tag allows users to request that a course they are interested in be created. Could also be used to request to take a course. Form includes Name, Email address, Course name, Course Description.
+* {formsupport} : Adds a "Support Request" form to your site (example: in a page). Form includes Name, Email address, pre-determined Subject, specific Subject, URL and Message fields.
+* {formcheckin} : Adds a "I'm here!" button to your to your course. Form does not include any other fields. Note: User must be logged in or the button will not be displayed.
 
 ### Custom method
 
@@ -213,6 +219,10 @@ Note that, in the future, the email message will be configurable from within the
 Contact Form for Moodle includes the following settings. These are available on the plugin's `Settings` page by going to:
 
 Site administration > Plugins > Local plugins > Contact Form
+
+### Override the sender's (FROM) email address
+
+You can optionally specify an emails address from which emails will be sent. If this field is blank, by default emails will be delivered from the no-reply email address.
 
 ### Configuring the List of Recipients
 

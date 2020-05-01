@@ -1,7 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.0.1] - 2020-04-30
+## [1.0.1] - 2020-05-01
+### Added
+- Option to specify and override the default "from" email address in the settings.
 ### Updated
 - Title of the confirmation page is now "Thank you" and is configurable in Moodle's language editor.
 

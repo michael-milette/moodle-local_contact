@@ -313,10 +313,17 @@ class local_contact {
         $footmessage = get_string('extrainfo', 'local_contact');
         $footmessage = format_text($footmessage, FORMAT_HTML, array('trusted' => true, 'noclean' => true, 'para' => false));
         $htmlmessage .= str_replace($tags, $info, $footmessage);
+        
+        // Override "from" email address if one was specified in the plugin's settings.
+        $noreplyaddress = $CFG->noreplyaddress;
+        if (!empty($customfrom = get_config('local_contact', 'senderaddress'))) {
+            $CFG->noreplyaddress = $customfrom;
+        }
 
         // Send email message to recipient and set replyto to the sender's email address and name.
         $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true,
                 $from->email, $from->firstname);
+        $CFG->noreplyaddress = $noreplyaddress;
 
         // If successful and a confirmation email is desired, send it the original sender.
         if ($status && $sendconfirmationemail) {

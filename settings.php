@@ -30,6 +30,15 @@ if ($hassiteconfig) {
     $settings = new admin_settingpage('local_contact', get_string('pluginname', 'local_contact'));
     $ADMIN->add('localplugins', $settings);
 
+    // Custom sender (from) email address.
+    $default = '';
+    $name = 'local_contact/senderaddress';
+    $title = get_string('senderaddress', 'local_contact');
+    $description = get_string('senderaddress_description', 'local_contact');
+    $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_RAW);
+    $setting->set_updatedcallback('theme_reset_all_caches');
+    $settings->add($setting);
+
     // List of tags and recipient email addresses.
     $default = '';
     $name = 'local_contact/recipient_list';

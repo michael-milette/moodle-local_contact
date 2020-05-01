@@ -64,6 +64,9 @@ $string['confirmationemail'] = '
 $string['lockedout'] = 'LOCKED OUT';
 $string['notconfirmed'] = 'NOT CONFIRMED';
 
+$string['senderaddress'] = 'Custom sender';
+$string['senderaddress_description'] = 'Emails will be delivered from this email address. If this field is blank, emails will be delivered from the no-reply email address.';
+
 $string['recipient_list'] = 'List of available recipients';
 $string['recipient_list_description'] = 'You can configure a list of potential recipients here, any of which can be used in a Contact Form to specify the email recipient using a hidden text field, or in a select dropdown list to allow users to select the recipient without divulging the recipient\'s actual email address. If the list is empty, emails will be sent to the Moodle email address, either the support email address or the primary Moodle administrator.
 Each line must consist of a unique text alias/label, a single email address and a name, each separated by pipe characters. For example:

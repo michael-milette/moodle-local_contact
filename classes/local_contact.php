@@ -44,15 +44,24 @@ class local_contact {
         if (isloggedin() && !isguestuser()) {
             // If logged-in as non guest, use their registered fullname and email address.
             global $USER;
-            $this->fromname = $USER->firstname.' '.$USER->lastname;
+            $this->fromname = $USER->firstname . ' ' . $USER->lastname;
             $this->fromemail = $USER->email;
+             // Insert name and email address at first position in $_POST array.
+            if (!empty($_POST['email'])) {
+                unset($_POST['email']);
+            }
+            if (!empty($_POST['name'])) {
+                unset($_POST['name']);
+            }
+            $_POST = array_merge(array('email' => $this->fromemail), $_POST);
+            $_POST = array_merge(array('name' => $this->fromname), $_POST);
         } else {
             // If not logged-in as a user or logged in a guest, the name and email fields are required.
             if (empty($this->fromname  = trim(optional_param(get_string('field-name', 'local_contact'), '', PARAM_TEXT)))) {
-                $this->fromname  = required_param('name', PARAM_TEXT);
+                $this->fromname = required_param('name', PARAM_TEXT);
             }
             if (empty($this->fromemail = trim(optional_param(get_string('field-email', 'local_contact'), '', PARAM_EMAIL)))) {
-                $this->fromemail  = required_param('email', PARAM_TEXT);
+                $this->fromemail = required_param('email', PARAM_TEXT);
             }
         }
         $this->fromname = trim($this->fromname);
@@ -239,7 +248,8 @@ class local_contact {
         $subject = '';
         if (empty(get_config('local_contact', 'nosubjectsitename'))) { // Not checked.
             // Include site name in subject field.
-            $subject .= '[' . $SITE->shortname . '] ';
+            $systemcontext = context_system::instance();
+            $subject .= '[' . format_text($SITE->shortname, FORMAT_HTML, ['context' => $systemcontext]) . '] ';
         }
         $subject .= optional_param(get_string('field-subject', 'local_contact'),
                 get_string('defaultsubject', 'local_contact'), PARAM_TEXT);
@@ -250,6 +260,7 @@ class local_contact {
         $fieldmessage = get_string('field-message', 'local_contact');
 
         $htmlmessage = '';
+
         foreach ($_POST as $key => $value) {
 
             // Only process key conforming to valid form field ID/Name token specifications.
@@ -313,7 +324,7 @@ class local_contact {
         $footmessage = get_string('extrainfo', 'local_contact');
         $footmessage = format_text($footmessage, FORMAT_HTML, array('trusted' => true, 'noclean' => true, 'para' => false));
         $htmlmessage .= str_replace($tags, $info, $footmessage);
-        
+
         // Override "from" email address if one was specified in the plugin's settings.
         $noreplyaddress = $CFG->noreplyaddress;
         if (!empty($customfrom = get_config('local_contact', 'senderaddress'))) {

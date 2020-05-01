@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Option to specify and override the default "from" email address in the settings.
 ### Updated
-- Title of the confirmation page is now "Thank you" and is configurable in Moodle's language editor.
+- Title of the confirmation page is now "Status" and is configurable in Moodle's language editor.
+- When user is logged in, the user's Moodle Name and Email address will always appear at the top of the message body.
+- Site name is now passed through Moodle filters - useful for multi-language sites.
 
 ## [1.0.0] - 2019-11-17
 ### Added

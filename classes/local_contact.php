@@ -362,7 +362,7 @@ class local_contact {
      * @return     string  Contains what we know about the Moodle user including whether they are logged in or out.
      */
     private function moodleuserstatus($emailaddress) {
-        if (isloggedin()) {
+        if (isloggedin() && !isguestuser()) {
             global $USER;
             $info = $USER->firstname . ' ' . $USER->lastname . ' / ' . $USER->email . ' (' . $USER->username .
                     ' / ' . get_string('eventuserloggedin', 'auth') . ')';

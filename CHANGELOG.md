@@ -1,10 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.0.1] - 2020-05-01
+## [1.0.1] - 2020-05-13
 ### Added
 - Option to specify and override the default "from" email address in the settings.
 ### Updated
+- Users logged-in as guest will now be treated as if they were logged-out.
 - Title of the confirmation page is now "Status" and is configurable in Moodle's language editor.
 - When user is logged in, the user's Moodle Name and Email address will always appear at the top of the message body.
 - Site name is now passed through Moodle filters - useful for multi-language sites.

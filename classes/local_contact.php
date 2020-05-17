@@ -368,7 +368,7 @@ class local_contact {
                     ' / ' . get_string('eventuserloggedin', 'auth') . ')';
         } else {
             global $DB;
-            $usercount = $DB->count_records('user', array('email' => $emailaddress));
+            $usercount = $DB->count_records('user', ['email' => $emailaddress, 'deleted' => 0]);
             switch ($usercount) {
                 case 0:  // We don't know this email address.
                     $info = get_string('emailnotfound');

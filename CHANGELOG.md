@@ -1,11 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.0.1] - 2020-05-16
+## [1.0.1] - 2020-05-17
 ### Added
 - Option to specify and override the default "from" email address in the settings.
 - Missing 'duplicateemailaddresses' status string.
 ### Updated
+- User status function now ignores deleted users.
 - Users logged-in as guest will now be treated as if they were logged-out.
 - Title of the confirmation page is now "Status" and is configurable in Moodle's language editor.
 - When user is logged in, the user's Moodle Name and Email address will always appear at the top of the message body.

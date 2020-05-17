@@ -63,6 +63,7 @@ $string['confirmationemail'] = '
 ';
 $string['lockedout'] = 'LOCKED OUT';
 $string['notconfirmed'] = 'NOT CONFIRMED';
+$string['duplicateemailaddresses'] = 'There are multiple users with the same email address.';
 
 $string['senderaddress'] = 'Custom sender';
 $string['senderaddress_description'] = 'Emails will be delivered from this email address. If this field is blank, emails will be delivered from the no-reply email address.';

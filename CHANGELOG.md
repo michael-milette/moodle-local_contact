@@ -1,8 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.0.1] - 2020-05-17
+## [1.0.1] - 2020-06-09
 ### Added
+- Added composer.json.
 - Option to specify and override the default "from" email address in the settings.
 - Missing 'duplicateemailaddresses' status string.
 ### Updated

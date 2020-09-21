@@ -1,17 +1,25 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.0.1] - 2020-06-09
+## [1.1.0] - 2020-09-20
 ### Added
-- Added composer.json.
 - Option to specify and override the default "from" email address in the settings.
 - Missing 'duplicateemailaddresses' status string.
+- Added support for installation using composer with mediamaisteri/moodle-installer. See https://github.com/juho-jaakkola/moodle-project
+- README.md FAQ: Why isn't my form working?
+- README.md FAQ: Static Pages plugin compatibility
+- User status now ignores deleted users.
+- Site name is now passed through Moodle filters - useful for multi-language sites.
 ### Updated
-- User status function now ignores deleted users.
+- Fixed support for select multiple type form fields.
 - Users logged-in as guest will now be treated as if they were logged-out.
 - Title of the confirmation page is now "Status" and is configurable in Moodle's language editor.
-- When user is logged in, the user's Moodle Name and Email address will always appear at the top of the message body.
-- Site name is now passed through Moodle filters - useful for multi-language sites.
+- When user is logged in, the user's Moodle Name and Email address will always appear at the top of the message body, regardless of the order of the fields in the form.
+- README.md FAQ: How do I make this form available to everyone, even if they are not logged in?
+- The purpose of the **Site name in email subject field** field is now clearer.
+- Compatible with PHP 5.6 to 7.3.
+- Compatible with Moodle 3.0 to 3.9.
+- Copyright notice.
 
 ## [1.0.0] - 2019-11-17
 ### Added

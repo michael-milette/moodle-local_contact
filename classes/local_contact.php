@@ -297,7 +297,7 @@ class local_contact {
                         default:            // All other fields.
                             // Join array of values. Example: <select multiple>.
                             if (is_array($value)) {
-                                $value = join($value, ", ");
+                                $value = join(', ', $value);
                             }
                             // Sanitize the text.
                             $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
@@ -332,8 +332,12 @@ class local_contact {
         }
 
         // Send email message to recipient and set replyto to the sender's email address and name.
-        $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true,
-                $from->email, $from->firstname);
+        if (empty(get_config('local_contact', 'noreplyto'))) { // Not checked.
+            $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true,
+                    $from->email, $from->firstname);
+        } else { // Checked.
+            $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true);
+        }
         $CFG->noreplyaddress = $noreplyaddress;
 
         // If successful and a confirmation email is desired, send it the original sender.

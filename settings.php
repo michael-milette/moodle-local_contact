@@ -47,6 +47,14 @@ if ($hassiteconfig) {
     $setting = new admin_setting_configtextarea($name, $title, $description, $default);
     $settings->add($setting);
 
+    // Don't use reply-to.
+    $default = 0;
+    $name = 'local_contact/noreplyto';
+    $title = get_string('noreplyto', 'local_contact');
+    $description = get_string('noreplyto_description', 'local_contact');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+    $settings->add($setting);
+
     // Require the user to be logged-in in order to send the form.
     $default = 0;
     $name = 'local_contact/loginrequired';

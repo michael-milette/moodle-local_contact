@@ -1,8 +1,15 @@
 {
     "name": "michael-milette/moodle-local_contact",
     "type": "moodle-local",
-    "description": "This Moodle plugin enables you to create webmail forms which will be sent to the site's support email address or primary administrator if the support email address is not defined.",
+    "description": "Contact Form for Moodle is a Moodle local plugin plugin enables you to create webmail forms which will be sent to the site's support email address or primary administrator if the support email address is not defined.",
     "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Michael Milette - TNG Consulting Inc.",
+            "homepage": "https://www.tngconsulting.ca",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "composer/installers": "~1.0"
     },
@@ -11,6 +18,9 @@
     },
     "support": {
         "issues": "https://github.com/michael-milette/moodle-local_contact/issues",
-        "source": "https://github.com/michael-milette/moodle-local_contact/"
+        "forum": "https://moodle.org/mod/forum/discuss.php?d=352851",
+        "source": "https://github.com/michael-milette/moodle-local_contact/",
+        "wiki": "https://github.com/michael-milette/moodle-local_contact/wiki",
+        "docs": "https://github.com/michael-milette/moodle-local_contact/blob/master/README.md"
     }
 }

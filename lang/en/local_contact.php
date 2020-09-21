@@ -36,6 +36,9 @@ $string['field-email'] = 'email';
 $string['field-subject'] = 'subject';
 $string['field-message'] = 'message';
 
+$string['noreplyto'] = 'No reply-to';
+$string['noreplyto_description'] = 'Some SMTP servers reject emails if the from and noreply-to fields in the heading are different. Enable this option to ensure that the no-reply field matches the from address instead of the sender\'s email address.';
+
 $string['confirmationmessage'] = 'Thank you for contacting us. If required, we will be in touch with you very soon.';
 $string['confirmationsent'] = 'An email has been sent to your address at {$a}.';
 $string['forbidden'] = 'Forbidden';
@@ -87,8 +90,8 @@ philosophy|aristotle@example.com|Aristotle
 $string['loginrequired'] = 'Login required';
 $string['loginrequired_description'] = 'Only allow logged-in users to submit the Contact forms. Guests are not considered to be logged-in.';
 
-$string['nosubjectsitename'] = 'Site name in email subject field';
-$string['nosubjectsitename_description'] = 'Do not include site name in email subject field.';
+$string['nosubjectsitename'] = 'No site name in email subject field';
+$string['nosubjectsitename_description'] = 'Enable to not prefix email subject with [site name]. Does not affect Moodle\'s own <strong>Email subject prefix text</strong> setting.';
 
 $string['recapchainfo'] = 'Using ReCAPTCHA';
 $string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle. You <strong>must</strong>:<br>

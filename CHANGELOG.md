@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2020-11-07
+### Update
+- HTTP_USER_AGENT and HTTP_REFERER are now sanitized.
+
 ## [1.1.0] - 2020-09-20
 ### Added
 - Option to specify and override the default "from" email address in the settings.

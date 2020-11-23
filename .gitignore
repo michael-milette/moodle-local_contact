@@ -2,3 +2,4 @@
 !/lang/en
 *.swp
 vendor
+.vscode

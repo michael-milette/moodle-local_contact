@@ -93,7 +93,7 @@ class local_contact {
         // Use primary administrators name and email address if support name and email are not defined.
         $primaryadmin = get_admin();
         $CFG->supportemail = empty($CFG->supportemail) ? $primaryadmin->email : $CFG->supportemail;
-        $CFG->supportname = empty($CFG->supportname) ? fullname($primaryadmin, true) :$CFG->supportname;
+        $CFG->supportname = empty($CFG->supportname) ? fullname($primaryadmin, true) : $CFG->supportname;
 
         // Validate Moodle's support email address.
         if (!$this->isspambot && $this->isspambot = !validate_email($CFG->supportemail)) {

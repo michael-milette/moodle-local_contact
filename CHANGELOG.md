@@ -1,9 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.1.1] - 2020-11-07
+## [1.2.0] - 2020-11-23
 ### Update
 - HTTP_USER_AGENT and HTTP_REFERER are now sanitized.
+- Compatible with PHP 5.6 to 7.4.
+- Compatible with Moodle 3.0 to 3.10.
+- Updated .gitignore list.
 
 ## [1.1.0] - 2020-09-20
 ### Added

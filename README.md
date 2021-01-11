@@ -418,7 +418,20 @@ The quick and easy way to create webforms in Moodle is to simply install [Filter
 
 Anytime your form doesn't work, be sure to try it in a Moodle page or block using the Boost theme with the current language set to English. If it works there, chances are that it is the theme or plugin you are using that is causing the issue, not FilterCodes or Contact for Moodle. As with the Static Pages plugin (see below), you may find that there is a setting that needs to be changed. If not, contact the author/maintainer of the plugin and ask them to add support for filtering in their theme or plugin.
 
-If the form works in English and not in your preferred language, you may need to translate the names of some of your fields. This is required if you want the field names to appear in your language in the email. [More infomation on Language support](#language-support)
+If the form works in English and not in your preferred language, you may need to translate the names of some of your fields. This is required if you want the field names to appear in your language in the email. [More information on Language support](#language-support)
+#### Sesskey error
+If you are getting an error that mentions *sesskey*, you may have forgot to include the JavaScript snippet in your form:
+
+    <input type="hidden" id="sesskey" name="sesskey" value="">
+    <script>document.getElementById('sesskey').value = M.cfg.sesskey;</script>
+
+If you have [FilterCodes](https://moodle.org/plugins/filter_filtercodes/) installed, you can simply replace all of the above code in your form with:
+
+    {formsesskey}
+
+If JavaScript does not work in your form, you can replace the above code with the following HTML. Be aware that it will override one of several anti-spam protections built into Contact Form (requires FilterCodes):
+
+    <input type="hidden" id="sesskey" name="sesskey" value="{sesskey}">
 
 #### Static Pages plugin compatibility
 
@@ -606,7 +619,7 @@ https://github.com/michael-milette/moodle-local_contact
 
 # License
 
-Copyright © 2016-2020 TNG Consulting Inc. - https://www.tngconsulting.ca/
+Copyright © 2016-2021 TNG Consulting Inc. - https://www.tngconsulting.ca/
 
 This file is part of the Contact Form plugin for Moodle - https://moodle.org/plugins/local_contact/
 

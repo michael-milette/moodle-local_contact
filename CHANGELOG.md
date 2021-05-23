@@ -1,9 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.2.1] - 2021-01-11 (DEV)
+## [1.2.1] - 2021-05-23
 ### Updated
 - Added FAQ information to the README.md on how to fix *sesskey* errors.
+- Bug fix in creation of temporary user object.
+- Copyright notice to 2021.
+- Compatible with Moodle 3.11.
 
 ## [1.2.0] - 2020-11-23
 ### Update

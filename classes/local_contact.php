@@ -18,7 +18,7 @@
  * This plugin for Moodle is used to send emails through a web form.
  *
  * @package    local_contact
- * @copyright  2016-2020 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2021 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * local_contact class. Handles processing of information submitted from a web form.
- * @copyright  2016-2020 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2021 TNG Consulting Inc. - www.tngconsulting.ca
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_contact {
@@ -157,10 +157,10 @@ class local_contact {
         // Validate against email address whitelist and blacklist.
         $skipdomaintest = false;
         // TODO: Create a plugin setting for this list.
-        $whitelist = ''; // $config->whitelistemails .
+        $whitelist = ''; // Future code: $config->whitelistemails .
         $whitelist = ',' . $whitelist . ',';
         // TODO: Create a plugin blacklistemails setting.
-        $blacklist = ''; // $config->blacklistemails .
+        $blacklist = ''; // Future code: $config->blacklistemails .
         $blacklist = ',' . $blacklist . ',';
         if (!$this->isspambot && stripos($whitelist, ',' . $this->fromemail . ',') != false) {
             $skipdomaintest = true; // Skip the upcoming domain test.
@@ -175,7 +175,7 @@ class local_contact {
         // Validate against domain whitelist and blacklist... except for the nice people.
         if (!$skipdomaintest && !$this->isspambot) {
             // TODO: Create a plugin whitelistdomains setting.
-            $whitelist = ''; // $config->whitelistdomains .
+            $whitelist = ''; // Future code: $config->whitelistdomains .
             $whitelist = ',' . $whitelist . ',';
             $domain = substr(strrchr($this->fromemail, '@'), 1);
 
@@ -184,7 +184,7 @@ class local_contact {
                 $blacklist = '';
             } else {
                  // TODO: Create a plugin blacklistdomains setting.
-                $blacklist = 'example.com,example.net,sample.com,test.com,specified.com'; // $config->blacklistdomains .
+                $blacklist = 'example.com,example.net,sample.com,test.com,specified.com'; // Future code:$config->blacklistdomains .
                 $blacklist = ',' . $blacklist . ',';
                 if ($blacklist != ',,'
                         && $this->isspambot = ($blacklist == '*' || stripos($blacklist, ',' . $domain . ',') != false)) {
@@ -223,6 +223,7 @@ class local_contact {
         $emailuser->lastnamephonetic = '';
         $emailuser->middlename = '';
         $emailuser->alternatename = '';
+        $emailuser->username = '';
         return $emailuser;
     }
 

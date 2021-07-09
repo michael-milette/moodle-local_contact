@@ -44,7 +44,7 @@ class local_contact {
         if (isloggedin() && !isguestuser()) {
             // If logged-in as non guest, use their registered fullname and email address.
             global $USER;
-            $this->fromname = $USER->firstname . ' ' . $USER->lastname;
+            $this->fromname = get_string('fullnamedisplay', null, $USER);
             $this->fromemail = $USER->email;
              // Insert name and email address at first position in $_POST array.
             if (!empty($_POST['email'])) {
@@ -373,7 +373,7 @@ class local_contact {
     private function moodleuserstatus($emailaddress) {
         if (isloggedin() && !isguestuser()) {
             global $USER;
-            $info = $USER->firstname . ' ' . $USER->lastname . ' / ' . $USER->email . ' (' . $USER->username .
+            $info = get_string('fullnamedisplay', null, $USER) . ' / ' . $USER->email . ' (' . $USER->username .
                     ' / ' . get_string('eventuserloggedin', 'auth') . ')';
         } else {
             global $DB;
@@ -396,7 +396,7 @@ class local_contact {
                         $extrainfo .= ' / ' . get_string('notconfirmed', 'local_contact');
                     }
 
-                    $info = $user->firstname . ' ' . $user->lastname . ' / ' . $user->email . ' (' . $user->username .
+                    $info = get_string('fullnamedisplay', null, $user) . ' / ' . $user->email . ' (' . $user->username .
                             ' / ' . get_string('eventuserloggedout') . $extrainfo . ')';
                     break;
                 default: // We found multiple users with this email address.

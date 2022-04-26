@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2022-04-25
+
+### Updated
+- Removed db directory as this plugin does not use any tables.
+- .gitignore
+- Copyright notice to 2022.
+- Compatible with Moodle 3.0 to 4.0.
+-
 ## [1.2.1] - 2021-05-23
 ### Updated
 - Added FAQ information to the README.md on how to fix *sesskey* errors.

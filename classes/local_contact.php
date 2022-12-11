@@ -308,6 +308,10 @@ class local_contact {
                         default:            // All other fields.
                             // Sanitize the text.
                             $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
+                            if (filter_var($value, FILTER_VALIDATE_URL)) {
+                                // Convert URL into clickable link.
+                                $value = '<a href="' . $value . '">' . $value . '</a>';
+                            }
                             // Add to email message.
                             $htmlmessage .= '<strong>'.ucfirst($key) . ' :</strong> ' . $value . '<br>' . PHP_EOL;
                     }

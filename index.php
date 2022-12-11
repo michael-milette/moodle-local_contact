@@ -35,7 +35,7 @@ if (empty(get_local_referer(false))) {
 // If we require user to be logged in.
 if (!empty(get_config('local_contact', 'loginrequired'))) {
     // Log them in and then redirect them back to the form.
-    if (!isloggedin() or isguestuser()) {
+    if (!isloggedin() || isguestuser()) {
         // Set message that session has timed out.
         $SESSION->has_timed_out = 1;
         require_login();

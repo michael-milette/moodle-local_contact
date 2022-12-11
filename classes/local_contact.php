@@ -259,9 +259,15 @@ class local_contact {
 
         $htmlmessage = '';
 
-        function filterempty($value){
-            $value = trim($value);
-            return ($value !== NULL && $value !== FALSE && $value !== "");
+        /**
+         * Callback function for array_filter.
+         *
+         * @param string $string Text to be chekced.
+         * @return boolean true if string is not empty, otherwise false.
+         */
+        function filterempty($string) {
+            $string = trim($string);
+            return ($string !== null && $string !== false && $string !== '');
         }
 
         foreach ($_POST as $key => $value) {
@@ -285,7 +291,7 @@ class local_contact {
                         // Make custom alterations.
                         case 'message': // Message field - use translated value from language file.
                             $key = $fieldmessage;
-                        case strpos($value, "\n") !== FALSE: // Field contains linefeeds.
+                        case strpos($value, "\n") !== false: // Field contains linefeeds.
                         case $fieldmessage: // Message field.
                             // Strip out excessive empty lines.
                             $value = preg_replace('/\n(\s*\n){2,}/', "\n\n", $value);

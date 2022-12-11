@@ -72,7 +72,7 @@ if ($hassiteconfig) {
     $settings->add($setting);
 
     // Override and disable ReCAPTCHA, if the private and public keys are setup in Moodle.
-    if (!empty($CFG->recaptchaprivatekey) AND !empty($CFG->recaptchapublickey)) {
+    if (!empty($CFG->recaptchaprivatekey) && !empty($CFG->recaptchapublickey)) {
         // Information on using recaptcha with Contact Form.
         $name = 'local_contact/recapchainfo';
         $title = get_string('recapchainfo', 'local_contact');

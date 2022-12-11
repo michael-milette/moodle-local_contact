@@ -7,9 +7,10 @@ All notable changes to this project will be documented in this file.
 - Field value will be converted to clickable link if it is a URL.
 ### Updated
 - Fix-66: Select multiple fields now work corretly.
+- Compatible with PHP 5.6 to 8.0.
+- Compatible with Moodle up to v4.1.
 
 ## [1.2.2] - 2022-04-25
-
 ### Updated
 - Removed db directory as this plugin does not use any tables.
 - .gitignore

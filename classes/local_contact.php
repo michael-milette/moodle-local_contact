@@ -285,6 +285,7 @@ class local_contact {
                         // Make custom alterations.
                         case 'message': // Message field - use translated value from language file.
                             $key = $fieldmessage;
+                        case strpos($value, "\n") !== FALSE: // Field contains linefeeds.
                         case $fieldmessage: // Message field.
                             // Strip out excessive empty lines.
                             $value = preg_replace('/\n(\s*\n){2,}/', "\n\n", $value);

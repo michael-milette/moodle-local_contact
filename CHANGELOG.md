@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [1.2.3] - 2022-12-11
+### Added
+- Formatting in email for all fields containing linefeeds.
 ### Updated
 - Fix-66: Select multiple fields now work corretly.
 

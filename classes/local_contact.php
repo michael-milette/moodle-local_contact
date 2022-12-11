@@ -259,11 +259,23 @@ class local_contact {
 
         $htmlmessage = '';
 
+        function filterempty($value){
+            $value = trim($value);
+            return ($value !== NULL && $value !== FALSE && $value !== "");
+        }
+
         foreach ($_POST as $key => $value) {
 
             // Only process key conforming to valid form field ID/Name token specifications.
             if (preg_match('/^[A-Za-z][A-Za-z0-9_:\.-]*/', $key)) {
 
+                if (is_array($value)) {
+                    // Join array of values. Example: <select multiple>.
+                    $value = array_filter($value, "filterempty");
+                    $value = join(', ', $value);
+                } else {
+                    $value = trim($value);
+                }
                 // Exclude fields we don't want in the message and empty fields.
                 if (!in_array($key, array('sesskey', 'submit')) && trim($value) != '') {
 
@@ -293,10 +305,6 @@ class local_contact {
                         case 'subject':     // Subject field.
                             $key = get_string('field-' . $key, 'local_contact');
                         default:            // All other fields.
-                            // Join array of values. Example: <select multiple>.
-                            if (is_array($value)) {
-                                $value = join(', ', $value);
-                            }
                             // Sanitize the text.
                             $value = format_text($value, FORMAT_PLAIN, array('trusted' => false));
                             // Add to email message.

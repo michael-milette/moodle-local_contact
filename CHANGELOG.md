@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.3] - 2022-12-11
+### Updated
+- Fix-66: Select multiple fields now work corretly.
+
 ## [1.2.2] - 2022-04-25
 
 ### Updated

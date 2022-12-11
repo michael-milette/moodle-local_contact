@@ -279,7 +279,7 @@ Notice that you can include any number of recipients in your form's drop-down li
 
 If you are using a select form where you allow multiple items to be selected, all of the selected items will be merged together in a commas/space delimited list. Example:
 
-    <select name="cars[]" id="cars">
+    <select multiple name="cars[]" id="cars">
         <option value="">Please select...</option>
         <option value="TOYOTA">Toyota</option>
         <option value="GM">General Motors</option>

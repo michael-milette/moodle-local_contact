@@ -100,11 +100,6 @@ class local_contact {
 
         // START: Spambot detection.
 
-        // File attachments not supported.
-        if (!$this->isspambot && $this->isspambot = !empty($_FILES)) {
-            $this->errmsg = 'File attachments not supported.';
-        }
-
         // Validate submit button.
         if (!$this->isspambot && $this->isspambot = !isset($_POST['submit'])) {
             $this->errmsg = 'Missing submit button.';
@@ -325,6 +320,20 @@ class local_contact {
             }
         }
 
+        $attachname = '';
+        $attachpath = '';
+        // Take the first file as an attachment.
+        foreach ($_FILES as $value) {
+            $attachname = $value['name'];
+            $path = $CFG->tempdir . '/local_contact/';
+            if (!is_dir($path)) {
+                mkdir($path); // Create temp directory if it does not exist.
+            }
+            $attachpath = tempnam($path, 'attachment_');
+            move_uploaded_file($value['tmp_name'], $attachpath);
+            break;
+        }
+
         // Sanitize user agent and referer.
         $httpuseragent = format_text($_SERVER['HTTP_USER_AGENT'], FORMAT_PLAIN, array('trusted' => false));
         $httpreferer = format_text($_SERVER['HTTP_REFERER'], FORMAT_PLAIN, array('trusted' => false));
@@ -354,10 +363,10 @@ class local_contact {
 
         // Send email message to recipient and set replyto to the sender's email address and name.
         if (empty(get_config('local_contact', 'noreplyto'))) { // Not checked.
-            $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true,
+            $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, $attachpath, $attachname, true,
                     $from->email, $from->firstname);
         } else { // Checked.
-            $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true);
+            $status = email_to_user($to, $from, $subject, html_to_text($htmlmessage), $htmlmessage, $attachpath, $attachname, true);
         }
         $CFG->noreplyaddress = $noreplyaddress;
 

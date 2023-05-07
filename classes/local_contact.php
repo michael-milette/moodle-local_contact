@@ -61,8 +61,8 @@ class local_contact {
                 $this->fromemail = required_param('email', PARAM_TEXT);
             }
         }
-        $this->fromname = trim($this->fromname);
-        $this->fromemail = trim($this->fromemail);
+        $this->fromname = trim($this->fromname ?? '');
+        $this->fromemail = trim($this->fromemail ?? '');
 
         $this->isspambot = false;
         $this->errmsg = '';
@@ -207,7 +207,7 @@ class local_contact {
      */
     private function makeemailuser($email, $name = '', $id = -99) {
         $emailuser = new stdClass();
-        $emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL));
+        $emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL) ?? '');
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $emailuser->email = '';
         }
@@ -267,7 +267,7 @@ class local_contact {
          * @return boolean true if string is not empty, otherwise false.
          */
         function filterempty($string) {
-            $string = trim($string);
+            $string = trim($string ?? '');
             return ($string !== null && $string !== false && $string !== '');
         }
 
@@ -281,10 +281,10 @@ class local_contact {
                     $value = array_filter($value, "filterempty");
                     $value = join(', ', $value);
                 } else {
-                    $value = trim($value);
+                    $value = trim($value ?? '');
                 }
                 // Exclude fields we don't want in the message and empty fields.
-                if (!in_array($key, array('sesskey', 'submit')) && trim($value) != '') {
+                if (!in_array($key, array('sesskey', 'submit')) && trim($value ?? '') != '') {
 
                     // Apply minor formatting of the key by replacing underscores with spaces.
                     $key = str_replace('_', ' ', $key);

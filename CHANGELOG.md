@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.4] - 2022-05-07
+### Updated
+- Fix-69: Now handles sites with ampersands in its name.
+
 ## [1.2.3] - 2022-12-11
 ### Added
 - Formatting in email for all fields containing linefeeds.

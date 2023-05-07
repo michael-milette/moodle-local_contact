@@ -236,6 +236,8 @@ class local_contact {
     public function sendmessage($email, $name, $sendconfirmationemail = false) {
         global $USER, $CFG, $SITE;
 
+        $systemcontext = context_system::instance();
+
         // Create the sender from the submitted name and email address.
         $from = $this->makeemailuser($this->fromemail, $this->fromname);
 
@@ -246,8 +248,7 @@ class local_contact {
         $subject = '';
         if (empty(get_config('local_contact', 'nosubjectsitename'))) { // Not checked.
             // Include site name in subject field.
-            $systemcontext = context_system::instance();
-            $subject .= '[' . format_text($SITE->shortname, FORMAT_HTML, ['context' => $systemcontext]) . '] ';
+            $subject .= '[' . format_string($SITE->shortname, true, ['escape' => false, 'context' => $systemcontext]) . '] ';
         }
         $subject .= optional_param(get_string('field-subject', 'local_contact'),
                 get_string('defaultsubject', 'local_contact'), PARAM_TEXT);
@@ -337,7 +338,8 @@ class local_contact {
         );
         $info = array($from->firstname, $from->email, $CFG->supportname, $CFG->supportemail,
                 current_language(), getremoteaddr(), $this->moodleuserstatus($from->email),
-                $SITE->fullname . ': ', $SITE->shortname, $CFG->wwwroot,
+                format_text($SITE->fullname, FORMAT_HTML, ['context' => $systemcontext, 'escape' => false]) . ': ',
+                format_text($SITE->shortname, FORMAT_HTML, ['context' => $systemcontext, 'escape' => false]), $CFG->wwwroot,
                 $httpuseragent, $httpreferer
         );
 

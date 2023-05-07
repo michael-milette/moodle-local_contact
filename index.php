@@ -44,7 +44,7 @@ if (!empty(get_config('local_contact', 'loginrequired'))) {
 
 $context = context_system::instance();
 $PAGE->set_context($context);
-$PAGE->set_heading($SITE->fullname);
+$PAGE->set_heading(format_text($SITE->fullname, FORMAT_HTML, ['context' => $context, 'escape' => false]));
 $PAGE->set_pagelayout('standard');
 $PAGE->set_title(get_string('confirmationpage', 'local_contact'));
 $PAGE->navbar->add('');

@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Fix-69: Now handles sites with ampersands in its name.
 - Compatible with PHP 5.6 to 8.1.
 - Compatible with Moodle 3.0 to 4.2.
+- Copyright notice to 2023.
 
 ## [1.2.3] - 2022-12-11
 ### Added

@@ -18,7 +18,7 @@
  * Version information for Contact Form (also called Contact).
  *
  * @package    local_contact
- * @copyright  2016-2022 TNG Consulting Inc. - www.tngconsulting.ca
+ * @copyright  2016-2023 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

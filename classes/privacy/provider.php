@@ -18,7 +18,7 @@
  * Privacy Subsystem implementation for local_contact.
  *
  * @package    local_contact
- * @copyright  2015-2022 TNG Consulting Inc. - www.tngcosulting.ca
+ * @copyright  2015-2023 TNG Consulting Inc. - www.tngcosulting.ca
  * @author     Michael Milette
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

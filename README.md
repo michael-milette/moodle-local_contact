@@ -39,7 +39,7 @@ Examples uses for this plugin include:
 * Membership application form.
 * Quiz question issue report form.
 
-Several pre-configured templates are available when used with the FilterCodes plugin. They include:
+Several pre-configured templates are available when used with the [FilterCodes](https://moodle.org/plugins/filter_filtercodes/) plugin. They include:
 * {formquickquestion}
 * {formcontactus}
 * {formcourserequest}
@@ -89,7 +89,7 @@ Before getting started:
 
 ### The Quick and Easy method
 
-By far, The quickest way to get started is to use the [FilterCodes](https://moodle.org/plugins/filter_filtercodes/ Moodle plugin. As of version 1.3.0, it includes several plain text tags that you can easily copy and paste into any Atto editor. The {tags} include:
+By far, The quickest way to get started is to use the [FilterCodes](https://moodle.org/plugins/filter_filtercodes/) Moodle plugin. As of version 1.3.0, it includes several plain text tags that you can easily copy and paste into any Atto editor. The {tags} include:
 
 * {formquickquestion} : Adds a "quick question" form to your course. Form only includes a Subject and Message field. Note: User must be logged in or the form will not be displayed.
 * {formcontactus} : Adds a "Contact Us" form to your site (example: in a page). Form includes Name, Email address, Subject and Message fields.

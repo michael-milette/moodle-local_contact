@@ -105,6 +105,12 @@ class local_contact {
 
         // START: Spambot detection.
 
+        // File attachments not supported.
+        $supportattachments = !empty(get_config('local_contact', 'attachment'));
+        if (!$supportattachments && !$this->isspambot && $this->isspambot = !empty($_FILES)) {
+            $this->errmsg = 'File attachments not enabled.';
+        }
+
         // Validate submit button.
         if (!$this->isspambot && $this->isspambot = !isset($_POST['submit'])) {
             $this->errmsg = 'Missing submit button.';
@@ -345,16 +351,20 @@ class local_contact {
 
         $attachname = '';
         $attachpath = '';
-        // Take the first file as an attachment.
-        foreach ($_FILES as $value) {
-            $attachname = $value['name'];
-            $path = $CFG->tempdir . '/local_contact/';
-            if (!is_dir($path)) {
-                mkdir($path); // Create temp directory if it does not exist.
+        // If support for an attachement is enabled.
+        $supportattachments = !empty(get_config('local_contact', 'attachment'));
+        if ($supportattachments) {
+            // Take the first file as the attachment.
+            foreach ($_FILES as $value) {
+                $attachname = $value['name'];
+                $path = $CFG->tempdir . '/local_contact/';
+                if (!is_dir($path)) {
+                    mkdir($path); // Create temp directory if it does not exist.
+                }
+                $attachpath = tempnam($path, 'attachment_');
+                move_uploaded_file($value['tmp_name'], $attachpath);
+                break;
             }
-            $attachpath = tempnam($path, 'attachment_');
-            move_uploaded_file($value['tmp_name'], $attachpath);
-            break;
         }
 
         // Sanitize user agent and referer.

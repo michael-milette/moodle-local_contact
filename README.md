@@ -321,6 +321,44 @@ However, even if reCAPTCHA is enabled, you can tell Contact Form for Moodle not 
         </div>
     </form>
 
+### Adding support for attachments
+
+In order to add support for one attachment to your form, you must:
+
+1. Enable attachments in the Contact Form plugin settings. Otherwise attachments will be ignored, even if you have a field for it in your form. If you try to submit an attachment but get the message `File attachments not enabled.`, you did not enable this feature.
+2. Add `enctype="multipart/form-data"` to the <form> tag.
+3. Add the following two tags in the form. You can change the word `Attachment a file` but everything else must remain as is.
+
+```
+<label for="attachment" id="attachmentlabel">Attachment a file</label><br>
+<input type="file" id="attachment" name="attachment">
+```
+
+Here is a complete example of the previous Contact Us form example but with these changes:
+
+   <form action="../../local/contact/index.php" method="post" class="contact-us" enctype="multipart/form-data">
+        <fieldset>
+            <label for="name" id="namelabel">Your name <strong class="required">(required)</strong></label><br>
+            <input id="name" name="name" type="text" size="57" maxlength="45" pattern="[A-zÀ-ž]([A-zÀ-ž\s]){2,}"
+                    title="Minimum 3 letters/spaces." required="required" value=""><br>
+            <label for="email" id="emaillabel">Email address <strong class="required">(required)</strong></label><br>
+            <input id="email" name="email" type="email" size="57" maxlength="60" required="required" value=""><br>
+            <label for="subject" id="subjectlabel">Subject <strong class="required">(required)</strong></label><br>
+            <input id="subject" name="subject" type="text" size="57" maxlength="80" minlength="5"
+                    title="Minimum 5 characters." required="required"><br>
+            <label for="message" id="messagelabel">Message <strong class="required">(required)</strong></label><br>
+            <textarea id="message" name="message" rows="5" cols="58" minlength="5"
+                    title="Minimum 5 characters." required="required"></textarea><br>
+            <label for="attachment" id="attachmentlabel">Attachment a file: </label><br>
+            <input type="file" id="attachment" name="attachment">
+            <input type="hidden" id="sesskey" name="sesskey" value="">
+            <script>document.getElementById('sesskey').value = M.cfg.sesskey;</script>
+        </fieldset>
+        <div>
+            <input type="submit" name="submit" id="submit" value="Send">
+        </div>
+    </form>
+
 ### Require login
 
 The `Require login` setting requires that users be logged-in in order to be able to submit the form. If a form is submitted and the user is not logged-in they will be redirected to the login page. If you require users to be logged-in, it is also highly recommended that you also place your form on a page which is only accessible to logged-in users. Guest users are not considered to be logged-in.
@@ -364,8 +402,6 @@ You cannot configure the Contact Form email processor on a per form basis. All c
 * The autoresponder message (if enabled).
 
 Web forms are limited to 1024 fields including hidden fields and the submit button. Total size of the submission may not exceed 256 KB.
-
-There is no support file attachments type fields or form-data encoded as "multipart/form-data".
 
 [(Back to top)](#table-of-contents)
 
@@ -584,6 +620,7 @@ Michael Milette - Author and Lead Developer
 Big thank you to the following contributors. (Please let me know if I forgot to include you in the list):
 
 * geoffreyvanwyk: Fixed links in the documenation (2023).
+* alexmorrisnz: Add support for an attachment (2023).
 * HirotoKagotani: Use the system-wide setting for fullname display (2021).
 * kmoouni: Option to restrict usage of the plugin to logged in users (2017).
 

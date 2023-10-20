@@ -1,7 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.2.5] - 2023-10-20
+## [1.3.0] - 2023-10-20
+### Added
+- Added support for attachments.
+- Added configurable setting to enable/disable attachments. Default is disabled.
 ### Updated
 - Compatible with Moodle up to v4.3.
 

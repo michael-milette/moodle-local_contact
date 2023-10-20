@@ -71,6 +71,14 @@ if ($hassiteconfig) {
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
     $settings->add($setting);
 
+    // Enable file attachments.
+    $default = 0;
+    $name = 'local_contact/attachment';
+    $title = get_string('attachment', 'local_contact');
+    $description = get_string('attachment_description', 'local_contact');
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
+    $settings->add($setting);
+
     // Override and disable ReCAPTCHA, if the private and public keys are setup in Moodle.
     if (!empty($CFG->recaptchaprivatekey) && !empty($CFG->recaptchapublickey)) {
         // Information on using recaptcha with Contact Form.

@@ -93,6 +93,9 @@ $string['loginrequired_description'] = 'Only allow logged-in users to submit the
 $string['nosubjectsitename'] = 'No site name in email subject field';
 $string['nosubjectsitename_description'] = 'Enable to not prefix email subject with [site name]. Does not affect Moodle\'s own <strong>Email subject prefix text</strong> setting.';
 
+$string['attachment'] = 'Enable file attachments';
+$string['attachment_description'] = 'When enabled, Contact Form will support one attachment. See README.md for details on how to add support for an attachment to your form.';
+
 $string['recapchainfo'] = 'Using ReCAPTCHA';
 $string['recapchainfo_description'] = 'ReCAPTCHA is currently enabled in Moodle. You <strong>must</strong>:<br>
 <ul>

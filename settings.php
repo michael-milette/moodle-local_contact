@@ -71,7 +71,7 @@ if ($hassiteconfig) {
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default);
     $settings->add($setting);
 
-    // Enable file attachments.
+    // Enable a file attachment.
     $default = 0;
     $name = 'local_contact/attachment';
     $title = get_string('attachment', 'local_contact');

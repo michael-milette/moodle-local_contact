@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Contact Form plugin for Moodle - http://moodle.org/
+// This file is part of the Contact Form plugin for Moodle - https://moodle.org/
 //
 // Contact Form is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Contact Form.  If not, see <http://www.gnu.org/licenses/>.
+// along with Contact Form.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
  * This plugin for Moodle is used to send emails through a web form.
@@ -20,7 +20,7 @@
  * @package    local_contact
  * @copyright  2016-2023 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once('../../config.php');
@@ -99,16 +99,21 @@ if (!empty($recipient)) {
 // ReCAPTCHA is never required for logged-in non-guest users.
 if (!isloggedin() || isguestuser()) {
     // Is ReCAPTCHA configured in Moodle?
-    if (!empty($CFG->recaptchaprivatekey) &&
-            !empty($CFG->recaptchapublickey) &&
-            empty(get_config('local_contact', 'norecaptcha'))) {
-
+    if (
+        !empty($CFG->recaptchaprivatekey)
+        && !empty($CFG->recaptchapublickey)
+        && empty(get_config('local_contact', 'norecaptcha'))
+    ) {
         // If so, ensure that it was filled correctly and submitted with the form.
         if (file_exists($CFG->libdir . '/recaptchalib_v2.php')) {
             // For reCAPTCHA 2.0.
             require_once($CFG->libdir . '/recaptchalib_v2.php');
-            $response = recaptcha_check_response(RECAPTCHA_VERIFY_URL, $CFG->recaptchaprivatekey,
-                   getremoteaddr(), optional_param('g-recaptcha-response', '', PARAM_TEXT));
+            $response = recaptcha_check_response(
+                RECAPTCHA_VERIFY_URL,
+                $CFG->recaptchaprivatekey,
+                getremoteaddr(),
+                optional_param('g-recaptcha-response', '', PARAM_TEXT)
+            );
             $resp = new stdClass();
             $resp->is_valid = $response['isvalid'];
             if (!$resp->is_valid) {
@@ -116,15 +121,19 @@ if (!isloggedin() || isguestuser()) {
             }
         } else {
             // For reCAPTCHA 1.0.
-            $resp = recaptcha_check_answer($CFG->recaptchaprivatekey, $_SERVER["REMOTE_ADDR"],
-                    optional_param('recaptcha_challenge_field', '', PARAM_TEXT),
-                    optional_param('recaptcha_response_field', '', PARAM_TEXT));
+            $resp = recaptcha_check_answer(
+                $CFG->recaptchaprivatekey,
+                $_SERVER["REMOTE_ADDR"],
+                optional_param('recaptcha_challenge_field', '', PARAM_TEXT),
+                optional_param('recaptcha_response_field', '', PARAM_TEXT)
+            );
         }
 
         if (!$resp->is_valid) {
             // Display error message if CAPTCHA was entered incorrectly.
             echo '<h3>' . get_string('missingrecaptchachallengefield') . '</h3>';
-            echo '<p>' . get_string('recaptcha_help', 'auth') . ($CFG->debugdisplay == 1 ? ' (' .  $resp->error . ')' : '') .'</p>';
+            echo '<p>' . get_string('recaptcha_help', 'auth')
+                . ($CFG->debugdisplay == 1 ? ' (' .  $resp->error . ')' : '') . '</p>';
             echo '<button type="button" onclick="history.back();">' . get_string('incorrectpleasetryagain', 'auth') . '</a>';
             // Display page footer.
             echo $OUTPUT->footer();
@@ -141,7 +150,7 @@ if ($contact->sendmessage($email, $name)) {
     echo get_string('confirmationmessage', 'local_contact');
 } else {
     // Oh no! What are the chances. Looks like we failed to meet user expectations (message not sent).
-    echo '<h3>'.get_string('errorsendingtitle', 'local_contact').'</h3>';
+    echo '<h3>' . get_string('errorsendingtitle', 'local_contact') . '</h3>';
     echo get_string('errorsending', 'local_contact');
 }
 

@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Contact Form plugin for Moodle - http://moodle.org/
+// This file is part of the Contact Form plugin for Moodle - https://moodle.org/
 //
 // Contact Form is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Contact Form.  If not, see <http://www.gnu.org/licenses/>.
+// along with Contact Form.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
  * Version information for Contact Form (also called Contact).
@@ -20,14 +20,14 @@
  * @package    local_contact
  * @copyright  2016-2023 TNG Consulting Inc. - www.tngconsulting.ca
  * @author     Michael Milette
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_contact';   // To check on upgrade, that module sits in correct place.
-$plugin->version   = 2023050700;        // The current module version (Date: YYYYMMDDXX).
+$plugin->version   = 2023102000;        // The current module version (Date: YYYYMMDDXX).
 $plugin->requires  = 2015111600;        // Requires Moodle version 3.0.
-$plugin->release   = '1.2.4';
+$plugin->release   = '1.2.5';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->cron      = 0;

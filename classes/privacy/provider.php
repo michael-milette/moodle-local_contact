@@ -1,5 +1,5 @@
 <?php
-// This file is part of the Contact Form plugin for Moodle - http://moodle.org/
+// This file is part of the Contact Form plugin for Moodle - https://moodle.org/
 //
 // Contact Form is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Contact Form.  If not, see <http://www.gnu.org/licenses/>.
+// along with Contact Form.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
  * Privacy Subsystem implementation for local_contact.
@@ -20,24 +20,23 @@
  * @package    local_contact
  * @copyright  2015-2023 TNG Consulting Inc. - www.tngcosulting.ca
  * @author     Michael Milette
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * Privacy Subsystem for local_contact implementing null_provider.
  *
- * @copyright  2022 TNG Consulting Inc. <www.tngconsulting.ca>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  2015-2023 TNG Consulting Inc. <www.tngconsulting.ca>
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {
-
     /**
      * Get the language string identifier with the component's language
      * file to explain why this plugin stores no data.
      *
      * @return  string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:metadata';
     }
 }

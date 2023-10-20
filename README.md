@@ -2,8 +2,8 @@
 
 Local Contact Form plugin for Moodle
 ====================================
-![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1%20%2F%207.2%20%2F%207.3%20%2F%207.4%20%2F%208.0-blue.svg)
-![Moodle](https://img.shields.io/badge/Moodle-v3.0%20to%20v4.1-orange.svg)
+![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1%20%2F%207.2%20%2F%207.3%20%2F%207.4%20%2F%208.1-blue.svg)
+![Moodle](https://img.shields.io/badge/Moodle-v3.0%20to%20v4.3-orange.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/michael-milette/moodle-local_contact.svg)](https://github.com/michael-milette/moodle-local_contact/issues)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-green.svg)](#contributing)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](#license)
@@ -137,7 +137,7 @@ To see a full example of the above form, see [Contact Us with FilterCodes exampl
 
 ### Customizing the form
 
-You can customize your form to suit your particular requirements. You will need to be familiar with how to create basic HTML5 web forms. If you are not, take a look at the [HTML5 Forms tutorial](http://www.html5-tutorials.org/forms/introduction/).
+You can customize your form to suit your particular requirements. You will need to be familiar with how to create basic HTML5 web forms. If you are not, take a look at the [HTML5 Forms tutorial](https://www.html5-tutorials.org/forms/introduction/).
 
 Almost any type of HTML field included with the form should automatically appear in the email. Example: text, password, textarea, radio, checkbox, select drop-down, hidden and more. See the section on [Limitations](#limitations).
 
@@ -580,6 +580,14 @@ If you are interested in helping, please take a look at our [contributing](https
 ## Contributors
 
 Michael Milette - Author and Lead Developer
+
+Big thank you to the following contributors. (Please let me know if I forgot to include you in the list):
+
+* geoffreyvanwyk: Fixed links in the documenation (2023).
+* HirotoKagotani: Use the system-wide setting for fullname display (2021).
+* kmoouni: Option to restrict usage of the plugin to logged in users (2017).
+
+Thank you also to all the people who have requested features, tested and reported bugs.
 
 ## Pending Features
 

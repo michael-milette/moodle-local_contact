@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.5] - 2023-10-20
+### Updated
+- Compatible with Moodle up to v4.3.
+
 ## [1.2.4] - 2022-05-07
 ### Updated
 - Fix-69: Now handles sites with ampersands in its name.

@@ -2,7 +2,7 @@
 
 Local Contact Form plugin for Moodle
 ====================================
-![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1%20%2F%207.2%20%2F%207.3%20%2F%207.4%20%2F%208.1-blue.svg)
+![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1%20%2F%207.2%20%2F%207.3%20%2F%207.4%20%2F%208.1%20%2F%208.2-blue.svg)
 ![Moodle](https://img.shields.io/badge/Moodle-v3.0%20to%20v4.3-orange.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/michael-milette/moodle-local_contact.svg)](https://github.com/michael-milette/moodle-local_contact/issues)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-green.svg)](#contributing)

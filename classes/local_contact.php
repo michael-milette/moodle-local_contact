@@ -29,11 +29,16 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class local_contact {
-    /**
+    public $fromname;
+    public $fromemail;
+    public $isspambot;
+    public $errmsg;
+
+/**
      * Class constructor. Receives and validates information received through a
      * web form submission.
      *
-     * @return     True  if the information received passes our spambot detection. False if it fails.
+     * @return boolean True if the information received passes our spambot detection. False if it fails.
      */
     public function __construct() {
         global $CFG;

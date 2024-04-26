@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.3.2] - 2024-04-26 (dev)
+### Updated
+- Copyright notice to 2024.
 ## [1.3.1] - 2023-10-23
 ### Added
 - Added support for attachments.

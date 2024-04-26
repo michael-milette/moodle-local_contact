@@ -664,7 +664,7 @@ https://github.com/michael-milette/moodle-local_contact
 
 # License
 
-Copyright © 2016-2023 TNG Consulting Inc. - https://www.tngconsulting.ca/
+Copyright © 2016-2024 TNG Consulting Inc. - https://www.tngconsulting.ca/
 
 This file is part of the Contact Form plugin for Moodle - https://moodle.org/plugins/local_contact/
 

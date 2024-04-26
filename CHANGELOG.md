@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.3.2] - 2024-04-26 (dev)
+## [1.4.0] - 2024-04-26
 ### Added
 - GitHub actions CI workflow.
 - *.patch to gitignore.
@@ -11,7 +11,10 @@ All notable changes to this project will be documented in this file.
 - Smarter continue button URL logic after the form was submitted.
 - Contributing guidelines and bug reporting form.
 - Refactored for compliance with Moodle coding guidelines.
+- Compatible with Moodle 3.0 to 4.4.
+- Compatible with PHP 5.6 to 8.3.
 - Copyright notice to 2024.
+
 ## [1.3.1] - 2023-10-23
 ### Added
 - Added support for attachments.

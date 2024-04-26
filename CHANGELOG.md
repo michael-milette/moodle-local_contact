@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - GitHub actions CI workflow.
 - *.patch to gitignore.
+- Security issue reporting link.
 ### Updated
 - Added a little space between the post-submission message and the Continue button.
 - Smarter continue button URL logic after the form was submitted.

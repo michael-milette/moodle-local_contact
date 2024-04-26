@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [1.3.2] - 2024-04-26 (dev)
 ### Updated
+- Added a little space between the post-submission message and the Continue button.
+- Smarter continue button URL logic after the form was submitted.
 - Copyright notice to 2024.
 ## [1.3.1] - 2023-10-23
 ### Added

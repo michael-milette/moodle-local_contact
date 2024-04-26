@@ -147,18 +147,36 @@ if (!isloggedin() || isguestuser()) {
 if ($contact->sendmessage($email, $name)) {
     // Share a gratitude and Say Thank You! Your user will love to know their message was sent.
     echo '<h3>' . get_string('eventmessagesent', 'message') . '</h3>';
-    echo get_string('confirmationmessage', 'local_contact');
+    echo '<p>' . get_string('confirmationmessage', 'local_contact') . '</p>';
 } else {
     // Oh no! What are the chances. Looks like we failed to meet user expectations (message not sent).
     echo '<h3>' . get_string('errorsendingtitle', 'local_contact') . '</h3>';
-    echo get_string('errorsending', 'local_contact');
+    echo '<p>' . get_string('errorsending', 'local_contact') . '</p>';
 }
 
-// Continue button takes the user back to the original page that he/she started from before going to the form.
-// If the referrer URL was not provided in the submitted form fields or is not from this site, go to the front page.
+// Determine the URL of the Continue button after the form has been submitted.
+// If a 'referrer' parameter is provided and is a valid URL on the same site, use it.
+// If not, if the course ID is the same as the site ID, set the button to the home page.
+// Otherwise, it tries to return to the page where the form was submitted from.
+// If it can't find such a page, it redirects to the course page.
+// Finally, it outputs a continue button with the determined URL.
 $continueurl = optional_param('referrer', '', PARAM_URL);
-if (stripos($continueurl, $CFG->wwwroot) !== 0) {
-    $continueurl = $CFG->wwwroot;
+// Only allow continue to relative or absolute URLs on this site.
+if (!(stripos($continueurl, $CFG->wwwroot) === 0 || substr($continueurl, 0, 1) != '/' || substr($continueurl, 0, 1) != '.')) {
+    $continueurl = '';
+}
+if (empty($continueurl)) {
+    if ($PAGE->course->id == SITEID) {
+        // If coming from a site page, continue to the home page.
+        $continueurl = $CFG->wwwroot;
+    } else { // If coming from a course page.
+        // See if we can return to the page from where the form was submitted.
+        $continueurl = get_local_referer(false);
+        if (empty($continueurl)) {
+            // If the referrer was not available, go to the course page.
+            $continueurl = new moodle_url('/course/view.php', ['id' => $PAGE->course->id]);
+        }
+    }
 }
 echo $OUTPUT->continue_button($continueurl);
 

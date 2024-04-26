@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Added a little space between the post-submission message and the Continue button.
 - Smarter continue button URL logic after the form was submitted.
 - Contributing guidelines and bug reporting form.
+- Refactored for compliance with Moodle coding guidelines.
 - Copyright notice to 2024.
 ## [1.3.1] - 2023-10-23
 ### Added

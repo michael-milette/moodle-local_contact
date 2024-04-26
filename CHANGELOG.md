@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [1.3.2] - 2024-04-26 (dev)
+### Added
+- GitHub actions CI workflow.
 ### Updated
 - Added a little space between the post-submission message and the Continue button.
 - Smarter continue button URL logic after the form was submitted.

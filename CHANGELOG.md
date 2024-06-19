@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2024-06-19
+### Updated
+- Fixed compatibility with PHP 5.6.
+
 ## [1.4.0] - 2024-04-26
 ### Added
 - GitHub actions CI workflow.

@@ -66,8 +66,8 @@ echo $OUTPUT->header();
 
 // The default recipient is the Moodle site's support contact. This will
 // be used if no recipient was specified or if the recipient is unknown.
-$name = trim($CFG->supportname ?? '');
-$email = trim($CFG->supportemail ?? '');
+$name = isset($CFG->supportname) ? trim($CFG->supportname) : '';
+$email = isset($CFG->supportemail) ? trim($CFG->supportemail) : '';
 
 // Handle recipient alias.
 // If the form includes a recipient's alias, search the plugin's recipient list settings for a name and email address.
@@ -75,7 +75,7 @@ $recipient = trim(optional_param('recipient', '', PARAM_TEXT));
 if (!empty($recipient)) {
     $lines = explode("\n", get_config('local_contact', 'recipient_list'));
     foreach ($lines as $linenumbe => $line) {
-        $line = trim($line ?? '');
+        $line = isset($line) ? trim($line) : '';
         if (empty($line)) { // Blank line.
             continue;
         }

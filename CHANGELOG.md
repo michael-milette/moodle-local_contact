@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2024-10-03
+### Updated
+- Fixed compatibility with Moodle 4.5.
+
 ## [1.4.1] - 2024-06-19
 ### Updated
 - Fixed compatibility with PHP 5.6.

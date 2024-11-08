@@ -290,11 +290,13 @@ class local_contact {
             // Include site name in subject field.
             $subject .= '[' . format_string($SITE->shortname, true, ['escape' => false, 'context' => $systemcontext]) . '] ';
         }
-        $subject .= optional_param(
+        /**$subject .= optional_param(
             get_string('field-subject', 'local_contact'),
             get_string('defaultsubject', 'local_contact'),
             PARAM_TEXT
-        );
+        ); */
+        // Use form-subject for mail-subject; if form-subject empty use defaultsubject
+        $subject .= (isset($_POST['subject']) && !empty($_POST['subject'])) ? $_POST['subject'] : get_string('defaultsubject', 'local_contact');
 
         // Build the body of the email using user-entered information.
 

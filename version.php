@@ -30,4 +30,3 @@ $plugin->requires  = 2015111600;        // Requires Moodle version 3.0.
 $plugin->component = 'local_contact';   // To check on upgrade, that module sits in correct place.
 $plugin->release   = '1.4.2';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->cron      = 0;

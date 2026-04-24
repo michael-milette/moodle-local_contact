@@ -160,11 +160,7 @@ if ($contact->sendmessage($email, $name)) {
 // Otherwise, it tries to return to the page where the form was submitted from.
 // If it can't find such a page, it redirects to the course page.
 // Finally, it outputs a continue button with the determined URL.
-$continueurl = optional_param('referrer', '', PARAM_URL);
-// Only allow continue to relative or absolute URLs on this site.
-if (!(stripos($continueurl, $CFG->wwwroot) === 0 || substr($continueurl, 0, 1) != '/' || substr($continueurl, 0, 1) != '.')) {
-    $continueurl = '';
-}
+$continueurl = optional_param('referrer', '', PARAM_LOCALURL);
 if (empty($continueurl)) {
     if ($PAGE->course->id == SITEID) {
         // If coming from a site page, continue to the home page.

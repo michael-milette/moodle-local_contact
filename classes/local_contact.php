@@ -241,10 +241,7 @@ class local_contact {
      */
     private function makeemailuser($email, $name = '', $id = -99) {
         $emailuser = new stdClass();
-        $emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL) ? filter_var($email, FILTER_SANITIZE_EMAIL) : '');
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailuser->email = '';
-        }
+        $emailuser->email = filter_var(trim($email), FILTER_VALIDATE_EMAIL) ?: '';
         $emailuser->firstname = format_text($name, FORMAT_PLAIN, ['trusted' => false]);
         $emailuser->lastname = '';
         $emailuser->maildisplay = true;

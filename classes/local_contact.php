@@ -362,15 +362,42 @@ class local_contact {
         // If support for an attachement is enabled.
         $supportattachments = !empty(get_config('local_contact', 'attachment'));
         if ($supportattachments) {
-            // Take the first file as the attachment.
+            // Accepted attachment extensions. Keeps executable and script types out.
+            $allowedext = [
+                'pdf', 'doc', 'docx', 'odt', 'rtf', 'txt',
+                'xls', 'xlsx', 'ods', 'csv',
+                'ppt', 'pptx', 'odp',
+                'jpg', 'jpeg', 'png', 'gif', 'webp',
+                'zip',
+            ];
+            $maxbytes = !empty($CFG->maxbytes) ? (int) $CFG->maxbytes : 5242880;
+            // Take the first successfully uploaded file as the attachment.
             foreach ($_FILES as $value) {
-                $attachname = $value['name'];
+                // Skip entries missing expected keys or that failed to upload.
+                if (!is_array($value) || !isset($value['error']) || $value['error'] !== UPLOAD_ERR_OK) {
+                    continue;
+                }
+                if (empty($value['tmp_name']) || !is_uploaded_file($value['tmp_name'])) {
+                    continue;
+                }
+                if (!empty($value['size']) && $value['size'] > $maxbytes) {
+                    continue;
+                }
+                $safename = clean_filename($value['name'] ?? '');
+                $ext = core_text::strtolower(pathinfo($safename, PATHINFO_EXTENSION));
+                if ($ext === '' || !in_array($ext, $allowedext, true)) {
+                    continue;
+                }
                 $path = $CFG->tempdir . '/local_contact/';
-                if (!is_dir($path)) {
-                    mkdir($path); // Create temp directory if it does not exist.
+                if (!is_dir($path) && !make_temp_directory('local_contact')) {
+                    continue;
                 }
                 $attachpath = tempnam($path, 'attachment_');
-                move_uploaded_file($value['tmp_name'], $attachpath);
+                if ($attachpath === false || !move_uploaded_file($value['tmp_name'], $attachpath)) {
+                    $attachpath = '';
+                    continue;
+                }
+                $attachname = $safename;
                 break;
             }
         }

@@ -23,6 +23,8 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * local_contact class. Handles processing of information submitted from a web form.
  * @copyright  2016-2024 TNG Consulting Inc. - www.tngconsulting.ca

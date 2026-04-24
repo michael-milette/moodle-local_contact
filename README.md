@@ -2,8 +2,8 @@
 
 Local Contact Form plugin for Moodle
 ====================================
-![PHP](https://img.shields.io/badge/PHP-v5.6%20to%20v8.3-blue.svg)
-![Moodle](https://img.shields.io/badge/Moodle-v3.0%20to%20v4.4-orange.svg)
+![PHP](https://img.shields.io/badge/PHP-v7.1%20to%20v8.4-blue.svg)
+![Moodle](https://img.shields.io/badge/Moodle-v3.7%20to%20v5.2-orange.svg)
 [![GitHub Issues](https://img.shields.io/github/issues/michael-milette/moodle-local_contact.svg)](https://github.com/michael-milette/moodle-local_contact/issues)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-green.svg)](#contributing)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](#license)
@@ -52,9 +52,7 @@ See [The Quick and Easy method](#the-quick-and-easy-method) for details.
 
 # Requirements
 
-This plugin requires Moodle 3.0+ from https://moodle.org .
-
-It may work with previous versions of Moodle all the way back to Moodle 2.7 but it has not been tested yet. If it works for you, let us know. Tip: You might need to modify the version.php in order for Moodle to let you install it on earlier versions.
+This plugin requires Moodle 3.7+ from https://moodle.org .
 
 [(Back to top)](#table-of-contents)
 
@@ -664,7 +662,7 @@ https://github.com/michael-milette/moodle-local_contact
 
 # License
 
-Copyright © 2016-2024 TNG Consulting Inc. - https://www.tngconsulting.ca/
+Copyright © 2016-2026 TNG Consulting Inc. - https://www.tngconsulting.ca/
 
 This file is part of the Contact Form plugin for Moodle - https://moodle.org/plugins/local_contact/
 

@@ -303,23 +303,12 @@ class local_contact {
 
         $htmlmessage = '';
 
-        /**
-         * Callback function for array_filter.
-         *
-         * @param string $string Text to be chekced.
-         * @return boolean true if string is not empty, otherwise false.
-         */
-        function filterempty($string) {
-            $string = isset($string) ? trim($string) : '';
-            return ($string !== null && $string !== false && $string !== '');
-        }
-
         foreach ($_POST as $key => $value) {
             // Only process key conforming to valid form field ID/Name token specifications.
             if (preg_match('/^[A-Za-z][A-Za-z0-9_:\.-]*/', $key)) {
                 if (is_array($value)) {
                     // Join array of values. Example: <select multiple>.
-                    $value = array_filter($value, "filterempty");
+                    $value = array_filter($value, [$this, 'filterempty']);
                     $value = join(', ', $value);
                 }
                 $value = (!empty($value) ? trim($value) : '');
@@ -473,6 +462,17 @@ class local_contact {
             email_to_user($from, $to, $subject, html_to_text($htmlmessage), $htmlmessage, '', '', true);
         }
         return $status;
+    }
+
+    /**
+     * Callback function for array_filter that rejects empty/whitespace entries.
+     *
+     * @param string $string Text to be checked.
+     * @return boolean true if string is not empty, otherwise false.
+     */
+    private function filterempty($string) {
+        $string = isset($string) ? trim($string) : '';
+        return ($string !== null && $string !== false && $string !== '');
     }
 
     /**

@@ -88,7 +88,7 @@ class local_contact {
                 $this->fromname = required_param('name', PARAM_TEXT);
             }
             if (empty($this->fromemail = trim(optional_param(get_string('field-email', 'local_contact'), '', PARAM_EMAIL)))) {
-                $this->fromemail = required_param('email', PARAM_TEXT);
+                $this->fromemail = required_param('email', PARAM_EMAIL);
             }
         }
         $this->fromname = isset($this->fromname) ? trim($this->fromname) : '';

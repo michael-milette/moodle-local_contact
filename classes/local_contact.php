@@ -157,7 +157,7 @@ class local_contact {
         }
 
         // Validate if "sesskey" field contains the correct value.
-        if (!$this->isspambot && $this->isspambot = (optional_param('sesskey', '3.1415', PARAM_RAW) != sesskey())) {
+        if (!$this->isspambot && $this->isspambot = (optional_param('sesskey', '3.1415', PARAM_RAW) !== sesskey())) {
             $this->errmsg = '"sesskey" field is missing or contains an incorrect value.';
         }
 
@@ -165,7 +165,7 @@ class local_contact {
         if (!$this->isspambot && $this->isspambot = !isset($_SERVER['HTTP_REFERER'])) {
             $this->errmsg = 'Missing referrer.';
         }
-        if (!$this->isspambot && $this->isspambot = (stripos($_SERVER['HTTP_REFERER'], $CFG->wwwroot) != 0)) {
+        if (!$this->isspambot && $this->isspambot = (stripos($_SERVER['HTTP_REFERER'], $CFG->wwwroot) !== 0)) {
             $this->errmsg = 'Unknown referrer - must come from this site: ' . $CFG->wwwroot;
         }
 
@@ -187,13 +187,13 @@ class local_contact {
         // TODO: MDL-0 - Create a plugin blacklistemails setting.
         $blacklist = ''; // Future code: $config->blacklistemails .
         $blacklist = ',' . $blacklist . ',';
-        if (!$this->isspambot && stripos($whitelist, ',' . $this->fromemail . ',') != false) {
+        if (!$this->isspambot && stripos($whitelist, ',' . $this->fromemail . ',') !== false) {
             $skipdomaintest = true; // Skip the upcoming domain test.
         } else {
             if (
                 !$this->isspambot
-                && $blacklist != ',,'
-                && $this->isspambot = ($blacklist == '*' || stripos($blacklist, ',' . $this->fromemail . ',') == false)
+                && $blacklist !== ',,'
+                && $this->isspambot = ($blacklist === '*' || stripos($blacklist, ',' . $this->fromemail . ',') === false)
             ) {
                 // Nice try. We know who you are.
                 $this->errmsg = 'Bad sender - Email address is blacklisted.';
@@ -207,7 +207,7 @@ class local_contact {
             $whitelist = ',' . $whitelist . ',';
             $domain = substr(strrchr($this->fromemail, '@'), 1);
 
-            if (stripos($whitelist, ',' . $domain . ',') != false) {
+            if (stripos($whitelist, ',' . $domain . ',') !== false) {
                 // Ya, you check out. This email domain is gold here!
                 $blacklist = '';
             } else {
@@ -215,9 +215,9 @@ class local_contact {
                 $blacklist = 'example.com,example.net,sample.com,test.com,specified.com'; // Future code:$config->blacklistdomains .
                 $blacklist = ',' . $blacklist . ',';
                 if (
-                    $blacklist != ',,'
-                    && $this->isspambot = ($blacklist == '*'
-                    || stripos($blacklist, ',' . $domain . ',') != false)
+                    $blacklist !== ',,'
+                    && $this->isspambot = ($blacklist === '*'
+                    || stripos($blacklist, ',' . $domain . ',') !== false)
                 ) {
                     // Naughty naughty. We know all about your kind.
                     $this->errmsg = 'Bad sender - Email domain is blacklisted.';

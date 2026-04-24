@@ -97,10 +97,8 @@ class local_contact {
         $this->isspambot = false;
         $this->errmsg = '';
 
-        if ($CFG->branch >= 32) {
-            // As of Moodle 3.2, $CFG->emailonlyfromnoreplyaddress has been deprecated.
-            $CFG->emailonlyfromnoreplyaddress = !empty($CFG->noreplyaddress);
-        }
+        // As of Moodle 3.2, $CFG->emailonlyfromnoreplyaddress has been deprecated.
+        $CFG->emailonlyfromnoreplyaddress = !empty($CFG->noreplyaddress);
 
         // Did someone forget to configure Moodle properly?
 
@@ -112,11 +110,7 @@ class local_contact {
                 && $this->isspambot = !validate_email($CFG->noreplyaddress)
             ) {
                 $this->errmsg = 'Moodle no-reply email address is invalid.';
-                if ($CFG->branch >= 32) {
-                    $this->errmsg .= '  (<a href="../../admin/settings.php?section=outgoingmailconfig">change</a>)';
-                } else {
-                    $this->errmsg .= '  (<a href="../../admin/settings.php?section=messagesettingemail">change</a>)';
-                }
+                $this->errmsg .= '  (<a href="../../admin/settings.php?section=outgoingmailconfig">change</a>)';
             }
         }
 

@@ -321,7 +321,7 @@ class local_contact {
                             // Sanitize the text.
                             $value = format_text($value, FORMAT_PLAIN, ['trusted' => false]);
                             // Add to email message.
-                            $htmlmessage .= '<p><strong>' . ucfirst($key) . ' :</strong></p><p>' . $value . '</p>';
+                            $htmlmessage .= '<p><strong>' . core_text::strtoupper(core_text::substr($key, 0, 1)) . core_text::substr($key, 1) . ' :</strong></p><p>' . $value . '</p>';
                             break;
                             // Don't include the following fields in the body of the message.
                         case 'recipient':
@@ -351,7 +351,7 @@ class local_contact {
                                 $value = '<a href="' . $value . '">' . $value . '</a>';
                             }
                             // Add to email message.
-                            $htmlmessage .= '<strong>' . ucfirst($key) . ' :</strong> ' . $value . '<br>' . PHP_EOL;
+                            $htmlmessage .= '<strong>' . core_text::strtoupper(core_text::substr($key, 0, 1)) . core_text::substr($key, 1) . ' :</strong> ' . $value . '<br>' . PHP_EOL;
                     }
                 }
             }

@@ -140,7 +140,7 @@ class local_contact {
 
         // Limit maximum number of form $_POST fields to 1024.
         if (!$this->isspambot) {
-            $postsize = @count($_POST);
+            $postsize = count($_POST);
             if ($this->isspambot = ($postsize > 1024)) {
                 $this->errmsg = 'Form cannot contain more than 1024 fields.';
             } else if ($this->isspambot = ($postsize == 0)) {
@@ -150,7 +150,7 @@ class local_contact {
 
         // Limit maximum size of allowed form $_POST submission to 256 KB.
         if (!$this->isspambot) {
-            $postsize = (int) @$_SERVER['CONTENT_LENGTH'];
+            $postsize = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
             if ($this->isspambot = ($postsize > 262144)) {
                 $this->errmsg = 'Form cannot contain more than 256 KB of data.';
             }
@@ -376,8 +376,8 @@ class local_contact {
         }
 
         // Sanitize user agent and referer.
-        $httpuseragent = format_text($_SERVER['HTTP_USER_AGENT'], FORMAT_PLAIN, ['trusted' => false]);
-        $httpreferer = format_text($_SERVER['HTTP_REFERER'], FORMAT_PLAIN, ['trusted' => false]);
+        $httpuseragent = format_text($_SERVER['HTTP_USER_AGENT'] ?? '', FORMAT_PLAIN, ['trusted' => false]);
+        $httpreferer = format_text($_SERVER['HTTP_REFERER'] ?? '', FORMAT_PLAIN, ['trusted' => false]);
 
         // Prepare arrays to handle substitution of embedded tags in the footer.
         $tags = [

@@ -105,28 +105,17 @@ if (!isloggedin() || isguestuser()) {
         && empty(get_config('local_contact', 'norecaptcha'))
     ) {
         // If so, ensure that it was filled correctly and submitted with the form.
-        if (file_exists($CFG->libdir . '/recaptchalib_v2.php')) {
-            // For reCAPTCHA 2.0.
-            require_once($CFG->libdir . '/recaptchalib_v2.php');
-            $response = recaptcha_check_response(
-                RECAPTCHA_VERIFY_URL,
-                $CFG->recaptchaprivatekey,
-                getremoteaddr(),
-                optional_param('g-recaptcha-response', '', PARAM_TEXT)
-            );
-            $resp = new stdClass();
-            $resp->is_valid = $response['isvalid'];
-            if (!$resp->is_valid) {
-                $resp->error = $response['error'];
-            }
-        } else {
-            // For reCAPTCHA 1.0.
-            $resp = recaptcha_check_answer(
-                $CFG->recaptchaprivatekey,
-                $_SERVER["REMOTE_ADDR"],
-                optional_param('recaptcha_challenge_field', '', PARAM_TEXT),
-                optional_param('recaptcha_response_field', '', PARAM_TEXT)
-            );
+        require_once($CFG->libdir . '/recaptchalib_v2.php');
+        $response = recaptcha_check_response(
+            RECAPTCHA_VERIFY_URL,
+            $CFG->recaptchaprivatekey,
+            getremoteaddr(),
+            optional_param('g-recaptcha-response', '', PARAM_TEXT)
+        );
+        $resp = new stdClass();
+        $resp->is_valid = $response['isvalid'];
+        if (!$resp->is_valid) {
+            $resp->error = $response['error'];
         }
 
         if (!$resp->is_valid) {

@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 ### Updated
 - Minimum supported Moodle raised to 3.7.
 - Minimum supported PHP raised to 7.1. Tested up to PHP 8.4.
+- Fix #75: Message Sent - Heading Level correction
+- Fix #75: Message Sent - Heading Level correction.
 - Fixed privacy subsystem registration so Moodle recognizes this plugin.
 - Fixed crash when the contact form is submitted more than once per request.
 - Fixed deprecation warning when running on PHP 8.1 or newer.

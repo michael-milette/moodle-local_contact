@@ -120,7 +120,7 @@ if (!isloggedin() || isguestuser()) {
 
         if (!$resp->is_valid) {
             // Display error message if CAPTCHA was entered incorrectly.
-            echo '<h3>' . get_string('missingrecaptchachallengefield') . '</h3>';
+            echo '<h2>' . get_string('missingrecaptchachallengefield') . '</h2>';
             echo '<p>' . get_string('recaptcha_help', 'auth')
                 . ($CFG->debugdisplay == 1 ? ' (' .  $resp->error . ')' : '') . '</p>';
             echo '<button type="button" onclick="history.back();">' . get_string('incorrectpleasetryagain', 'auth') . '</a>';
@@ -135,11 +135,11 @@ if (!isloggedin() || isguestuser()) {
 
 if ($contact->sendmessage($email, $name)) {
     // Share a gratitude and Say Thank You! Your user will love to know their message was sent.
-    echo '<h3>' . get_string('eventmessagesent', 'message') . '</h3>';
+    echo '<h2>' . get_string('eventmessagesent', 'message') . '</h2>';
     echo '<p>' . get_string('confirmationmessage', 'local_contact') . '</p>';
 } else {
     // Oh no! What are the chances. Looks like we failed to meet user expectations (message not sent).
-    echo '<h3>' . get_string('errorsendingtitle', 'local_contact') . '</h3>';
+    echo '<h2>' . get_string('errorsendingtitle', 'local_contact') . '</h2>';
     echo '<p>' . get_string('errorsending', 'local_contact') . '</p>';
 }
 

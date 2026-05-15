@@ -25,8 +25,6 @@
 
 namespace local_contact\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy Subsystem for local_contact implementing null_provider.
  *

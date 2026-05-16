@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## [1.5.0] - 2026-04-24
+### Added
+- Spambot detection failures now emit a `debugging()` message (visible in DEVELOPER debug mode) to aid troubleshooting.
 ### Security
 - Fixed continue button so it can no longer redirect to external sites.
 - Improved safety of the optional file attachment handling (extension whitelist, size check, upload-error check).

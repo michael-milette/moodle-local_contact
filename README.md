@@ -493,6 +493,10 @@ Next, simply upload the contact.html file into Static Pages in order to make it 
 
 This plugin has been extensively tested. If you are still getting this error, it is likely that you will need to fix your form and/or enable Moodle debugging. Alternatively you can try the form logged in as a Moodle administrator. This will enable the display of additional diagnostic information.
 
+To identify the specific cause, set Moodle's debug level to **DEVELOPER** (Site Administration > Development > Debugging > Debug messages). When a form submission is blocked, the specific reason will appear directly after the word "Forbidden" on screen.
+
+For more information, see [When submitting a form, you get a blank screen a message saying forbidden or it just doesnt work](https://github.com/michael-milette/moodle-local_contact/wiki/Troubleshooting#when-submitting-a-form-you-get-a-blank-screen-a-message-saying-forbidden-or-it-just-doesnt-work) in the Wiki.
+
 ### Where do emails go when they are submitted on my Moodle website?
 
 Emails are sent to the Support Email address. Logged in as a Moodle administrator, you can find out the email address by going to:

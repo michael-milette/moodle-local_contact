@@ -111,6 +111,7 @@ class local_contact {
             ) {
                 $this->errmsg = 'Moodle no-reply email address is invalid.';
                 $this->errmsg .= '  (<a href="../../admin/settings.php?section=outgoingmailconfig">change</a>)';
+                debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
             }
         }
 
@@ -123,6 +124,7 @@ class local_contact {
         if (!$this->isspambot && $this->isspambot = !validate_email($CFG->supportemail)) {
             $this->errmsg = 'Moodle support email address is invalid.';
             $this->errmsg .= ' (<a href="../../admin/settings.php?section=supportcontact">change</a>)';
+            debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
         }
 
         // START: Spambot detection.
@@ -131,11 +133,13 @@ class local_contact {
         $supportattachments = !empty(get_config('local_contact', 'attachment'));
         if (!$supportattachments && !$this->isspambot && $this->isspambot = !empty($_FILES)) {
             $this->errmsg = 'File attachments not enabled.';
+            debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
         }
 
         // Validate submit button.
         if (!$this->isspambot && $this->isspambot = !isset($_POST['submit'])) {
             $this->errmsg = 'Missing submit button.';
+            debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
         }
 
         // Limit maximum number of form $_POST fields to 1024.
@@ -143,8 +147,10 @@ class local_contact {
             $postsize = count($_POST);
             if ($this->isspambot = ($postsize > 1024)) {
                 $this->errmsg = 'Form cannot contain more than 1024 fields.';
+                debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
             } else if ($this->isspambot = ($postsize == 0)) {
                 $this->errmsg = 'Form must be submitted using POST method.';
+                debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
             }
         }
 
@@ -153,30 +159,36 @@ class local_contact {
             $postsize = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
             if ($this->isspambot = ($postsize > 262144)) {
                 $this->errmsg = 'Form cannot contain more than 256 KB of data.';
+                debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
             }
         }
 
         // Validate if "sesskey" field contains the correct value.
         if (!$this->isspambot && $this->isspambot = (optional_param('sesskey', '3.1415', PARAM_RAW) !== sesskey())) {
             $this->errmsg = '"sesskey" field is missing or contains an incorrect value.';
+            debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
         }
 
         // Validate referrer URL.
         if (!$this->isspambot && $this->isspambot = !isset($_SERVER['HTTP_REFERER'])) {
             $this->errmsg = 'Missing referrer.';
+            debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
         }
         if (!$this->isspambot && $this->isspambot = (stripos($_SERVER['HTTP_REFERER'], $CFG->wwwroot) !== 0)) {
             $this->errmsg = 'Unknown referrer - must come from this site: ' . $CFG->wwwroot;
+            debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
         }
 
         // Validate sender's email address.
         if (!$this->isspambot && $this->isspambot = !validate_email($this->fromemail)) {
             $this->errmsg = 'Unknown sender - invalid email address or the form field name is incorrect.';
+            debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
         }
 
         // Validate sender's name.
         if (!$this->isspambot && $this->isspambot = empty($this->fromname)) {
             $this->errmsg = 'Missing sender - invalid name or the form field name is incorrect';
+            debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
         }
 
         // Validate against email address whitelist and blacklist.
@@ -197,6 +209,7 @@ class local_contact {
             ) {
                 // Nice try. We know who you are.
                 $this->errmsg = 'Bad sender - Email address is blacklisted.';
+                debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
             }
         }
 
@@ -221,6 +234,7 @@ class local_contact {
                 ) {
                     // Naughty naughty. We know all about your kind.
                     $this->errmsg = 'Bad sender - Email domain is blacklisted.';
+                    debugging('local_contact: ' . $this->errmsg, DEBUG_DEVELOPER);
                 }
             }
         }
